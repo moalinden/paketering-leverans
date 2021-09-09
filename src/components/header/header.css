@@ -1,0 +1,26 @@
+#headerContainer{
+    background-color: #bf8596;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#headerHeader{
+    color: #F3E7DA;
+}
+#appMenu{
+    color: #F3DAC6;
+    display: flex;
+    align-self: flex-end;
+}
+
+/*headerContainer
+
+rosa: #bf8596
+rosa/vit: #EDBFC0
+beige/vit: #F3DAC6
+vit: #F3E7DA
+grå: #BAABB4 
+
+*/
