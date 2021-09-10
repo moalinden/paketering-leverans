@@ -1,0 +1,22 @@
+#footerContainer{
+    background-color: #BAABB4 ;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footerIcon{
+    padding: 10px;
+    color: #F3DAC6;
+}
+
+
+/*headerContainer
+
+rosa: #bf8596
+rosa/vit: #EDBFC0
+beige/vit: #F3DAC6
+vit: #F3E7DA
+grå: #BAABB4 
+
+*/
