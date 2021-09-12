@@ -1,40 +1,69 @@
-export default function RegHelper(data) {
-  let retObj = {type: null, OK: false};
+export default async function RegHelper(data) {
+  let retObj = {type: data.inpType, OK: false};
+  let mail_format = /\S+@\S+\.\S+/;
+
+  //Another check to make sure it's longer than 0
+  if(data.inpVal.length < 1){
+    retObj.OK = false;
+    return retObj;
+  }
 
   //Function to check
   switch(data.inpType){
     case 'username':
     {
-      //Perform DB check to make sure it does not exist
+      //Add fetch to make sure only 1 username in DB
 
-      break;
+      retObj.OK = true;
+      return retObj;
     }
     case 'firstname':
     {
-      //Make sure alphabetic(?)
-      break;
+      retObj.OK = true;
+      return retObj;
     }
     case 'lastname':
     {
-      //Make sure alphabetic(?)
-      break;
+      retObj.OK = true;
+      return retObj;
     }
     case 'email':
     {
-      //Make sure real email
-      //Make sure email does not exist already
-      break;
+      //Email input check
+      if(mail_format.test(data.inpVal) == true){
+        retObj.OK = true;
+      }
+      else{
+        retObj.OK = false;
+        return retObj;
+      }
+
+      //Add fetch to make sure only 1 email in DB
+
+      return retObj;
     }
     case 'password':
     {
       //Make sure password is long enough
-      //Make sure it matches reentered(if entered)
-      break;
+      if(data.inpVal.length < 5){
+        retObj.OK = false;
+        return retObj;
+      }
+
+      retObj.OK = true;
+      return retObj;
     }
-    case 'password2':
+    case 'repassword':
     {
-      //Make sure it matches password(if entered)
-      break;
+      //Check if other password input is !null
+      //if they match, OK = true
+      if(data.compVal != null){
+        if(data.inpVal == data.compVal){
+          retObj.OK = true;
+        }
+      }
+
+      return retObj;
     }
   }
 }
