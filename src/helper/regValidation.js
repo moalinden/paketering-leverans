@@ -1,4 +1,4 @@
-export default async function RegHelper(data) {
+export default async function RegValidation(data) {
   let retObj = {type: data.inpType, OK: false};
   let mail_format = /\S+@\S+\.\S+/;
 
@@ -12,10 +12,26 @@ export default async function RegHelper(data) {
   switch(data.inpType){
     case 'username':
     {
-      //Add fetch to make sure only 1 username in DB
+      //Check only 1 username exist
+      const dataVal = {
+        username: data.inpVal
+      }
+      const settings = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dataVal)
+      }
+      const result = await fetch('/api/getUser/username', settings);
+      const amount = await result.json();
+      console.log(amount.amount)
+      if(amount.amount > 0 ){
+        retObj.OK = false;
+        return retObj;
+      }
 
       retObj.OK = true;
       return retObj;
+
     }
     case 'firstname':
     {
@@ -39,6 +55,20 @@ export default async function RegHelper(data) {
       }
 
       //Add fetch to make sure only 1 email in DB
+      const dataVal = {
+        email: data.inpVal
+      }
+      const settings = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dataVal)
+      }
+      let result = await fetch('/api/getUser/email', settings);
+      let amount = await result.json();
+      if(amount.amount > 0 ){
+        retObj.OK = false;
+        return retObj;
+      }
 
       return retObj;
     }
