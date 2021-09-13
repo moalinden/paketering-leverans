@@ -92,27 +92,6 @@ app.delete('/api/products/:id', (req, res) => {
   res.json(stmt.run({ id: req.params.id }));
 });
 
-app.get('/api/changeImage', (req, res) => {
 
-    db.all("UPDATE products SET imageUrl = '../src/media/red/la-royal.jpg' WHERE imageUrl = '../media/red/la-royal.jpg'",  (err, rows, result) => {
-      if (err) {
-        res.status(400).json({"error":err.message});
-        return;
-      }
-    });
-  
-  });
-
-  app.get('/api/selectImage', (req, res) => {
-
-    db.all("SELECT * FROM products",  (err, rows, result) => {
-      if (err) {
-          res.status(400).json({"error":err.message});
-          return;
-        }
-        console.log(rows)
-    });
-  
-  });
 // start the web server
 app.listen(4000, () => console.log('Listening on port 4000'));
