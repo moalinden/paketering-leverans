@@ -37,6 +37,8 @@ function WineBottles() {
                         <p>
                             {wine.price}
                         </p>
+                        <button placeholder="add to cart">
+                        </button>
                     </div>
                 </div>
                 ))]: null}
