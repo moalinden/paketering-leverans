@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./register.css";
 
-import RegHelper from '../../helper/regHelper'
+import RegValidation from '../../helper/regValidation'
 import RegSubmitHelper from '../../helper/regSubmitHelper'
 
 export default function RegisterPage() {
@@ -14,10 +14,6 @@ export default function RegisterPage() {
     let inpVal = e.target.value;
     let compVal = null;
 
-    //Send password or password2 when one of those are entered
-
-    console.log(inpType);
-
     if(inpType == 'repassword'){
       compVal = regInfo['password'].val;
     }
@@ -26,7 +22,7 @@ export default function RegisterPage() {
     }
 
     //Get return value from helper
-    let result = await RegHelper({inpVal: inpVal, inpType: inpType, compVal: compVal});
+    let result = await RegValidation({inpVal: inpVal, inpType: inpType, compVal: compVal});
 
     //Manage response from helper
     if(result.OK == false){
