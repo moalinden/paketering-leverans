@@ -1,7 +1,14 @@
+//FIX POST WITH ? (EASIER)
+//WHEN THAT WORKS, GO AND DO SELECT
+
 //Require
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
+
+app.use(bodyParser());
 
 const sqlite3 = require('sqlite3').verbose();
 
@@ -13,15 +20,18 @@ let db = new sqlite3.Database('./webshop.db', (err) => {
   console.log('Connected to the chinook database.');
 });
 // Get/read all products
-app.get('/api/user', (req, res) => {
+app.get('/api/getUser/:info', (req, res) => {
 
-  db.all("SELECT * FROM user", [], (err, rows) => {
-    if (err) {
-      res.status(400).json({"error":err.message});
-      return;
-    }
-    res.status(200).json({rows})
-  });
+  console.log(req.params.info);
+  if(req.params.info == "email"){
+    db.all("SELECT COUNT(id) AS userCount FROM user WHERE email = ?", [req.body.value], (err, rows) => {
+      if (err) {
+        res.status(400).json({"error":err.message});
+        return;
+      }
+      res.status(200).json({rows})
+    });
+  }
 });
 
 // Get one product by id
@@ -49,12 +59,17 @@ app.get('/api/products/byName/:name', (req, res) => {
 });
 
 // Create a new product
-app.post('/api/products', (req, res) => {
-  let stmt = db.prepare(`
-    INSERT INTO products (name, description, price)
-    VALUES (:name, :description, :price)
-  `);
-  res.json(stmt.run(req.body));
+app.post('/api/addUser', (req, res) => {
+
+  let data = req.body;
+
+  db.run(`INSERT INTO user(username, firstname, lastname, email, password) VALUES(?,?,?,?,?)`, [data.username, data.firstname, data.lastname, data.email, data.password], function(err) {
+    if (err) {
+      return console.log(err.message);
+    }
+    // get the last insert id
+    console.log(`A row has been inserted with rowid ${this.lastID}`);
+  });
 });
 
 // Update/change a product
