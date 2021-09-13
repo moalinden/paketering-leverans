@@ -1,7 +1,8 @@
 import "./App.css";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-// import WineBottles from "./components/wineCards/WineBottles";
+import WineBottles from "./components/wineCards/WineBottles";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import LoginPage from "./Login";
@@ -13,7 +14,7 @@ function App() {
     <Router>
         <div id="App">
           <Header />
-          {/* <WineBottles /> */}
+          <WineBottles />
             <Switch>
               <Route path="/Login" component={LoginPage}>
                 <LoginPage />

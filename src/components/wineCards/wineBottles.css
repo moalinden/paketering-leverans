@@ -1,18 +1,18 @@
 #wineBox{
-    display: flex;
-    flex-direction: column;
 border: 1px solid rgb(165, 135, 135);
 border-radius: 20px;
-width: 100px;
-height: 100px;
+width: 260px;
+height: 300px;
 padding: 50px;
-
+margin: 40px;
+font-size: 12px;
+padding-left: 60px;
 }
-
+#h3{
+font-size: 22px;
+}
 #winePic{
 border-radius: 20px;
-align-self: flex-start;
 }
 #wineFacts{
-align-self: flex-end;
 }
