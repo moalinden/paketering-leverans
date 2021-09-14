@@ -1,18 +1,25 @@
+#systembolaget{
+    align-items: center;
+}
 #wineBox{
-    display: flex;
-    flex-direction: column;
 border: 1px solid rgb(165, 135, 135);
 border-radius: 20px;
-width: 100px;
-height: 100px;
-padding: 50px;
-
+width: 260px;
+height: 300px;
+padding: 20px;
+margin: 30px;
+font-size: 12px;
+align-items: center;
+/* padding-left: 60px; */
 }
-
+.row{
+    width: fit-content;
+}
+#h3{
+font-size: 22px;
+}
 #winePic{
 border-radius: 20px;
-align-self: flex-start;
 }
 #wineFacts{
-align-self: flex-end;
 }
