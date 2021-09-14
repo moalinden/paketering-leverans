@@ -194,7 +194,6 @@ app.delete('/api/products/:id', (req, res) => {
   res.json(stmt.run({ id: req.params.id }));
 });
 
-app.get('/api/changeImage', (req, res) => {
 
     db.all("UPDATE products SET imageUrl = '../src/media/red/la-royal.jpg' WHERE imageUrl = '../media/red/la-royal.jpg'",  (err, rows, result) => {
       if (err) {
@@ -216,6 +215,5 @@ app.get('/api/changeImage', (req, res) => {
     });
   
   });
-})
 // start the web server
 app.listen(4000, () => console.log('Listening on port 4000'));
