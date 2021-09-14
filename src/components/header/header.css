@@ -1,24 +1,4 @@
-#headerContainer{
-    background-color: #bf8596;
-    height: 15vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-}
-#headerHeader{
-    color: #F3E7DA;
-}
-#appMenu{
-    color: #F3DAC6;
-    display: flex;
-    align-self: flex-end;
-}
 
-.userIcons{
-    padding: 1px;
-}
 
 /*headerContainer
 
