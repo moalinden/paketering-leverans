@@ -1,16 +1,26 @@
 import "./App.css";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import Login from "./components/login/Login";
-import Register from "./components/register/Register"
+import WineBottles from "./components/wineCards/WineBottles";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import LoginPage from "./Login";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div id="App">
-      {/* <Header /> */}
-      <Register />
-      {/* <Footer /> */}
-    </div>
+    <Router>
+      <div id="App">
+        <Header />
+        <WineBottles />
+        <Switch>
+          <Route path="/Login" component={LoginPage}>
+            <LoginPage />
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
