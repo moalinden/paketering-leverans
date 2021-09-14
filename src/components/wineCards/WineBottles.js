@@ -14,6 +14,7 @@ function WineBottles() {
         })();
     }, []);
 
+    // Ändra namnen i databasen - "-"
     return (
         <div className='container' id='systembolaget'>
             <div className='row'>
