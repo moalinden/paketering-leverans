@@ -1,5 +1,5 @@
-/* 990 från två kort t ett - fortf inte centrerat */
-/*  */
+/* 990 går från två t ett kort - fortf inte centrerat */
+/* Add medie querys */
 
 #systembolaget{
     width: fit-content
@@ -35,10 +35,12 @@
    white-space: pre-line;
 }
 #cartKnapp{
-    border: 1px solid blanchedalmond;
+    border: 1px solid rgb(165, 135, 135);
     padding: 6px 15px;
     font-size: 10px;
     position: absolute;
     bottom: 10px;
     right: 10px;
+    border-radius: 4px;
+
 }
