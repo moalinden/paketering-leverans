@@ -2,24 +2,31 @@
     align-items: center;
 }
 #wineBox{
-border: 1px solid rgb(165, 135, 135);
-border-radius: 20px;
-width: 260px;
-height: 300px;
-padding: 20px;
-margin: 30px;
-font-size: 12px;
-align-items: center;
-/* padding-left: 60px; */
+    border: 1px solid rgb(165, 135, 135);
+    border-radius: 20px;
+    width: 260px;
+    height: 300px;
+    padding: 20px;
+    margin: 30px;
+    font-size: 12px;
+    position: relative;
+    /* align-items: center; */
 }
 .row{
     width: fit-content;
 }
 #h3{
-font-size: 22px;
+    font-size: 22px;
 }
 #winePic{
-border-radius: 20px;
+    border-radius: 20px;
 }
-#wineFacts{
+#cartKnapp{
+    border: 1px solid blanchedalmond;
+    padding: 6px 15px;
+    font-size: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
 }
