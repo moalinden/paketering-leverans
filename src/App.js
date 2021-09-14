@@ -8,7 +8,7 @@ import WineBottles from "./components/wineCards/WineBottles";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import LoginPage from "./Login";
+import Login from "./components/login/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -18,10 +18,10 @@ function App() {
         <Header />
         <WineBottles />
         <Switch>
-          <Route path="/Login" component={LoginPage}>
-            <LoginPage />
+          <Route path="/Login">
+            <Login />
           </Route>
-          <Route path="/About" component={AboutPage}>
+          <Route path="/About">
             <AboutPage />
           </Route>
         </Switch>
