@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./wineBottles.css";
+import { Image } from "react-bootstrap";
 // import "../../media/red";
 
 function WineBottles() {
@@ -18,13 +19,15 @@ function WineBottles() {
             <div className='row'>
                 {bottles != undefined  ? [ bottles.map(wine => (
                     <div className='col-1' id='wineBox' key={wine.id}>
+                        {/* <div className='bildTest'>
+                        </div> */}
                         <div id='bild'>
-    {/* {console.log(wine)} */}
-                            <img 
+                        {/* {console.log(wine)} */}
+                            <Image 
                             src={wine.imageUrl}
                             alt='wine and dinee' 
                             id='winePic'>
-                            </img>
+                            </Image>
                         </div>
                         <div id='wineFacts'>
                             <h3>

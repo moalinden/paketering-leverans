@@ -4,22 +4,26 @@
 #wineBox{
     border: 1px solid rgb(165, 135, 135);
     border-radius: 20px;
-    width: 260px;
+    width: 360px;
     height: 300px;
-    padding: 20px;
+    /* padding: 20px; */
     margin: 30px;
     font-size: 12px;
     position: relative;
     /* align-items: center; */
 }
 .row{
-    width: fit-content;
+    /* width: fit-content; */
 }
 #h3{
     font-size: 22px;
 }
 #winePic{
     border-radius: 20px;
+    height: 300px;
+    width: 110px;
+    padding-left: 0;
+    position: absolute;
 }
 #cartKnapp{
     border: 1px solid blanchedalmond;
@@ -28,5 +32,7 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
-
+}
+.bildTest{
+    background-image: url("../../media/skreen.png");
 }
