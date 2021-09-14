@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Image, Card} from 'react-bootstrap';
+import { Container, Row, Card} from 'react-bootstrap';
 
 function AboutPage() {
   
