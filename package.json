@@ -2,7 +2,7 @@
   "name": "projekt-leverans",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:4000/",
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
@@ -12,7 +12,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "body-parser": "^1.19.0",
-    "bootstrap": "^5.1.0",
+    "bootstrap": "^5.1.1",
     "node": "^16.6.1",
     "nodemon": "^2.0.12",
     "react": "^17.0.2",
