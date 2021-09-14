@@ -1,12 +1,19 @@
+#systembolaget{
+    align-items: center;
+}
 #wineBox{
 border: 1px solid rgb(165, 135, 135);
 border-radius: 20px;
 width: 260px;
 height: 300px;
-padding: 50px;
-margin: 40px;
+padding: 20px;
+margin: 30px;
 font-size: 12px;
-padding-left: 60px;
+align-items: center;
+/* padding-left: 60px; */
+}
+.row{
+    width: fit-content;
 }
 #h3{
 font-size: 22px;

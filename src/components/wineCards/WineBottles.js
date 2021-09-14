@@ -18,7 +18,7 @@ function WineBottles() {
         <div className='container' id='systembolaget'>
             <div className='row'>
                 {bottles != undefined  ? [ bottles.map(wine => (
-                    <div className='col-10' id='wineBox' key={wine.id}>
+                    <div className='col-1' id='wineBox' key={wine.id}>
                     <div id='bild'>
 {/* {console.log(wine)} */}
                         <img 
