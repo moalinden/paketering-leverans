@@ -38,8 +38,9 @@ function WineBottles() {
 
   return (
     <div className="container" id="systembolaget">
-      <div className="row">
-        {products.products.map((wine, index) => (
+          <div className="row">
+              {products != undefined ? [
+             products.map((wine, index) => (
           <div className="col-1" id="wineBox" key={index}>
             <div id="bild">
               {/* {console.log(wine)} */}
@@ -55,7 +56,9 @@ function WineBottles() {
               ></button>
             </div>
           </div>
-        ))}
+        ))
+        ] : null 
+           }
         {/* {handleGetJson()} */}
         {/* {console.log(bottles)} */}
       </div>

@@ -18,7 +18,7 @@ function App() {
       const response = await fetch("/api/products");
       const data = await response.json();
       console.log(data);
-      localStorage.setItem("/api/products", JSON.stringify(data));
+      localStorage.setItem("/api/products", JSON.stringify(data.products));
     };
     newFetch();
   }, []);
