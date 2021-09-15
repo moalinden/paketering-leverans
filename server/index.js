@@ -219,8 +219,9 @@ app.post("/api/addUser", (req, res) => {
     let stmt = db.prepare(`
     DELETE FROM products WHERE id = :id
   `);
-    res.json(stmt.run({ id: req.params.id }));
-  });
+  res.json(stmt.run({ id: req.params.id }));
+});
+
 
   app.get("/api/changeImage", (req, res) => {
     db.all(
