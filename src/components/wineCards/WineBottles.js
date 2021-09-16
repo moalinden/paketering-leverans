@@ -1,6 +1,8 @@
 import React from "react";
 import "./wineBottles.css";
 
+import { Nav, Col, Row } from 'react-bootstrap';
+
 import { useDispatch, useSelector } from "react-redux";
 import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
 
@@ -82,6 +84,7 @@ function WineBottles() {
       </div>
     </div>
   );
+
 }
 
 export default WineBottles;
