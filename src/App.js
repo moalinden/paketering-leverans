@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import Loading from "./components/loading/Loading";
 
 import AboutPage from "./About";
+// import NavbarPage from "./components/navbar/Navbar";
 
 import WineBottles from "./components/wineCards/WineBottles";
 
@@ -14,12 +16,17 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import CartItems from "./components/cartItems/Cart";
 
 function App() {
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const newFetch = async () => {
       const response = await fetch("/api/products");
       const data = await response.json();
       console.log(data);
       localStorage.setItem("/api/products", JSON.stringify(data.products));
+      if (!data) {
+        setLoading(true);
+      }
     };
     newFetch();
   }, []);

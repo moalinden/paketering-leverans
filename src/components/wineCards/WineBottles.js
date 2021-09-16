@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./wineBottles.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToStore } from "../../redux/actions";
+import { Nav, Col, Row } from "react-bootstrap";
 
-//import result from ../../../server/index.js
+import { useDispatch, useSelector } from "react-redux";
+import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
 
 function WineBottles() {
   const dispatch = useDispatch();
@@ -21,49 +21,51 @@ function WineBottles() {
     }
   };
 
-  // const [bottles, setBottles] = useState();
-  // useEffect(() => {
-  //   (async () => {
-  //     const wines = await (await fetch("/api/products")).json();
-  //     setBottles(wines.products);
-  //     return wines;
-  //   })();
-  // }, []);
+  const decrementCart = (product) => {
+    dispatch(decrementItem(product));
+  };
 
-  //Axel korrigerade lite för att det ska funka med redux/localstorage
+  const saveToWishList = () => {
+    const wishList = productsState.products;
+    const keyGen = Math.random() * 1000;
+    localStorage.setItem(keyGen, wishList);
+    dispatch(storeWishList(keyGen));
+  };
+
+  const removeWishList = (key) => {
+    dispatch(removeWishList(key));
+    const keyToRemove = productsState.keyToRemove;
+    localStorage.removeItem(keyToRemove);
+  };
 
   return (
-      <div className="container" id="systembolaget">
-          
-          <div className="row">
-              {products != undefined ? [products.map((wine, index) => (
-                  <div className="col-1" id="wineBox" key={index}>
-                      <div id="bild">
-                          {/* {console.log(wine)} */}
-                          <img src={wine.imageUrl} alt="wine and dinee" id="winePic"></img>
-                      </div>
-                      <div id="wineFacts">
-                          <h3>{wine.name}</h3>
-                          <p>{wine.description}</p>
-                          <p>{wine.price}</p>
-                          {/*<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                              <div class="toast-header">
-                                  <img src="..." class="rounded mr-2" alt="..." />
-                                  <strong class="mr-auto">Notification</strong>
-                                  <small class="text-muted">just now</small>
-                                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                  </button>
-                              </div>
-                              <div class="toast-body">Product added to cart</div>
-                          </div>*/}
-                          <button id="cartKnapp" placeholder="add to cart"
-                              onClick={() => addToCart(wine)}>Add to cart</button>
-                      </div>
-                  </div>
-        ))
-        ] : null 
-           }
+    <div className="container" id="systembolaget">
+      <div className="row">
+        {products.map((wine, index) => (
+          <div className="col-1" id="wineBox" key={index}>
+            <div id="bild">
+              {/* {console.log(wine)} */}
+              <img src={wine.imageUrl} alt="wine and dinee" id="winePic"></img>
+            </div>
+            <div id="wineFacts">
+              <h3>{wine.name}</h3>
+              <p>{wine.description}</p>
+              <p>{wine.price}</p>
+              <button
+                placeholder="add to cart"
+                onClick={() => addToCart(wine)}
+                id="cartKnapp"
+              >
+                Add to Cart
+              </button>
+              <button onClick={() => decrementCart(wine)} id="cartKnapp">
+                -1
+              </button>
+              <button onCLick={() => saveToWishList()}>Save to Wishlist</button>
+              <button onClick={() => removeWishList()}>remove Wishlist</button>
+            </div>
+          </div>
+        ))}
         {/* {handleGetJson()} */}
         {/* {console.log(bottles)} */}
       </div>

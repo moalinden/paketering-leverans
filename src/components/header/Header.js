@@ -15,17 +15,18 @@ function Header() {
     <Container fluid style={{ backgroundColor: "#bf8596" }}>
             <Row md="auto" className="justify-content-md-center">
         <Col>
-          <FontAwesomeIcon icon={faUser} className="userIcons" />
+          <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
         </Col>
 
-              <Col>
-                  
+        <Col>
+
           <Countindicator />
-          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" onClick ={()=> history.push('/cart')} />
+          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
+
         </Col>
       </Row>
       <Nav
-        className="justify-content-md-center"
+        className="justify-content-md-center xs-2"
         onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
       >
         <Nav.Item>
