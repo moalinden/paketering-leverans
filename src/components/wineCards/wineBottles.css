@@ -1,25 +1,33 @@
 /* 990 går från två t ett kort - fortf inte centrerat */
 /* Add medie querys */
-
-#systembolaget{
+body{
     background-color: #f9f4ee;
+    align-items: center;
+}
+#systembolaget{
+    width: 1500px;
+    align-items: center;
+    /* margin: auto; */
+    position: relative;
+}
+#testTest{
     width: fit-content;
 }
 #wineBox{
-    align-items: center;
+    /* align-items: center; */
     border: 1px solid #f3dac6;
     border-radius: 20px;
     width: 350px;
     height: 240px;
     padding: 0px;
     margin: 30px;
-    font-size: 12px;
     position: relative;
     box-shadow: 1px 5px #d2cfcf;
 }
 #h3{
     font-size: 16px;
-    height: 40px;
+    height: 70px;
+    /* margin-top: 5px; */
 }
 #winePic{
     border-radius: 20px;
@@ -31,17 +39,23 @@
 }
 #wineFacts{
     float: right;
-    width: 200px;
-   margin: 12px;
-   white-space: pre-line;
+    width: 210px;
+    margin: 8px;
+    white-space: pre-line;
+    font-size: 14px;
+}
+#detail{
+    /* margin-bottom: 50%; */
+    bottom: 80px;
+    position: absolute;
 }
 #cartKnapp{
     border: 1px solid #f3dac6;
     padding: 6px 15px;
     font-size: 10px;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
     border-radius: 4px;
 
 }
