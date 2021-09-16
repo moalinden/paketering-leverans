@@ -42,20 +42,20 @@ function WineBottles() {
         <div className="container" id="systembolaget">
             <Col >
                 <Row className="justify-content-md-center">
-                    <Nav variant="tabs" defaultActiveKey="/App" style={{ padding: "40px" }} >
-                        <h2 style={{ color: "#bf8596" }}>MENU</h2>
+                    <Nav variant="tabs" defaultActiveKey="/App"  id="navbar" >
+                        {/* <h2>MENU</h2> */}
                         <Nav.Item>
-                            <Nav.Link href="/App" style={{ color: "#bf8596" }}>
+                            <Nav.Link href="/App" id="navLink">
                                 Red Wine
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="/App" style={{ color: "#bf8596" }}>
+                            <Nav.Link href="/App" id="navLink">
                                 White Wine
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="/App" style={{ color: "#bf8596" }}>
+                            <Nav.Link href="/App" id="navLink">
                                 Bubbles
                             </Nav.Link>
                         </Nav.Item>
@@ -63,13 +63,13 @@ function WineBottles() {
                 </Row>
             </Col>
 
-            <div className="row" id='testTest'>
+            <div className="row" id="testi">
                 {products != undefined ? [
                     products.map((wine, index) => (
-                        <div className="col-1" id="wineBox" key={index}>
+                        <div className="col-4" id="wineBox" key={index}>
                             <div id="bild">
                                 {/* {console.log(wine)} */}
-                                <img src={wine.imageUrl} alt="wine and dinee" id="winePic"></img>
+                                <img src={wine.imageUrl} alt={wine + "bottle"} id="winePic"></img>
                             </div>
                             <div id="wineFacts">
                                 <h3>{wine.name}</h3>
@@ -81,7 +81,8 @@ function WineBottles() {
                                     placeholder="add to cart"
                                     id="cartKnapp"
                                     onClick={() => addToCart(wine)}
-                                > add to cart
+                                > 
+                                add to cart
                                 </button>
                             </div>
                         </div>
