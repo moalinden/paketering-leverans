@@ -1,0 +1,30 @@
+#tableContainer{
+    flex-grow: 1;
+    background-color: #F3DAC6;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.productCard{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #BAABB4;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.listItem{
+    list-style: none;
+}
+.changeButton{
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+}
+
+img{
+    max-width: 10vh;
+    height: auto;
+}
