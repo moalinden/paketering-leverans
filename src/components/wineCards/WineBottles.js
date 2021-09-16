@@ -52,8 +52,9 @@ function WineBottles() {
               <p>{wine.price}</p>
               <button
                 placeholder="add to cart"
+                id="cartKnapp"
                 onClick={() => addToCart(wine)}
-              >
+              > add to cart
               </button>
             </div>
           </div>
