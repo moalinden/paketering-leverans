@@ -3,6 +3,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 
 import AboutPage from "./About";
+import NavbarPage from "./components/navbar/Navbar";
 
 import WineBottles from "./components/wineCards/WineBottles";
 
@@ -15,6 +16,7 @@ function App() {
   return (
     <Router>
       <div id="App">
+        
         <Header />
         <WineBottles />
         <Switch>
@@ -25,6 +27,12 @@ function App() {
             <AboutPage />
           </Route>
         </Switch>
+        <Switch>
+        <Route path="/Navbar">
+            <NavbarPage />
+          </Route>
+        </Switch>
+        
         <Footer />
       </div>
     </Router>
