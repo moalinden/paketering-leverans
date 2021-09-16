@@ -53,7 +53,8 @@ function WineBottles() {
               <button
                 placeholder="add to cart"
                 onClick={() => addToCart(wine)}
-              ></button>
+              >
+              </button>
             </div>
           </div>
         ))
