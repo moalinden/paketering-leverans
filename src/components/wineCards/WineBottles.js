@@ -2,9 +2,7 @@ import React from "react";
 import "./wineBottles.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addToStore, decrementItem } from "../../redux/actions";
-
-//import result from ../../../server/index.js
+import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
 
 function WineBottles() {
   const dispatch = useDispatch();
@@ -25,6 +23,20 @@ function WineBottles() {
   const decrementCart = (product) => {
     dispatch(decrementItem(product));
   };
+
+  const saveToWishList = () => {
+    const wishList = productsState.products;
+    const keyGen = Math.random() * 1000;
+    localStorage.setItem(keyGen, wishList);
+    dispatch(storeWishList(keyGen));
+  };
+
+  const removeWishList = (key) => {
+    dispatch(removeWishList(key));
+    const keyToRemove = productsState.keyToRemove;
+    localStorage.removeItem(keyToRemove);
+  };
+
   return (
     <div className="container" id="systembolaget">
       <div className="row">
@@ -53,6 +65,12 @@ function WineBottles() {
                     </button>
                     <button onClick={() => decrementCart(wine)} id="cartKnapp">
                       -1
+                    </button>
+                    <button onCLick={() => saveToWishList()}>
+                      Save to Wishlist
+                    </button>
+                    <button onClick={() => removeWishList(key)}>
+                      remove Wishlist
                     </button>
                   </div>
                 </div>

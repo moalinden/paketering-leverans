@@ -2,6 +2,7 @@ const initialState = {
   storedProducts: JSON.parse(localStorage.getItem("/api/products")),
   productCount: 0,
   products: [],
+  wishList: [],
 };
 const storeSlice = (state = initialState, action) => {
   switch (action.type) {
@@ -51,6 +52,26 @@ const storeSlice = (state = initialState, action) => {
       } else {
         return state;
       }
+    case "FETCH-WISHLIST":
+      return {
+        ...state,
+        wishList: action.payload,
+      };
+
+    case "REMOVE_WISHLIST":
+      const wishListToRemove = state.wishList.find(
+        (element) => element === action.payload
+      );
+      if (!wishListToRemove) {
+        return {
+          ...state,
+          error: "No matching key was found",
+        };
+      }
+      return {
+        ...state,
+        keyToRemove: wishListToRemove,
+      };
     case "RESET":
       return (state = 0);
     default:

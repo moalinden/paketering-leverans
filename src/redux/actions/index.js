@@ -12,3 +12,17 @@ export const decrementItem = (payload) => {
     payload: payload,
   };
 };
+
+export const storeWishList = (payload) => {
+  return {
+    type: "FETCH-WISHLIST",
+    payload: payload,
+  };
+};
+
+export const removeWishList = (payload) => {
+  return {
+    type: "REMOVE_WISHLIST",
+    payload: payload,
+  };
+};
