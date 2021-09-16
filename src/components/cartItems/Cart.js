@@ -19,8 +19,8 @@ const Cart = () => {
     <div className='cart-item' key={name}>
           <img src={imageUrl} alt='wine bottle' />
           <div classname='item-details'>
-        <p className='name'>{name}</p>
-              <p className='price'>{price * count || 1} kr</p>
+          <p className='name'>{name}</p>
+          <p className='price'>{price * count || 1} kr</p>
               {/*< FontAwesomeIcon icon={faTrash} className="userIcons" onClick={() => deleteFromCart(products)} />*/}
             
           </div>

@@ -10,7 +10,7 @@ export const deleteProduct = (cartItemID) => {
     return {
         type: "DELETE_PRODUCT",
         payload: {
-            id: cartItemID,
+            cartItemID: cartItemID,
         },
     };
 };

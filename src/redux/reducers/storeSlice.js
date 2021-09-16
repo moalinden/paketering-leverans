@@ -46,20 +46,20 @@ const storeSlice = (state = initialState, action) => {
                     ...state,
                     products: state.products.filter((cartItem) => cartItem.id !== action.payload.id),
                 };
-            case "EDIT_QUANTITY":
-                return {
-                    ...state,
-                    products: state.products.map(cartItem => cartItem.id === action.payload.id ? {
-                            ...cartItem,
-                            count: action.payload.count
-                        } : cartItem
-                    ),
-                };
-        case "SHOW_ITEM":
-            return {
-                    ...state,
-                    products: state.products.filter((cartItem) => cartItem.id !== action.payload.id),
-                };
+            //case "EDIT_QUANTITY":
+            //    return {
+            //        ...state,
+            //        products: state.products.map(cartItem => cartItem.id === action.payload.id ? {
+            //                ...cartItem,
+            //                count: action.payload.count
+            //            } : cartItem
+            //        ),
+            //    };
+        //case "SHOW_ITEM":
+        //    return {
+        //            ...state,
+        //            products: state.products.filter((cartItem) => cartItem.id !== action.payload.id),
+        //        };
             case "RESET":
                 return (state = 0);
             default:
