@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 
+import Countindicator from "./CountIndicator";
+
 function Header() {
   return (
     <Container fluid style={{ backgroundColor: "#bf8596" }}>
@@ -13,6 +15,7 @@ function Header() {
         </Col>
 
         <Col>
+          <Countindicator />
           <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
         </Col>
       </Row>
