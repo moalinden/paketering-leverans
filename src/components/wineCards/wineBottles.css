@@ -15,6 +15,8 @@
     font-size: 12px;
     position: relative;
     box-shadow: 1px 5px #d2cfcf;
+    display: flex;
+    flex-direction: row;
 }
 #h3{
     font-size: 16px;
@@ -26,21 +28,25 @@
     width: 95px;
     padding-left: -20px;
     border: 1px solid rgb(165, 135, 135);
-    float: left;
 }
 #wineFacts{
-    float: right;
     width: 200px;
-   margin: 12px;
-   white-space: pre-line;
+    margin: 12px;
+    white-space: pre-line;
+    display: flex;
+    flex-direction: column;
+   
+   
 }
 #cartKnapp{
     border: 1px solid rgb(165, 135, 135);
     padding: 6px 15px;
     font-size: 10px;
-    position: absolute;
     bottom: 10px;
     right: 10px;
     border-radius: 4px;
+}
 
+#cartKnapp:active{
+    background-color: gray;
 }

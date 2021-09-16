@@ -36,6 +36,21 @@ const storeSlice = (state = initialState, action) => {
           products: [...state.products, action.payload],
         };
       }
+    case "DECREMENT_ITEM":
+      let count = action.payload.count;
+      if (count > 0 && state.productCount > 0) {
+        return {
+          ...state,
+          productCount: state.productCount - 1,
+          products: state.products.map((object) => {
+            if (object.id === action.payload.id) {
+              return { ...object, count: count - 1 };
+            }
+          }),
+        };
+      } else {
+        return state;
+      }
     case "RESET":
       return (state = 0);
     default:

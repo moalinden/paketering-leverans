@@ -5,3 +5,10 @@ export const addToStore = (payload) => {
     payload: payload,
   };
 };
+
+export const decrementItem = (payload) => {
+  return {
+    type: "DECREMENT_ITEM",
+    payload: payload,
+  };
+};
