@@ -38,7 +38,7 @@ function WineBottles() {
 
   return (
     <div className="container" id="systembolaget">
-          <div className="row">
+          <div className="row" id='testTest'>
               {products != undefined ? [
              products.map((wine, index) => (
           <div className="col-1" id="wineBox" key={index}>
@@ -48,12 +48,15 @@ function WineBottles() {
             </div>
             <div id="wineFacts">
               <h3>{wine.name}</h3>
-              <p>{wine.description}</p>
-              <p>{wine.price}</p>
+              <div id='detail'>
+                <p>{wine.description}</p>
+                <p>{wine.price}kr</p>
+              </div>
               <button
                 placeholder="add to cart"
+                id="cartKnapp"
                 onClick={() => addToCart(wine)}
-              >
+              > add to cart
               </button>
             </div>
           </div>
