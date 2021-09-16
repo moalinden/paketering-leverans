@@ -10,7 +10,8 @@ import WineBottles from "./components/wineCards/WineBottles";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/login/Login";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import CartItems from "./components/cartItems/Cart";
 
 function App() {
   useEffect(() => {
@@ -23,23 +24,18 @@ function App() {
     newFetch();
   }, []);
   return (
-    <Router>
+    <BrowserRouter>
       <div id="App">
         <Header />
         <Switch>
-          <Route path="/Login">
-            <Login />
-          </Route>
-          <Route path="/About">
-            <AboutPage />
-          </Route>
-          <Route>
-            <WineBottles path="/" />
-          </Route>
+          <Route path="/Login" component={Login}/> 
+          <Route path="/About" component={AboutPage}/>
+          <Route exact path="/" component={WineBottles} />
+          <Route exact path="/cart" component={CartItems}/>
         </Switch>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

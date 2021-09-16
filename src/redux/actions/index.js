@@ -5,3 +5,26 @@ export const addToStore = (payload) => {
     payload: payload,
   };
 };
+
+export const deleteProduct = (cartItemID) => {
+    return {
+        type: "DELETE_PRODUCT",
+        payload: {
+            id: cartItemID,
+        },
+    };
+};
+
+export const editQuantity = (cartItemID, value) => {
+    return {
+        type: "EDIT_QUANTITY",
+        id: cartItemID,
+        count: value,
+    };
+};
+export const showItem = (cartItem) => {
+    return {
+        type: "SHOW_ITEM",
+        payload: cartItem,
+    };
+};

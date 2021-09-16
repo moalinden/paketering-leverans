@@ -3,20 +3,25 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Nav } from "react-bootstrap";
+import {
+  useHistory
+} from "react-router-dom";
 
 import Countindicator from "./CountIndicator";
 
 function Header() {
+  const history = useHistory();
   return (
     <Container fluid style={{ backgroundColor: "#bf8596" }}>
-      <Row md="auto" className="justify-content-md-center">
+            <Row md="auto" className="justify-content-md-center">
         <Col>
           <FontAwesomeIcon icon={faUser} className="userIcons" />
         </Col>
 
-        <Col>
+              <Col>
+                  
           <Countindicator />
-          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
+          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" onClick ={()=> history.push('/cart')} />
         </Col>
       </Row>
       <Nav

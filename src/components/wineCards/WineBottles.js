@@ -10,11 +10,7 @@ function WineBottles() {
   const dispatch = useDispatch();
   const productsState = useSelector((state) => state.storeSlice);
   const products = productsState.storedProducts;
-  console.log(productsState);
-  console.log(products);
-
   const addToCart = (product) => {
-    console.log("products: ", productsState.products);
     const productToDispatch = productsState.products.find(
       (element) => element.id === product.id
     );
@@ -37,25 +33,34 @@ function WineBottles() {
   //Axel korrigerade lite för att det ska funka med redux/localstorage
 
   return (
-    <div className="container" id="systembolaget">
+      <div className="container" id="systembolaget">
+          
           <div className="row">
-              {products != undefined ? [
-             products.map((wine, index) => (
-          <div className="col-1" id="wineBox" key={index}>
-            <div id="bild">
-              {/* {console.log(wine)} */}
-              <img src={wine.imageUrl} alt="wine and dinee" id="winePic"></img>
-            </div>
-            <div id="wineFacts">
-              <h3>{wine.name}</h3>
-              <p>{wine.description}</p>
-              <p>{wine.price}</p>
-              <button
-                placeholder="add to cart"
-                onClick={() => addToCart(wine)}
-              ></button>
-            </div>
-          </div>
+              {products != undefined ? [products.map((wine, index) => (
+                  <div className="col-1" id="wineBox" key={index}>
+                      <div id="bild">
+                          {/* {console.log(wine)} */}
+                          <img src={wine.imageUrl} alt="wine and dinee" id="winePic"></img>
+                      </div>
+                      <div id="wineFacts">
+                          <h3>{wine.name}</h3>
+                          <p>{wine.description}</p>
+                          <p>{wine.price}</p>
+                          {/*<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                              <div class="toast-header">
+                                  <img src="..." class="rounded mr-2" alt="..." />
+                                  <strong class="mr-auto">Notification</strong>
+                                  <small class="text-muted">just now</small>
+                                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </div>
+                              <div class="toast-body">Product added to cart</div>
+                          </div>*/}
+                          <button id="cartKnapp" placeholder="add to cart"
+                              onClick={() => addToCart(wine)}>Add to cart</button>
+                      </div>
+                  </div>
         ))
         ] : null 
            }
