@@ -9,6 +9,7 @@ body{
     align-items: center;
     /* margin: auto; */
     position: relative;
+    margin-bottom: 80px;
 }
 #testTest{
     width: fit-content;
