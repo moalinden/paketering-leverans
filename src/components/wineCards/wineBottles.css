@@ -2,11 +2,12 @@
 /* Add medie querys */
 
 #systembolaget{
-    width: fit-content
+    background-color: #f9f4ee;
+    width: fit-content;
 }
 #wineBox{
     align-items: center;
-    border: 2px solid rgb(165, 135, 135);
+    border: 1px solid #f3dac6;
     border-radius: 20px;
     width: 350px;
     height: 240px;
@@ -22,10 +23,10 @@
 }
 #winePic{
     border-radius: 20px;
-    height: 240px;
+    height: 238px;
     width: 95px;
-    padding-left: -20px;
-    border: 1px solid rgb(165, 135, 135);
+    /* padding-left: -20px; */
+    border: 1px solid #f3dac6;
     float: left;
 }
 #wineFacts{
@@ -35,7 +36,7 @@
    white-space: pre-line;
 }
 #cartKnapp{
-    border: 1px solid rgb(165, 135, 135);
+    border: 1px solid #f3dac6;
     padding: 6px 15px;
     font-size: 10px;
     position: absolute;
