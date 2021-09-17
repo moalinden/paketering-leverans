@@ -21,7 +21,6 @@ function AboutPage() {
 
           </Card.Body>
         </Card>
-
         <Card style={{ width: '35rem', backgroundColor: '#F3E7DA' }}>
 
           <Card.Body>
