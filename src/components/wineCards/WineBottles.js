@@ -58,14 +58,13 @@ function WineBottles() {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link href="/App" id="navLink">
-                  Bubbles
+                  Sparkling Wine
                 </Nav.Link>
               </Nav.Item>
             </Nav>
           </Row>
         </Col>
       </div>
-
       <div id="systembolaget">
         <div className="row">
           {products.map((wine, index) => (
@@ -78,14 +77,14 @@ function WineBottles() {
                 <h3>{wine.name}</h3>
                 <p>{wine.description}</p>
                 <p>{wine.price} kr</p>
-                <button id="wishknapp" onCLick={() => saveToWishList()}>♡</button>
+                <button id="wishknapp" onClick={() => saveToWishList()}>♡</button>
                 {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
                 <div id="cartButtons">
                   <button
                     placeholder="add to cart"
                     onClick={() => addToCart(wine)}
                     id="cartKnapp"
-                  >
+                    >
                     Add to Cart
                   </button>
                   <button onClick={() => decrementCart(wine)} id="cartKnapp">
@@ -94,9 +93,7 @@ function WineBottles() {
                 </div>
               </div>
             </div>
-          ))}
-          {/* {handleGetJson()} */}
-          {/* {console.log(bottles)} */}
+                    ))}
         </div>
       </div>
     </div>
