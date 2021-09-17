@@ -67,7 +67,7 @@ function WineBottles() {
       </div>
       <div id="systembolaget">
         <div className="row">
-          {products != undefined ? products.map((wine, index) => (
+          {products.map((wine, index) => (
             <div className="col-1" id="wineBox" key={index}>
               <div id="bild">
                 {/* {console.log(wine)} */}
@@ -77,7 +77,7 @@ function WineBottles() {
                 <h3>{wine.name}</h3>
                 <p>{wine.description}</p>
                 <p>{wine.price} kr</p>
-                <button id="wishknapp" onCLick={() => saveToWishList()}>♡</button>
+                <button id="wishknapp" onClick={() => saveToWishList()}>♡</button>
                 {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
                 <div id="cartButtons">
                   <button
@@ -93,7 +93,7 @@ function WineBottles() {
                 </div>
               </div>
             </div>
-                    )) :null }
+                    ))}
         </div>
       </div>
     </div>
