@@ -80,7 +80,6 @@
     border-radius: 4px;
     width: 90px;
 }
-
 #cartKnapp:active{
     background-color: gray;
 }

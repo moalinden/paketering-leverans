@@ -15,6 +15,7 @@ import Login from "./components/login/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cart from "./components/cart/Cart";
 
+
 function App() {
   const [loading, setLoading] = useState(false);
 
@@ -30,8 +31,7 @@ function App() {
     };
     newFetch();
   }, []);
-
-  if (loading) {
+if (loading) {
     return (
       <div id="app">
         <Loading />
