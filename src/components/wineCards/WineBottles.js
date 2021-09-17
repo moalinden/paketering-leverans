@@ -32,15 +32,41 @@ function WineBottles() {
     localStorage.setItem(keyGen, wishList);
     dispatch(storeWishList(keyGen));
   };
-
   const removeWishList = (key) => {
     dispatch(removeWishList(key));
     const keyToRemove = productsState.keyToRemove;
     localStorage.removeItem(keyToRemove);
   };
 
-  return (
-    <div className="container" id="systembolaget">
+    return (
+      <div className="container">
+
+        <div id="navbar">
+            <Col >
+                <Row className="justify-content-md-center">
+                    <Nav variant="tabs" defaultActiveKey="/App"  id="navbar" >
+                        {/* <h2>MENU</h2> */}
+                        <Nav.Item>
+                            <Nav.Link href="/App" id="navLink">
+                                Red Wine
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/App" id="navLink">
+                                White Wine
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/App" id="navLink">
+                                Bubbles
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Row>
+            </Col>
+  </div>
+
+    <div id="systembolaget">
       <div className="row">
         {products.map((wine, index) => (
           <div className="col-1" id="wineBox" key={index}>
@@ -56,7 +82,7 @@ function WineBottles() {
                 placeholder="add to cart"
                 onClick={() => addToCart(wine)}
                 id="cartKnapp"
-              >
+                >
                 Add to Cart
               </button>
               <button onClick={() => decrementCart(wine)} id="cartKnapp">
@@ -71,6 +97,7 @@ function WineBottles() {
         {/* {console.log(bottles)} */}
       </div>
     </div>
+        </div>
   );
 }
 

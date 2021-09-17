@@ -1,17 +1,41 @@
 /* 990 går från två t ett kort - fortf inte centrerat */
 /* Add medie querys */
-body{
+
+/* 767 centrera vinkorten */
+/* For mobile phones: */
+/* @media only screen and (max-width: 768px) {
+    [class*="col-"] {
+      width: 100%;
+    }
+  } */
+#App{
+    /* align-items: center; */
     background-color: #f9f4ee;
-    align-items: center;
+    height: fit-content;
+}
+/* h2{
+    color: #bf8596;
+} */
+#navbar{ 
+    padding: 40px;
+    margin: 15px; 
+}
+#navLink{
+    color: #bf8596; 
+    background-color: #f9f4ee; 
+    margin: 2px;
+    border: 1px solid #f3dac6;
+    border-bottom: 0;
+
 }
 #systembolaget{
-    width: 1500px;
+    width: 100%;
     align-items: center;
     /* margin: auto; */
     position: relative;
     margin-bottom: 80px;
 }
-#testTest{
+#testi{
     width: fit-content;
 }
 #wineBox{
@@ -36,8 +60,10 @@ body{
     border-radius: 20px;
     height: 238px;
     width: 95px;
+    border: 1px solid #f3dac6;
+    float: left;
     padding-left: -20px;
-    border: 1px solid rgb(165, 135, 135);
+    /* border: 1px solid rgb(165, 135, 135); */
 }
 #wineFacts{
     width: 200px;
