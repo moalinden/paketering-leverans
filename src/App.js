@@ -12,8 +12,9 @@ import WineBottles from "./components/wineCards/WineBottles";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/login/Login";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Cart from "./components/cartItems/Cart";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cart from "./components/cart/Cart";
+
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -30,8 +31,15 @@ function App() {
     };
     newFetch();
   }, []);
-  return (
-    <BrowserRouter>
+if (loading) {
+    return (
+      <div id="app">
+        <Loading />
+      </div>
+    );
+  } else {
+    return (
+      <Router>
       <div id="App">
         <Header />
         <Switch>
@@ -42,8 +50,10 @@ function App() {
         </Switch>
         <Footer />
       </div>
-    </BrowserRouter>
-  );
+    </Router>
+
+    );
+  }
 }
 
 export default App;
