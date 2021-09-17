@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./wineBottles.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToStore } from "../../redux/actions";
+import { Nav, Col, Row } from "react-bootstrap";
 
-//import result from ../../../server/index.js
+import { useDispatch, useSelector } from "react-redux";
+import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
 
 function WineBottles() {
   const dispatch = useDispatch();
   const productsState = useSelector((state) => state.storeSlice);
   const products = productsState.storedProducts;
-  console.log(productsState);
-  console.log(products);
 
   const addToCart = (product) => {
-    console.log("products: ", productsState.products);
     const productToDispatch = productsState.products.find(
       (element) => element.id === product.id
     );
@@ -25,21 +22,27 @@ function WineBottles() {
     }
   };
 
-  // const [bottles, setBottles] = useState();
-  // useEffect(() => {
-  //   (async () => {
-  //     const wines = await (await fetch("/api/products")).json();
-  //     setBottles(wines.products);
-  //     return wines;
-  //   })();
-  // }, []);
+  const decrementCart = (product) => {
+    dispatch(decrementItem(product));
+  };
 
-  //Axel korrigerade lite för att det ska funka med redux/localstorage
+  const saveToWishList = () => {
+    const wishList = productsState.products;
+    const keyGen = Math.random() * 1000;
+    localStorage.setItem(keyGen, wishList);
+    dispatch(storeWishList(keyGen));
+  };
+
+  const removeWishList = (key) => {
+    dispatch(removeWishList(key));
+    const keyToRemove = productsState.keyToRemove;
+    localStorage.removeItem(keyToRemove);
+  };
 
   return (
     <div className="container" id="systembolaget">
       <div className="row">
-        {products.products.map((wine, index) => (
+        {products.map((wine, index) => (
           <div className="col-1" id="wineBox" key={index}>
             <div id="bild">
               {/* {console.log(wine)} */}
@@ -52,7 +55,15 @@ function WineBottles() {
               <button
                 placeholder="add to cart"
                 onClick={() => addToCart(wine)}
-              ></button>
+                id="cartKnapp"
+              >
+                Add to Cart
+              </button>
+              <button onClick={() => decrementCart(wine)} id="cartKnapp">
+                -1
+              </button>
+              <button onCLick={() => saveToWishList()}>Save to Wishlist</button>
+              <button onClick={() => removeWishList()}>remove Wishlist</button>
             </div>
           </div>
         ))}

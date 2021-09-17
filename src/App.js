@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import Loading from "./components/loading/Loading";
 
 import AboutPage from "./About";
+// import NavbarPage from "./components/navbar/Navbar";
 
 import WineBottles from "./components/wineCards/WineBottles";
 
@@ -13,34 +15,54 @@ import Login from "./components/login/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const newFetch = async () => {
       const response = await fetch("/api/products");
       const data = await response.json();
       console.log(data);
-      localStorage.setItem("/api/products", JSON.stringify(data));
+      localStorage.setItem("/api/products", JSON.stringify(data.products));
+      if (!data) {
+        setLoading(true);
+      }
     };
     newFetch();
   }, []);
-  return (
-    <Router>
-      <div id="App">
-        <Header />
-        <Switch>
-          <Route path="/Login">
-            <Login />
-          </Route>
-          <Route path="/About">
-            <AboutPage />
-          </Route>
-          <Route>
-            <WineBottles path="/" />
-          </Route>
-        </Switch>
-        <Footer />
+
+  if (loading) {
+    return (
+      <div id="app">
+        <Loading />
       </div>
-    </Router>
-  );
+    );
+  } else {
+    return (
+      <Router>
+        <div id="App">
+          <Header />
+          <Switch>
+            <Route path="/Login">
+              <Login />
+            </Route>
+            <Route path="/About">
+              <AboutPage />
+            </Route>
+            <Route>
+              <WineBottles path="/" />
+            </Route>
+          </Switch>
+          <Switch>
+            {/* <Route path="/Navbar">
+              <NavbarPage />
+            </Route> */}
+          </Switch>
+
+          <Footer />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
