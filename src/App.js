@@ -19,18 +19,17 @@ function App() {
 
   useEffect(() => {
     const newFetch = async () => {
+      setLoading(true);
       const response = await fetch("/api/products");
       const data = await response.json();
       console.log(data);
       localStorage.setItem("/api/products", JSON.stringify(data.products));
-      if (!data) {
-        setLoading(true);
-      }
+      setLoading(false);
     };
     newFetch();
   }, []);
 
-  if (loading) {
+  if (!loading) {
     return (
       <div id="app">
         <Loading />
