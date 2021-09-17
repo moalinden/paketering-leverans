@@ -58,7 +58,7 @@ function WineBottles() {
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link href="/App" id="navLink">
-                                Bubbles
+                                Sparkling Wine
                             </Nav.Link>
                         </Nav.Item>
                     </Nav>
