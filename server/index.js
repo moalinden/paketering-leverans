@@ -89,11 +89,11 @@ app.post("/api/addUser", (req, res) => {
     ],
     (err, rows) => {
       if(err){
-        res.status(400).json({ message: "Error" });
+        res.status(400).json({ status:{message: 'Error', auth:false} });
         return;
       }
       else{
-        res.json({ message: "Welcome!" });
+        res.json({status: {message: "Welcome!", auth: true}});
       }
     }
   )
@@ -137,14 +137,15 @@ app.post("/api/loginUser", (req, res) => {
             //If matches = logged in
             if (rows.length > 0) {
               //User exists
-              res.json({ message: "Logged in" });
+              res.json({status: {message: "Logged in", auth: true}});
             }
-              res.json({ message: "Wrong info" });
+              res.json({status: {message: "Wrong password", auth: false}});
+
           }
         });
       }
       else{
-        res.json({ message: "No user with that username found!" });
+        res.json({status: {message: "No user with that username", auth: false}});
       }
     }
   );
