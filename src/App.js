@@ -31,7 +31,12 @@ function App() {
     newFetch();
   }, []);
 
+<<<<<<< HEAD
   if (!loading) {
+=======
+  // if (loading === true) { if not mac
+  if (loading === false) {
+>>>>>>> 964152111db9a4779019c2118b8cd6310a71cbad
     return (
       <div id="app">
         <Loading />
