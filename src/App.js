@@ -12,7 +12,8 @@ import WineBottles from "./components/wineCards/WineBottles";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/login/Login";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Cart from "./components/cartItems/Cart";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -29,40 +30,20 @@ function App() {
     };
     newFetch();
   }, []);
-
-  if (loading) {
-    return (
-      <div id="app">
-        <Loading />
+  return (
+    <BrowserRouter>
+      <div id="App">
+        <Header />
+        <Switch>
+          <Route path="/Login" component={Login}/> 
+          <Route path="/About" component={AboutPage}/>
+          <Route exact path="/" component={WineBottles} />
+          <Route exact path="/cart" component={Cart}/>
+        </Switch>
+        <Footer />
       </div>
-    );
-  } else {
-    return (
-      <Router>
-        <div id="App">
-          <Header />
-          <Switch>
-            <Route path="/Login">
-              <Login />
-            </Route>
-            <Route path="/About">
-              <AboutPage />
-            </Route>
-            <Route>
-              <WineBottles path="/" />
-            </Route>
-          </Switch>
-          <Switch>
-            {/* <Route path="/Navbar">
-              <NavbarPage />
-            </Route> */}
-          </Switch>
-
-          <Footer />
-        </div>
-      </Router>
-    );
-  }
+    </BrowserRouter>
+  );
 }
 
 export default App;
