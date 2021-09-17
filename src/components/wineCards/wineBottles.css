@@ -2,12 +2,12 @@
 /* Add medie querys */
 
 /* 767 centrera vinkorten */
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
+/* For mobile phones: */
+/* @media only screen and (max-width: 768px) {
     [class*="col-"] {
       width: 100%;
     }
-  }
+  } */
 #App{
     /* align-items: center; */
     background-color: #f9f4ee;
@@ -24,7 +24,8 @@
     color: #bf8596; 
     background-color: #f9f4ee; 
     margin: 2px;
-    border-bottom:  #f9f4ee;;
+    border: 1px solid #f3dac6;
+    border-bottom: 0;
 
 }
 #systembolaget{
