@@ -24,6 +24,8 @@ body{
     margin: 30px;
     position: relative;
     box-shadow: 1px 5px #d2cfcf;
+    display: flex;
+    flex-direction: row;
 }
 #h3{
     font-size: 16px;
@@ -34,29 +36,28 @@ body{
     border-radius: 20px;
     height: 238px;
     width: 95px;
-    /* padding-left: -20px; */
-    border: 1px solid #f3dac6;
-    float: left;
+    padding-left: -20px;
+    border: 1px solid rgb(165, 135, 135);
 }
 #wineFacts{
-    float: right;
-    width: 210px;
-    margin: 8px;
+    width: 200px;
+    margin: 12px;
     white-space: pre-line;
-    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+
 }
-#detail{
-    /* margin-bottom: 50%; */
-    bottom: 80px;
-    position: absolute;
-}
+
 #cartKnapp{
     border: 1px solid #f3dac6;
     padding: 6px 15px;
     font-size: 10px;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    border-radius: 4px;
+    bottom: 10px;
+    right: 10px;
 
+    border-radius: 4px;
+}
+
+#cartKnapp:active{
+    background-color: gray;
 }
