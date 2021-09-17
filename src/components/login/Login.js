@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./Login.css";
+import submitHelper from '../../helper/submitHelper'
 
 export default function LoginPage() {
 
@@ -24,19 +25,16 @@ export default function LoginPage() {
   const submitLogin = async(e) => {
     e.preventDefault();
 
-    const dataVal = {
-      username: loginInfo.username,
-      password: loginInfo.password
-    }
-    const settings = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataVal)
-    }
+    let status = await submitHelper('login', loginInfo)
 
-    //Fetch (loginResult.message is result of fetch)
-    let fetchLogin = await fetch('/api/loginUser', settings);
-    let loginResult = await fetchLogin.json();
+    //Logged in
+    if(status.auth == true){
+
+    }
+    //Wrong info
+    if(status.auth == false){
+
+    }
 
   }
 
