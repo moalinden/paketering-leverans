@@ -2,11 +2,10 @@ import React from "react";
 import { Container, Row, Card } from 'react-bootstrap';
 
 function AboutPage() {
-
   return (
     <Container fluid style={{ minHeight: '100vh', padding:'60px' }}>
       <div className="d-flex justify-content-around">
-        <Card style={{ width: '35rem', backgroundColor: '#F3E7DA' }}>
+        <Card style={{ width: '35rem', backgroundColor: '#F3E7DA', padding:'10px' }}>
           <Card.Body>
             <Card.Title>The Wine Drinkers</Card.Title>
             <Card.Text>
@@ -18,21 +17,17 @@ function AboutPage() {
               <Row>Pakorn Nebbiolo - Two words, strong and powerful. Women loves it.</Row>
               <Row>Moa Zinfandel - Either you love me or you hate me</Row>
             </Card.Text>
-
           </Card.Body>
         </Card>
         <Card style={{ width: '35rem', backgroundColor: '#F3E7DA' }}>
-
           <Card.Body>
-            <Card.Title>But... How Did It Start?</Card.Title>
+            <Card.Title>  But... How Did It Start?</Card.Title>
             <Card.Text>
               A sunny evening during summer 2021, a group of people where drinking wine. They really enjoyed it so they started to import wine that Systembolaget didn't have so that other people could have the same experience. The End.
             </Card.Text>
           </Card.Body>
         </Card>
       </div>
-
-
     </Container>
   );
 
