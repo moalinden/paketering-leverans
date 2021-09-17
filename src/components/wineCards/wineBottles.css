@@ -60,13 +60,10 @@
     border-radius: 20px;
     height: 238px;
     width: 95px;
-<<<<<<< HEAD
     border: 1px solid #f3dac6;
     float: left;
-=======
     padding-left: -20px;
-    border: 1px solid rgb(165, 135, 135);
->>>>>>> 5bae4837961a8d8808d92ed3790aca0279c5a692
+    /* border: 1px solid rgb(165, 135, 135); */
 }
 #wineFacts{
     width: 200px;
@@ -85,11 +82,8 @@
     right: 10px;
 
     border-radius: 4px;
-<<<<<<< HEAD
-=======
 }
 
 #cartKnapp:active{
     background-color: gray;
->>>>>>> 5bae4837961a8d8808d92ed3790aca0279c5a692
 }
