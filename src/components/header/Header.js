@@ -1,7 +1,7 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faShoppingCart, faInfo } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 
 import Countindicator from "./CountIndicator";
@@ -13,12 +13,12 @@ function Header() {
         <Col>
           <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
         </Col>
-
         <Col>
-
-          <Countindicator />
           <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
-
+          <Countindicator />
+        </Col>
+        <Col>
+          <FontAwesomeIcon icon={faInfo} className="userIcons" />
         </Col>
       </Row>
       <Nav
