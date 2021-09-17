@@ -11,14 +11,17 @@ function Header() {
     <Container fluid style={{ backgroundColor: "#bf8596" }}>
       <Row md="auto" className="justify-content-md-center xs-2">
         <Col>
+        <Nav.Link href="/Login" style={{ color: "#F3DAC6" }}>
           <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
+          </Nav.Link>
         </Col>
 
         <Col>
+        <Nav.Link style={{ color: "#F3DAC6" }}>
 
           <Countindicator />
           <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
-
+          </Nav.Link>
         </Col>
       </Row>
       <Nav
@@ -30,11 +33,7 @@ function Header() {
             App
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/Login" style={{ color: "#F3DAC6" }}>
-            Login
-          </Nav.Link>
-        </Nav.Item>
+        
         <Nav.Item>
           <Nav.Link href="/About" style={{ color: "#F3DAC6" }}>
             About Us
