@@ -8,12 +8,12 @@ import './cartItems.css';
 const Cart = () => {
     const dispatch = useDispatch();
     const productsState = useSelector((state) => state.storeSlice);
-    const products = productsState.storedProducts;
+    const products = productsState.products;
       console.log('=====>', products)
-    //const deleteFromCart = (productID) => {
-    //    const productToDelete = productsState.products.splice(productID, 1)
+    const deleteFromCart = (productID) => {
+        const productToDelete = productsState.products.splice(productID, 1)
 
-    //}
+    }
 
   return (products.map(({ name, price, imageUrl, count }) => (
     <div className='cart-item' key={name}>
@@ -21,7 +21,7 @@ const Cart = () => {
           <div classname='item-details'>
           <p className='name'>{name}</p>
           <p className='price'>{price * count || 1} kr</p>
-              {/*< FontAwesomeIcon icon={faTrash} className="userIcons" onClick={() => deleteFromCart(products)} />*/}
+              < FontAwesomeIcon icon={faTrash} className="userIcons" onClick={() => deleteFromCart(products)} />
             
           </div>
 

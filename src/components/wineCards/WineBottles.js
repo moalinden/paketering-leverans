@@ -54,8 +54,7 @@ function WineBottles() {
               <button
                 placeholder="add to cart"
                 onClick={() => addToCart(wine)}
-                id="cartKnapp"
-              >
+                id="cartKnapp">
                 Add to Cart
               </button>
               <button onClick={() => decrementCart(wine)} id="cartKnapp">
@@ -64,7 +63,7 @@ function WineBottles() {
               <button onCLick={() => saveToWishList()}>Save to Wishlist</button>
               <button onClick={() => removeWishList()}>remove Wishlist</button>
             </div>
-          </div>
+          </div> 
         ))}
         {/* {handleGetJson()} */}
         {/* {console.log(bottles)} */}

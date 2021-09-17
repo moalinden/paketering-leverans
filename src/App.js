@@ -13,7 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/login/Login";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import CartItems from "./components/cartItems/Cart";
+import Cart from "./components/cartItems/Cart";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ function App() {
           <Route path="/Login" component={Login}/> 
           <Route path="/About" component={AboutPage}/>
           <Route exact path="/" component={WineBottles} />
-          <Route exact path="/cart" component={CartItems}/>
+          <Route exact path="/cart" component={Cart}/>
         </Switch>
         <Footer />
       </div>

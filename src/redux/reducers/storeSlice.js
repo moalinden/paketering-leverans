@@ -47,21 +47,7 @@ const storeSlice = (state = initialState, action) => {
                     ...state,
                     products: state.products.filter((cartItem) => cartItem.id !== action.payload.id),
                 };
-            //case "EDIT_QUANTITY":
-            //    return {
-            //        ...state,
-            //        products: state.products.map(cartItem => cartItem.id === action.payload.id ? {
-            //                ...cartItem,
-            //                count: action.payload.count
-            //            } : cartItem
-            //        ),
-            //    };
-        //case "SHOW_ITEM":
-        //    return {
-        //            ...state,
-        //            products: state.products.filter((cartItem) => cartItem.id !== action.payload.id),
-        //        };
-        
+    
     
     case "DECREMENT_ITEM":
       let count = action.payload.count;
@@ -97,7 +83,18 @@ const storeSlice = (state = initialState, action) => {
       return {
         ...state,
         keyToRemove: wishListToRemove,
-      };
+            };
+    case "EMPTY_WHOLE_CART":
+            return {
+
+            };
+        case "CALCULATE_TOTAL_PRICE":
+            return {
+                
+                ...state,
+
+            }
+            
     case "RESET":
       return (state = 0);
     default:
