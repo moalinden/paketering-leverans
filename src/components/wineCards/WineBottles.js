@@ -38,8 +38,9 @@ function WineBottles() {
     localStorage.removeItem(keyToRemove);
   };
 
-    return (
-      <div className="container">
+  return (
+    <div className="container">
+
 
         <div id="navbar">
             <Col >
@@ -79,25 +80,26 @@ function WineBottles() {
               <p>{wine.description}</p>
               <p>{wine.price} kr</p>
               <button id="wishknapp" onCLick={() => saveToWishList()}>♡</button>
-              {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
-              <button
-                placeholder="add to cart"
-                onClick={() => addToCart(wine)}
-                id="cartKnapp"
-                >
-                Add to Cart
-              </button>
-              <button onClick={() => decrementCart(wine)} id="cartKnapp">
-                Delete
-              </button>
+                {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
+                <div id="cartButtons">
+                  <button
+                    placeholder="add to cart"
+                    onClick={() => addToCart(wine)}
+                    id="cartKnapp"
+                  >
+                    Add to Cart
+                  </button>
+                  <button onClick={() => decrementCart(wine)} id="cartKnapp">
+                    Delete
+                  </button>
             </div>
           </div>
         )) :null }
         {/* {handleGetJson()} */}
         {/* {console.log(bottles)} */}
+
       </div>
     </div>
-        </div>
   );
 }
 
