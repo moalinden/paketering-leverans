@@ -77,7 +77,8 @@ function WineBottles() {
             <div id="wineFacts">
               <h3>{wine.name}</h3>
               <p>{wine.description}</p>
-              <p>{wine.price}</p>
+              <p>{wine.price} kr</p>
+              <button id="wishknapp" onCLick={() => saveToWishList()}>♡</button>
               <button
                 placeholder="add to cart"
                 onClick={() => addToCart(wine)}
@@ -86,10 +87,9 @@ function WineBottles() {
                 Add to Cart
               </button>
               <button onClick={() => decrementCart(wine)} id="cartKnapp">
-                -1
+                Delete
               </button>
-              <button onCLick={() => saveToWishList()}>Save to Wishlist</button>
-              <button onClick={() => removeWishList()}>remove Wishlist</button>
+              {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
             </div>
           </div>
         ))}

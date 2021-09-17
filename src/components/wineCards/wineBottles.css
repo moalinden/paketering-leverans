@@ -17,8 +17,8 @@
     color: #bf8596;
 } */
 #navbar{ 
-    padding: 40px;
-    margin: 15px; 
+    padding: 10px;
+    margin: 5px; 
 }
 #navLink{
     color: #bf8596; 
@@ -33,10 +33,7 @@
     align-items: center;
     /* margin: auto; */
     position: relative;
-    margin-bottom: 80px;
-}
-#testi{
-    width: fit-content;
+    margin-bottom: 100px;
 }
 #wineBox{
     /* align-items: center; */
@@ -71,19 +68,27 @@
     white-space: pre-line;
     display: flex;
     flex-direction: column;
-
 }
 
 #cartKnapp{
     border: 1px solid #f3dac6;
     padding: 6px 15px;
     font-size: 10px;
-    bottom: 10px;
-    right: 10px;
-
+    /* bottom: 10px;
+    right: 10px; */
     border-radius: 4px;
+    width: 90px;
 }
 
 #cartKnapp:active{
     background-color: gray;
+}
+#wishknapp{
+    /* border: 1px solid #f3dac6; */
+    padding: 6px 15px;
+    font-size: 10px;
+    /* bottom: 10px;
+    right: 10px; */
+    border-radius: 4px;
+    width: 90px;
 }
