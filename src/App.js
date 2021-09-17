@@ -31,7 +31,7 @@ function App() {
     newFetch();
   }, []);
 
-  if (loading) {
+  if (loading === true) {
     return (
       <div id="app">
         <Loading />
