@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import "./register.css";
 
-import RegValidation from '../../helper/regValidation'
-import RegSubmitHelper from '../../helper/regSubmitHelper'
+import RegValidation from './regValidation'
+import submitHelper from '../../helper/submitHelper'
 
 export default function RegisterPage() {
 
@@ -64,9 +64,16 @@ export default function RegisterPage() {
   }
 
   //Submit user on submit
-  const submitRegister = (event) => {
+  const submitRegister = async(event) => {
     event.preventDefault();
-    RegSubmitHelper(regInfo)
+
+    let status = await submitHelper('register', regInfo)
+
+    //Registered
+    if(status.auth == true){
+
+    }
+
   }
 
   return (
@@ -92,7 +99,7 @@ export default function RegisterPage() {
             <label className="form_label">Email</label>
           </div>
           <div className="form_div">
-            <input type="text" className="form_input" data-input="password" placeholder="" onBlur={regDataCheck} onChange={onChangeUpdateStateText}/>
+            <input type="password" className="form_input" data-input="password" placeholder="" onBlur={regDataCheck} onChange={onChangeUpdateStateText}/>
             <label className="form_label">Password</label>
           </div>
           <div className="form_div">
