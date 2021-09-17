@@ -31,15 +31,41 @@ function WineBottles() {
     localStorage.setItem(keyGen, wishList);
     dispatch(storeWishList(keyGen));
   };
-
   const removeWishList = (key) => {
     dispatch(removeWishList(key));
     const keyToRemove = productsState.keyToRemove;
     localStorage.removeItem(keyToRemove);
   };
 
-  return (
-    <div className="container" id="systembolaget">
+    return (
+      <div className="container">
+
+        <div id="navbar">
+            <Col >
+                <Row className="justify-content-md-center">
+                    <Nav variant="tabs" defaultActiveKey="/App"  id="navbar" >
+                        {/* <h2>MENU</h2> */}
+                        <Nav.Item>
+                            <Nav.Link href="/App" id="navLink">
+                                Red Wine
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/App" id="navLink">
+                                White Wine
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/App" id="navLink">
+                                Bubbles
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Row>
+            </Col>
+  </div>
+
+    <div id="systembolaget">
       <div className="row">
         {products.map((wine, index) => (
           <div className="col-1" id="wineBox" key={index}>
@@ -50,7 +76,9 @@ function WineBottles() {
             <div id="wineFacts">
               <h3>{wine.name}</h3>
               <p>{wine.description}</p>
-              <p>{wine.price}</p>
+              <p>{wine.price} kr</p>
+              <button id="wishknapp" onCLick={() => saveToWishList()}>♡</button>
+              {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
               <button
                 placeholder="add to cart"
                 onClick={() => addToCart(wine)}
@@ -58,10 +86,8 @@ function WineBottles() {
                 Add to Cart
               </button>
               <button onClick={() => decrementCart(wine)} id="cartKnapp">
-                -1
+                Delete
               </button>
-              <button onCLick={() => saveToWishList()}>Save to Wishlist</button>
-              <button onClick={() => removeWishList()}>remove Wishlist</button>
             </div>
           </div> 
         ))}
@@ -69,6 +95,7 @@ function WineBottles() {
         {/* {console.log(bottles)} */}
       </div>
     </div>
+        </div>
   );
 }
 
