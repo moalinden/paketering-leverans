@@ -12,7 +12,7 @@ import WineBottles from "./components/wineCards/WineBottles";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/login/Login";
-import Register from "./components/register/Register"
+import Register from "./components/register/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -31,7 +31,7 @@ function App() {
     newFetch();
   }, []);
 
-  if (!loading) {
+  if (loading) {
     return (
       <div id="app">
         <Loading />
