@@ -31,7 +31,8 @@ function App() {
     newFetch();
   }, []);
 
-  if (loading === true) {
+  // if (loading === true) { if not mac
+  if (loading === false) {
     return (
       <div id="app">
         <Loading />
