@@ -13,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/login/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cart from "./components/cart/Cart";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -39,28 +40,18 @@ function App() {
   } else {
     return (
       <Router>
-        <div id="App">
-          <Header />
-          <Switch>
-            <Route path="/Login">
-              <Login />
-            </Route>
-            <Route path="/About">
-              <AboutPage />
-            </Route>
-            <Route>
-              <WineBottles path="/" />
-            </Route>
-          </Switch>
-          <Switch>
-            {/* <Route path="/Navbar">
-              <NavbarPage />
-            </Route> */}
-          </Switch>
+      <div id="App">
+        <Header />
+        <Switch>
+          <Route path="/Login" component={Login}/> 
+          <Route path="/About" component={AboutPage}/>
+          <Route exact path="/" component={WineBottles} />
+          <Route exact path="/cart" component={Cart}/>
+        </Switch>
+        <Footer />
+      </div>
+    </Router>
 
-          <Footer />
-        </div>
-      </Router>
     );
   }
 }

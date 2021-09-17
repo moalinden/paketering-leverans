@@ -3,10 +3,13 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faShoppingCart, faInfo } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Nav } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+
 
 import Countindicator from "./CountIndicator";
 
 function Header() {
+    const history = useHistory();
   return (
     <Container fluid style={{ backgroundColor: "#bf8596" }}>
       <Row md="auto" className="justify-content-md-center xs-2">
@@ -14,8 +17,9 @@ function Header() {
           <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
         </Col>
         <Col>
-          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
-          <Countindicator />
+        < Countindicator />
+                  <FontAwesomeIcon icon={faShoppingCart} className="userIcons" onClick={()=> history.push('/cart')}/>
+          
         </Col>
         <Col>
           <FontAwesomeIcon icon={faInfo} className="userIcons" />
@@ -23,8 +27,7 @@ function Header() {
       </Row>
       <Nav
         className="justify-content-md-center xs-2"
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
+        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
         <Nav.Item>
           <Nav.Link href="/App" style={{ color: "#F3DAC6" }}>
             App
