@@ -10,7 +10,6 @@ function WineBottles() {
   const dispatch = useDispatch();
   const productsState = useSelector((state) => state.storeSlice);
   const products = productsState.storedProducts;
-
   const addToCart = (product) => {
     const productToDispatch = productsState.products.find(
       (element) => element.id === product.id
@@ -95,6 +94,7 @@ function WineBottles() {
             </div>
                     ))}
         </div>
+
       </div>
     </div>
   );
