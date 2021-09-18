@@ -5,8 +5,10 @@ import { faUser, faShoppingCart, faInfo, faWineBottle, faPenFancy } from "@forta
 import { Container, Row, Col, Nav } from "react-bootstrap";
 
 import Countindicator from "./CountIndicator";
+import { useHistory } from "react-router-dom";
 
 function Header() {
+  const history = useHistory();
   return (
     <Container fluid style={{ backgroundColor: "#bf8596", height:"200px" }}>
       <Row md="auto" className="justify-content-md-center xs-2">
@@ -17,7 +19,7 @@ function Header() {
         </Col>
         <Col>
         <Nav.Link style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
+          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" onClick={() => history.push('/cart')} />
           <Countindicator />
           </Nav.Link>
         </Col>
