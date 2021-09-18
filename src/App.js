@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+// import Footer from "./components/footer/Footer";
 import Loading from "./components/loading/Loading";
 
 import AboutPage from "./About";
@@ -15,7 +15,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Cart from "./components/cart/Cart";
+// import Cart from "./components/cart/Cart";
 
 
 function App() {
