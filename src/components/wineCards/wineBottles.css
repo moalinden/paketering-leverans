@@ -50,8 +50,8 @@
 }
 #h3{
     font-size: 16px;
-    height: 70px;
-    /* margin-top: 5px; */
+    min-height: 50px;
+    padding-top: 15px;
 }
 #winePic{
     border-radius: 20px;
@@ -65,18 +65,20 @@
 #wineFacts{
     width: 200px;
     margin-left: 12px;
-    margin-bottom: 12px;
     white-space: pre-line;
     display: flex;
     flex-direction: column;
 }
-
+#cartButtons{
+    position: absolute;
+    bottom: 14px;
+}
 #cartKnapp{
     border: 1px solid #f3dac6;
     padding: 4px 9px;
     font-size: 10px;
-    /* bottom: 10px;
-    right: 10px; */
+    bottom: 10px;
+    right: 10px;
     border-radius: 4px;
     width: 90px;
 }
@@ -84,11 +86,11 @@
     background-color: gray;
 }
 #wishknapp{
-    /* border: 1px solid #f3dac6; */
+    position: absolute;
     padding: 6px 15px;
-    font-size: 10px;
-    /* bottom: 10px;
-    right: 10px; */
+    font-size: 20px;
+    right: 0px;
+    bottom: 7px;
     border-radius: 4px;
     width: 90px;
 }

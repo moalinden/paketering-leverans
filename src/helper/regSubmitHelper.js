@@ -1,4 +1,3 @@
-import fetchHelper from './fetchHelper';
 
 export default async function RegSubmitHelper(data) {
   console.log(data.username)

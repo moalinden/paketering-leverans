@@ -10,6 +10,8 @@ const app = express();
 
 const sqlite3 = require("sqlite3").verbose();
 
+app.use(express.static(path.join(__dirname, "../build")));
+
 // open the database
 let db = new sqlite3.Database("./webshop.db", (err) => {
   if (err) {
@@ -219,9 +221,8 @@ app.post("/api/addUser", (req, res) => {
     let stmt = db.prepare(`
     DELETE FROM products WHERE id = :id
   `);
-  res.json(stmt.run({ id: req.params.id }));
-});
-
+    res.json(stmt.run({ id: req.params.id }));
+  });
 
   app.get("/api/changeImage", (req, res) => {
     db.all(
@@ -246,4 +247,4 @@ app.post("/api/addUser", (req, res) => {
   });
 });
 // start the web server
-app.listen(4000, () => console.log("Listening on port 4000"));
+app.listen(3000, () => console.log("Listening on port 3000"));

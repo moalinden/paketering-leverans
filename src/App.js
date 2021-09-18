@@ -12,6 +12,8 @@ import WineBottles from "./components/wineCards/WineBottles";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./components/login/Login";
+import Register from "./components/register/Register";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cart from "./components/cart/Cart";
 
@@ -21,16 +23,16 @@ function App() {
 
   useEffect(() => {
     const newFetch = async () => {
+      setLoading(true);
       const response = await fetch("/api/products");
       const data = await response.json();
       console.log(data);
       localStorage.setItem("/api/products", JSON.stringify(data.products));
-      if (!data) {
-        setLoading(true);
-      }
+      setLoading(false);
     };
     newFetch();
   }, []);
+
 if (loading) {
     return (
       <div id="app">
@@ -40,17 +42,28 @@ if (loading) {
   } else {
     return (
       <Router>
-      <div id="App">
-        <Header />
-        <Switch>
-          <Route path="/Login" component={Login}/> 
-          <Route path="/About" component={AboutPage}/>
-          <Route exact path="/" component={WineBottles} />
-          <Route exact path="/cart" component={Cart}/>
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
+        <div id="App">
+          <Header />
+          <Switch>
+            <Route path="/Login">
+              <Login />
+            </Route>
+            <Route path="/Register">
+              <Register />
+            </Route>
+            <Route path="/About">
+              <AboutPage />
+            </Route>
+            <Route>
+              <WineBottles path="/" />
+            </Route>
+          </Switch>
+          <Switch>
+            {/* <Route path="/Navbar">
+              <NavbarPage />
+            </Route> */}
+          </Switch>
+
 
     );
   }
