@@ -3,22 +3,28 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faShoppingCart, faInfo, faWineBottle, faPenFancy } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Nav } from "react-bootstrap";
+import {
+  useHistory
+} from "react-router-dom";
 
 import Countindicator from "./CountIndicator";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const history = useHistory();
+    const cartTotal = useSelector((state) => state.cart.cart);
   return (
     <Container fluid style={{ backgroundColor: "#bf8596", height:"200px" }}>
       <Row md="auto" className="justify-content-md-center xs-2">
       <Col>
         <Nav.Link href="/App" style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
+          <FontAwesomeIcon icon={faWineBottle} className="userIcons"  />
           </Nav.Link>
         </Col>
         <Col>
         <Nav.Link style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
-          <Countindicator />
+            <FontAwesomeIcon icon={faShoppingCart} className="userIcons" onClick={() => history.push('/cart')} />
+          < Countindicator /> {cartTotal.length > 0 ? cartTotal.length: ''}
           </Nav.Link>
         </Col>
         <Col>

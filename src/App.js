@@ -8,6 +8,7 @@ import AboutPage from "./About";
 // import NavbarPage from "./components/navbar/Navbar";
 
 import WineBottles from "./components/wineCards/WineBottles";
+import Cart from "./components/cart/Cart";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -32,7 +33,7 @@ function App() {
   }, []);
 
   // if (loading === true) { if not mac
-  if (loading === false) {
+  if (loading ) {
     return (
       <div id="app">
         <Loading />
@@ -41,31 +42,17 @@ function App() {
   } else {
     return (
       <Router>
-        <div id="App">
-          <Header />
-          <Switch>
-            <Route path="/Login">
-              <Login />
-            </Route>
-            <Route path="/Register">
-              <Register />
-            </Route>
-            <Route path="/About">
-              <AboutPage />
-            </Route>
-            <Route>
-              <WineBottles path="/" />
-            </Route>
-          </Switch>
-          <Switch>
-            {/* <Route path="/Navbar">
-              <NavbarPage />
-            </Route> */}
-          </Switch>
-
-          <Footer />
-        </div>
-      </Router>
+      <div id="App">
+        <Header />
+        <Switch>
+          <Route path="/Login" component={Login}/> 
+          <Route path="/About" component={AboutPage}/>
+          <Route exact path="/" component={WineBottles} />
+          <Route exact path="/cart" component={Cart}/>
+        </Switch>
+        <Footer />
+      </div>
+    </Router>
     );
   }
 }

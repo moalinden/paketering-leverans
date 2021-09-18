@@ -5,26 +5,15 @@ import { Nav, Col, Row } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
+import { addToCart } from "../../redux/actions/cart";
 
 function WineBottles() {
   const dispatch = useDispatch();
   const productsState = useSelector((state) => state.storeSlice);
   const products = productsState.storedProducts;
 
-  const addToCart = (product) => {
-    const productToDispatch = productsState.products.find(
-      (element) => element.id === product.id
-    );
-    if (productsState.products.length < 1 || productToDispatch === undefined) {
-      dispatch(addToStore(product));
-    } else {
-      dispatch(addToStore(productToDispatch));
-    }
-  };
-
-  const decrementCart = (product) => {
-    dispatch(decrementItem(product));
-  };
+  const handleAdd = (product) => { dispatch(addToCart(product)) };
+  const decrementCart = (product) => { dispatch(decrementItem(product));};
 
   const saveToWishList = () => {
     const wishList = productsState.products;
@@ -80,11 +69,7 @@ function WineBottles() {
                 <button id="wishknapp" onClick={() => saveToWishList()}>♡</button>
                 {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
                 <div id="cartButtons">
-                  <button
-                    placeholder="add to cart"
-                    onClick={() => addToCart(wine)}
-                    id="cartKnapp"
-                    >
+                  <button placeholder="add to cart" onClick={() => handleAdd(wine)} id="cartKnapp">
                     Add to Cart
                   </button>
                   <button onClick={() => decrementCart(wine)} id="cartKnapp">
