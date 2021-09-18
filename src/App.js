@@ -59,12 +59,12 @@ if (loading) {
             </Route>
           </Switch>
           <Switch>
-            {/* <Route path="/Navbar">
-              <NavbarPage />
-            </Route> */}
+            <Route path="/Navbar">
+              {/* <NavbarPage /> */}
+            </Route>
           </Switch>
-
-
+        </div>
+      </Router>
     );
   }
 }
