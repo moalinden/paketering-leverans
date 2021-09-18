@@ -15,6 +15,8 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cart from "./components/cart/Cart";
+
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -31,8 +33,7 @@ function App() {
     newFetch();
   }, []);
 
-  // if (loading === true) { if not mac
-  if (loading === false) {
+if (loading) {
     return (
       <div id="app">
         <Loading />
@@ -63,9 +64,7 @@ function App() {
             </Route> */}
           </Switch>
 
-          <Footer />
-        </div>
-      </Router>
+
     );
   }
 }

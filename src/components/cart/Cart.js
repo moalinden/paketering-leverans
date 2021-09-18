@@ -2,7 +2,9 @@ import React from "react";
 import "./Cart.style.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addToStore } from "../redux/actions";
+import { addToStore } from "../../redux/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function Cart() {
   const store = useSelector((state) => state.storeSlice);
@@ -35,14 +37,10 @@ function Cart() {
                 className="changeButton"
                 onClick={() => Increment(product)}
               >
-                increment
-              </button>
-              <button
-                className="changeButton"
-                onClick={() => Decrement(product)}
-              >
-                decrement
-              </button>
+                add
+                    </button>
+                    < FontAwesomeIcon icon={faTrash} className="userIcons" onClick={() => Decrement(product)} />
+    
             </div>
           </div>
         );
