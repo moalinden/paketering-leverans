@@ -42,27 +42,17 @@ if (loading) {
   } else {
     return (
       <Router>
-        <div id="App">
-          <Header />
-          <Switch>
-            <Route path="/Login">
-              <Login />
-            </Route>
-            <Route path="/Register">
-              <Register />
-            </Route>
-            <Route path="/About">
-              <AboutPage />
-            </Route>
-            <Route>
-              <WineBottles path="/" />
-            </Route>
-          </Switch>
-          <Switch>
-            {/* <Route path="/Navbar">
-              <NavbarPage />
-            </Route> */}
-          </Switch>
+      <div id="App">
+        <Header />
+        <Switch>
+          <Route path="/Login" component={Login}/> 
+          <Route path="/About" component={AboutPage}/>
+          <Route exact path="/" component={WineBottles} />
+          <Route exact path="/cart" component={Cart}/>
+        </Switch>
+        <Footer />
+      </div>
+    </Router>
 
 
     );
