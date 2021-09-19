@@ -17,7 +17,6 @@ import Register from "./components/register/Register";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cart from "./components/cart/Cart";
 
-
 function App() {
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +32,7 @@ function App() {
     newFetch();
   }, []);
 
-if (loading) {
+  if (loading) {
     return (
       <div id="app">
         <Loading />
@@ -58,13 +57,8 @@ if (loading) {
               <WineBottles path="/" />
             </Route>
           </Switch>
-          <Switch>
-            {/* <Route path="/Navbar">
-              <NavbarPage />
-            </Route> */}
-          </Switch>
-
-
+        </div>
+      </Router>
     );
   }
 }
