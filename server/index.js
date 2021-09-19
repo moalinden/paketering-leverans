@@ -64,7 +64,7 @@ app.get("/api/products", (req, res) => {
 
 // Get/read all products
 app.get("/api/getUser/:info", (req, res) => {
-  if (req.params.info == "email") {
+  if (req.params.info === "email") {
     db.all(
       "SELECT COUNT(id) AS userCount FROM user WHERE email = ?",
       [req.body.value],
