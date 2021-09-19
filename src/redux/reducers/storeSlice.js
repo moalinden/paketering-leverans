@@ -3,63 +3,76 @@ const initialState = {
   productCount: 0,
   products: [],
   wishList: [],
+  total: 0,
 };
 const storeSlice = (state = initialState, action) => {
-    switch (action.type) {
-        case "ADD_TO_STORE":
-            let trueOrFalse = false;
-            state.products.forEach((element) => {
-                if (element.id === action.payload.id) {
-                    trueOrFalse = true;
-                }
-                if (element.id !== action.payload.id) {
-                    return false;
-                }
-            });
+  switch (action.type) {
+    case "ADD_TO_STORE":
+      let trueOrFalse = false;
+      state.products.forEach((element) => {
+        if (element.id === action.payload.id) {
+          trueOrFalse = true;
+        }
+        if (element.id !== action.payload.id) {
+          return false;
+        }
+      });
 
-            if (trueOrFalse) {
-                let count = action.payload.count;
-                return {
-                    ...state,
-                    productCount: state.productCount + 1,
-                    products: state.products.map((object) => {
-                        if (object.id === action.payload.id) {
-                            return {
-                                ...object,
-                                count: count + 1
-                            };
-                        } else {
-                            return {
-                                ...object
-                            };
-                        }
-                    }),
-                };
+      if (trueOrFalse) {
+        let count = action.payload.count;
+        return {
+          ...state,
+          productCount: state.productCount + 1,
+          products: state.products.map((object) => {
+            if (object.id === action.payload.id) {
+              return {
+                ...object,
+                count: count + 1,
+                total: state.total + action.payload.price,
+              };
             } else {
-                return {
-                    ...state,
-                    productCount: state.productCount + 1,
-                    products: [...state.products, action.payload],
-                };
+              return {
+                ...object
+              };
             }
-            case "DELETE_PRODUCT":
-                return {
-                    ...state,
-                    products: state.products.filter((cartItem) => cartItem.id !== action.payload.id),
-                };
-    
-    
+          }),
+        };
+      } else {
+        return {
+          ...state,
+          productCount: state.productCount + 1,
+          products: [...state.products, action.payload],
+        };
+      }
+
+
     case "DECREMENT_ITEM":
       let count = action.payload.count;
-      if (count > 0 && state.productCount > 0) {
+      if (count > 0 && state.productCount > 0 || count < 0 && state.productCount < 0) {
+        const list = state.products.map((object) => {
+          if (object.id === action.payload.id) {
+            return {
+              ...object,
+              count: count - 1,
+            }
+
+          }
+        });
         return {
           ...state,
           productCount: state.productCount - 1,
           products: state.products.map((object) => {
             if (object.id === action.payload.id) {
-              return { ...object, count: count - 1 };
+              return {
+                ...object,
+                count: count - 1,
+              }
+
+            } else {
+              return object;
             }
-          }),
+          }).filter((cartItem) => cartItem.count !== 0)
+
         };
       } else {
         return state;
@@ -72,34 +85,36 @@ const storeSlice = (state = initialState, action) => {
 
     case "REMOVE_WISHLIST":
       const wishListToRemove = state.wishList.find(
-        (element) => element === action.payload
-      );
-      if (!wishListToRemove) {
-        return {
-          ...state,
-          error: "No matching key was found",
-        };
-      }
+      (element) => element === action.payload);
+        if (!wishListToRemove) {
+          return {
+            ...state,
+            error: "No matching key was found",
+            };
+          }
+          return {
+            ...state,
+            keyToRemove: wishListToRemove,
+          };
+
+    case "EMPTY_CART":
       return {
         ...state,
-        keyToRemove: wishListToRemove,
-            };
-    case "EMPTY_WHOLE_CART":
-            return {
+        products: [],
+        }
 
-            };
-        case "CALCULATE_TOTAL_PRICE":
-            return {
-                
-                ...state,
+    case "DELETE_FROM_CART":
+      return {
+          ...state,
+        products: state.products.filter((cartItem) => cartItem !== action.payload)
+      };
 
-            }
-            
     case "RESET":
       return (state = 0);
     default:
       return state;
   }
 };
+
 
 export default storeSlice;

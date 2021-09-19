@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Loading from "./components/loading/Loading";
+import { useSelector, useDispatch } from "react-redux";
 
 import AboutPage from "./About";
 // import NavbarPage from "./components/navbar/Navbar";
@@ -20,6 +21,8 @@ import Cart from "./components/cart/Cart";
 
 function App() {
   const [loading, setLoading] = useState(false);
+  const currentProductState = useSelector((state) => state.storeSlice.products);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const newFetch = async () => {
@@ -31,7 +34,8 @@ function App() {
       setLoading(false);
     };
     newFetch();
-  }, []);
+    console.log("YOU ARE HERE")
+  }, [currentProductState]);
 
 if (loading) {
     return (
@@ -44,7 +48,7 @@ if (loading) {
       <Router>
       <div id="App">
         <Header />
-        <Switch>
+          <Switch>  
           <Route path="/Login" component={Login}/> 
           <Route path="/About" component={AboutPage}/>
           <Route exact path="/" component={WineBottles} />
