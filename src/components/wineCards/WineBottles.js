@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./wineBottles.css";
 
 import { Nav, Col, Row } from "react-bootstrap";
@@ -9,7 +9,7 @@ import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
 function WineBottles() {
   const dispatch = useDispatch();
   const productsState = useSelector((state) => state.storeSlice);
-  const products = productsState.storedProducts;
+  const products = productsState.products;
 
   const addToCart = (product) => {
     const productToDispatch = productsState.products.find(
@@ -40,11 +40,10 @@ function WineBottles() {
 
   return (
     <div className="container">
-
       <div id="navbar">
-        <Col >
+        <Col>
           <Row className="justify-content-md-center">
-            <Nav variant="tabs" defaultActiveKey="/App" id="navbar" >
+            <Nav variant="tabs" defaultActiveKey="/App" id="navbar">
               {/* <h2>MENU</h2> */}
               <Nav.Item>
                 <Nav.Link href="/App" id="navLink">
@@ -71,29 +70,35 @@ function WineBottles() {
             <div className="col-1" id="wineBox" key={index}>
               <div id="bild">
                 {/* {console.log(wine)} */}
-                <img src={wine.imageUrl} alt="wine and dinee" id="winePic"></img>
+                <img
+                  src={wine.imageUrl}
+                  alt="wine and dinee"
+                  id="winePic"
+                ></img>
               </div>
               <div id="wineFacts">
                 <h3>{wine.name}</h3>
                 <p>{wine.description}</p>
                 <p>{wine.price} kr</p>
-                <button id="wishknapp" onClick={() => saveToWishList()}>♡</button>
+                <button id="wishknapp" onClick={() => saveToWishList()}>
+                  ♡
+                </button>
                 {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
                 <div id="cartButtons">
                   <button
                     placeholder="add to cart"
                     onClick={() => addToCart(wine)}
                     id="cartKnapp"
-                    >
+                  >
                     Add to Cart
                   </button>
-                  <button onClick={() => decrementCart(wine)} id="cartKnapp">
+                  <button onClick={() => decrementCart()} id="cartKnapp">
                     Delete
                   </button>
                 </div>
               </div>
             </div>
-                    ))}
+          ))}
         </div>
       </div>
     </div>

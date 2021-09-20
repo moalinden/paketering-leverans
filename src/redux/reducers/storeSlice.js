@@ -24,9 +24,14 @@ const storeSlice = (state = initialState, action) => {
           productCount: state.productCount + 1,
           products: state.products.map((object) => {
             if (object.id === action.payload.id) {
-              return { ...object, count: count + 1 };
+              return {
+                ...object,
+                count: count + 1,
+              };
             } else {
-              return { ...object };
+              return {
+                ...object,
+              };
             }
           }),
         };
@@ -34,9 +39,17 @@ const storeSlice = (state = initialState, action) => {
         return {
           ...state,
           productCount: state.productCount + 1,
-          products: [...state.products, action.payload],
+          products: action.payload,
         };
       }
+    case "DELETE_PRODUCT":
+      return {
+        ...state,
+        products: state.products.filter(
+          (cartItem) => cartItem.id !== action.payload.id
+        ),
+      };
+
     case "DECREMENT_ITEM":
       let count = action.payload.count;
       if (count > 0 && state.productCount > 0) {
@@ -72,6 +85,13 @@ const storeSlice = (state = initialState, action) => {
         ...state,
         keyToRemove: wishListToRemove,
       };
+    case "EMPTY_WHOLE_CART":
+      return {};
+    case "CALCULATE_TOTAL_PRICE":
+      return {
+        ...state,
+      };
+
     case "RESET":
       return (state = 0);
     default:
