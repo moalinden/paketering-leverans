@@ -33,6 +33,7 @@ const storeSlice = (state = initialState, action) => {
             } else {
               return {
                 ...object
+
               };
             }
           }),
@@ -44,7 +45,6 @@ const storeSlice = (state = initialState, action) => {
           products: [...state.products, action.payload],
         };
       }
-
 
     case "DECREMENT_ITEM":
       let count = action.payload.count;
@@ -109,6 +109,7 @@ const storeSlice = (state = initialState, action) => {
           ...state,
         products: state.products.filter((cartItem) => cartItem !== action.payload),
         productCount: state.productCount - action.payload.count,
+
       };
 
     case "RESET":
@@ -118,5 +119,5 @@ const storeSlice = (state = initialState, action) => {
   }
 };
 
-
 export default storeSlice;
+
