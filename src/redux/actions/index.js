@@ -27,25 +27,25 @@ export const removeWishList = (payload) => {
     };
 };
 
-export const deleteProduct = (cartItemID) => {
+export const deleteProduct = (payload) => {
     return {
-        type: "DELETE_PRODUCT",
-        payload: {
-            cartItemID: cartItemID,
-        },
+        type: "DELETE_FROM_CART",
+        payload: payload,
+    
     };
 };
 
-export const editQuantity = (cartItemID, value) => {
+export const clearCart = () => {
     return {
-        type: "EDIT_QUANTITY",
-        id: cartItemID,
-        count: value,
-    };
-};
-export const showItem = (cartItem) => {
+        type: "EMPTY_CART",
+        //payload: payload,
+    }
+    
+}
+export const calculateTotal = () => {
     return {
-        type: "SHOW_ITEM",
-        payload: cartItem,
-    };
-};
+        type: "CALCULATE_TOTAL_PRICE"
+    }
+    
+}
+
