@@ -22,13 +22,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Cart from "./components/cart/Cart";
 
 function App() {
-<<<<<<< HEAD
   const [loading, setLoading] = useState(false);
   const currentProductState = useSelector((state) => state.storeSlice.products);
-=======
-  const [loading, setLoading] = useState(true);
-  const productsState = useSelector((state) => state.storeSlice);
->>>>>>> dev
   const dispatch = useDispatch();
 
   useEffect(() => {
