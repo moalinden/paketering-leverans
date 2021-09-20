@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
-// import Footer from "./components/footer/Footer";
+import Footer from "./components/footer/Footer";
 import Loading from "./components/loading/Loading";
+import { useSelector, useDispatch } from "react-redux";
 
 import AboutPage from "./About";
 // import NavbarPage from "./components/navbar/Navbar";
@@ -18,11 +19,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToStore } from "./redux/actions";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import Cart from "./components/cart/Cart";
+import Cart from "./components/cart/Cart";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const productsState = useSelector((state) => state.storeSlice);
+  const [loading, setLoading] = useState(false);
+  const currentProductState = useSelector((state) => state.storeSlice.products);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,17 +50,17 @@ function App() {
       <Router>
       <div id="App">
         <Header />
-        <Switch>
+          <Switch>  
           <Route path="/Login" component={Login}/> 
           <Route path="/About" component={AboutPage} />
           < Route path= "/Register" component={Register}/>
           <Route exact path="/" component={WineBottles} />
+          <Route exact path="/Register" component={Register} />
           <Route exact path="/cart" component={Cart}/>
         </Switch>
         <Footer />
       </div>
     </Router>
-
 
     );
   }
