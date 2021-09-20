@@ -3,6 +3,7 @@ const initialState = {
   productCount: 0,
   products: [],
   wishList: [],
+  total: 0,
 };
 const storeSlice = (state = initialState, action) => {
   switch (action.type) {
@@ -24,9 +25,16 @@ const storeSlice = (state = initialState, action) => {
           productCount: state.productCount + 1,
           products: state.products.map((object) => {
             if (object.id === action.payload.id) {
-              return { ...object, count: count + 1 };
+              return {
+                ...object,
+                count: count + 1,
+                total: state.total + action.payload.price,
+              };
             } else {
-              return { ...object };
+              return {
+                ...object
+
+              };
             }
           }),
         };
@@ -37,17 +45,34 @@ const storeSlice = (state = initialState, action) => {
           products: [...state.products, action.payload],
         };
       }
+
     case "DECREMENT_ITEM":
       let count = action.payload.count;
-      if (count > 0 && state.productCount > 0) {
+      if (count > 0 && state.productCount > 0 || count < 0 && state.productCount < 0) {
+        const list = state.products.map((object) => {
+          if (object.id === action.payload.id) {
+            return {
+              ...object,
+              count: count - 1,
+            }
+
+          }
+        });
         return {
           ...state,
           productCount: state.productCount - 1,
           products: state.products.map((object) => {
             if (object.id === action.payload.id) {
-              return { ...object, count: count - 1 };
+              return {
+                ...object,
+                count: count - 1,
+              }
+
+            } else {
+              return object;
             }
-          }),
+          }).filter((cartItem) => cartItem.count !== 0)
+
         };
       } else {
         return state;
@@ -60,18 +85,33 @@ const storeSlice = (state = initialState, action) => {
 
     case "REMOVE_WISHLIST":
       const wishListToRemove = state.wishList.find(
-        (element) => element === action.payload
-      );
-      if (!wishListToRemove) {
-        return {
-          ...state,
-          error: "No matching key was found",
-        };
-      }
+      (element) => element === action.payload);
+        if (!wishListToRemove) {
+          return {
+            ...state,
+            error: "No matching key was found",
+            };
+          }
+          return {
+            ...state,
+            keyToRemove: wishListToRemove,
+          };
+
+    case "EMPTY_CART":
       return {
         ...state,
-        keyToRemove: wishListToRemove,
+        products: [],
+        
+        }
+
+    case "DELETE_FROM_CART":
+      return {
+          ...state,
+        products: state.products.filter((cartItem) => cartItem !== action.payload),
+        productCount: state.productCount - action.payload.count,
+
       };
+
     case "RESET":
       return (state = 0);
     default:
@@ -80,3 +120,4 @@ const storeSlice = (state = initialState, action) => {
 };
 
 export default storeSlice;
+
