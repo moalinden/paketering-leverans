@@ -34,8 +34,7 @@ function App() {
       setLoading(false);
     };
     newFetch();
-    console.log("YOU ARE HERE")
-  }, [currentProductState]);
+  }, []);
 
 if (loading) {
     return (
