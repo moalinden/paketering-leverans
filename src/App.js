@@ -14,19 +14,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
+import { useDispatch, useSelector } from "react-redux";
+import { addToStore } from "./redux/actions";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Cart from "./components/cart/Cart";
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const productsState = useSelector((state) => state.storeSlice);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const newFetch = async () => {
-      setLoading(true);
       const response = await fetch("/api/products");
       const data = await response.json();
-      console.log(data);
       localStorage.setItem("/api/products", JSON.stringify(data.products));
+      dispatch(addToStore(data.products));
+
       setLoading(false);
     };
     newFetch();
