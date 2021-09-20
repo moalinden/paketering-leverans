@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
+// import Footer from "./components/footer/Footer";
 import Loading from "./components/loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -15,28 +15,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Cart from "./components/cart/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { addToStore } from "./redux/actions";
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import Cart from "./components/cart/Cart";
 
 function App() {
+<<<<<<< HEAD
   const [loading, setLoading] = useState(false);
   const currentProductState = useSelector((state) => state.storeSlice.products);
+=======
+  const [loading, setLoading] = useState(true);
+  const productsState = useSelector((state) => state.storeSlice);
+>>>>>>> dev
   const dispatch = useDispatch();
 
   useEffect(() => {
     const newFetch = async () => {
-      setLoading(true);
       const response = await fetch("/api/products");
       const data = await response.json();
-      console.log(data);
       localStorage.setItem("/api/products", JSON.stringify(data.products));
+      dispatch(addToStore(data.products));
+
       setLoading(false);
     };
     newFetch();
   }, []);
 
-if (loading) {
+  if (loading) {
     return (
       <div id="app">
         <Loading />
@@ -49,7 +56,8 @@ if (loading) {
         <Header />
           <Switch>  
           <Route path="/Login" component={Login}/> 
-          <Route path="/About" component={AboutPage}/>
+          <Route path="/About" component={AboutPage} />
+          < Route path= "/Register" component={Register}/>
           <Route exact path="/" component={WineBottles} />
           <Route exact path="/cart" component={Cart}/>
         </Switch>

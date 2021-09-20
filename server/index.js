@@ -10,7 +10,7 @@ const app = express();
 
 const sqlite3 = require("sqlite3").verbose();
 
-app.use(express.static(path.join(__dirname, "../build")));
+// app.use(express.static(path.join(__dirname, "../build")));
 
 // open the database
 let db = new sqlite3.Database("./webshop.db", (err) => {
@@ -64,7 +64,7 @@ app.get("/api/products", (req, res) => {
 
 // Get/read all products
 app.get("/api/getUser/:info", (req, res) => {
-  if (req.params.info == "email") {
+  if (req.params.info === "email") {
     db.all(
       "SELECT COUNT(id) AS userCount FROM user WHERE email = ?",
       [req.body.value],
@@ -247,4 +247,4 @@ app.post("/api/addUser", (req, res) => {
   });
 });
 // start the web server
-app.listen(3000, () => console.log("Listening on port 3000"));
+app.listen(4000, () => console.log("Listening on port 4000"));
