@@ -5,3 +5,16 @@
     color: #F3DAC6;
     font-size: bold;
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Carattere&display=swap');
+
+.upper-nav{
+    font-family: 'Carattere', cursive;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.navbar-font{
+    font-family: 'Poppins', sans-serif;
+}
