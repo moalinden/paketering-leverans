@@ -15,14 +15,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToStore } from "./redux/actions";
+import { initialStore } from "./redux/actions";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cart from "./components/cart/Cart";
 
 function App() {
-  const [loading, setLoading] = useState(false);
   const currentProductState = useSelector((state) => state.storeSlice.products);
 
   const dispatch = useDispatch();
@@ -31,39 +29,26 @@ function App() {
     const newFetch = async () => {
       const response = await fetch("/api/products");
       const data = await response.json();
-      localStorage.setItem("/api/products", JSON.stringify(data.products));
-      dispatch(addToStore(data.products));
-
-      setLoading(false);
+      dispatch(initialStore(data.products));
     };
     newFetch();
   }, []);
 
-  if (loading) {
-    return (
-      <div id="app">
-        <Loading />
-      </div>
-    );
-  } else {
-    return (
-      <Router>
-
+  return (
+    <Router>
       <div id="App">
         <Header />
-          <Switch>  
-          <Route path="/Login" component={Login}/> 
-          <Route path="/About" component={AboutPage}/>
+        <Switch>
+          <Route path="/Login" component={Login} />
+          <Route path="/About" component={AboutPage} />
           <Route exact path="/" component={WineBottles} />
           <Route exact path="/Register" component={Register} />
-          <Route exact path="/cart" component={Cart}/>
+          <Route exact path="/cart" component={Cart} />
         </Switch>
         <Footer />
       </div>
     </Router>
-
-    );
-  }
+  );
 }
 
 export default App;

@@ -2,7 +2,12 @@ import React from "react";
 import "./Cart.style.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addToStore, clearCart, decrementItem, deleteProduct } from "../../redux/actions";
+import {
+  addToStore,
+  clearCart,
+  decrementItem,
+  deleteProduct,
+} from "../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -21,21 +26,23 @@ function Cart() {
   };
   const Deletion = (product) => {
     dispatch(deleteProduct(product));
-    
   };
-  const emptyCart = ()=> {
-    dispatch(clearCart())
-    
-  }
+  const emptyCart = () => {
+    dispatch(clearCart());
+  };
 
-  const getTotal = (item) => item.count * Number(item.price)
+  const getTotal = (price, count) => {
+    const total = price * count;
+    return total;
+  };
 
-  const totalPrice = storeItems.length > 0 &&
-    storeItems.reduce((previousValue, item) => {
-      const price = getTotal(item);
-      return previousValue + price;
-    },0) || 0;
-
+  const totalPrice =
+    (storeItems.length > 0 &&
+      storeItems.reduce((previousValue, item) => {
+        const price = getTotal(item);
+        return previousValue + price;
+      }, 0)) ||
+    0;
 
   //return (
   //  <div id="tableContainer">
@@ -49,7 +56,7 @@ function Cart() {
   //                Name: {product.name}
   //              </li>
   //              <li id="priceItem" className="listItem">
-                  
+
   //                Price: {getTotal(product) }
   //              </li>
   //            </ul>
@@ -64,7 +71,7 @@ function Cart() {
   //               +
   //                   </span>
   //                  < FontAwesomeIcon icon={faTrash} className="userIcons" onClick={() => Deletion(product)} />
-    
+
   //          </div>
   //        </div>
   //      );
@@ -80,53 +87,78 @@ function Cart() {
           <h2 className="item-header"> Products in Cart</h2>
         </div>
       </div>
-      
+
       {storeItems.map((product, index) => {
         return (
           <div key={index} className="col-md-12">
-                <table className="table table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <td>Product</td>
-                            <td>Name of Product</td>
-                            <td>Price</td>
-                            <td>Quantity</td>
-                            <td>Remove</td>
-                            <td>Total</td>
-                        </tr>
-          </thead>
-          <tbody >
-            <tr>
+            <table className="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <td>Product</td>
+                  <td>Name of Product</td>
+                  <td>Price</td>
+                  <td>Quantity</td>
+                  <td>Remove</td>
+                  <td>Total</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
                   <td className="imgCards">
                     {/*{product.imageUrl}*/}
-                    <img src="../media/red/Contrabandistes.jpg" alt="whinebottle" />
+                    <img
+                      src="../media/red/Contrabandistes.jpg"
+                      alt="whinebottle"
+                    />
                   </td>
                   <td> {product.name}</td>
                   <td> {product.price}kr</td>
                   <td>
-                    <span className="button-3" id="minus-button" onClick={() => Decrement(product)}> - </span>
+                    <span
+                      className="button-3"
+                      id="minus-button"
+                      onClick={() => Decrement(product)}
+                    >
+                      {" "}
+                      -{" "}
+                    </span>
                     {product.count}
-                    <span className="button-3" id="add-button" onClick={() => Increment(product)} >  + </span>
+                    <span
+                      className="button-3"
+                      id="add-button"
+                      onClick={() => Increment(product)}
+                    >
+                      {" "}
+                      +{" "}
+                    </span>
                   </td>
-                  <td>< FontAwesomeIcon icon={faTrash} className="userIcons" onClick={() => Deletion(product)} /></td>
-                  <td>{getTotal(product)}</td>
-            </tr>
+                  <td>
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      className="userIcons"
+                      onClick={() => Deletion(product)}
+                    />
+                  </td>
+                  <td>{getTotal(product.price, product.count)}</td>
+                </tr>
               </tbody>
               <div className="buttonContainer">
-                <button className="button-3">Total Amount: {totalPrice}kr</button>
-                <p className="button-3" id="checkout" onClick={() => emptyCart()}>EMPTY CART</p>
+                <button className="button-3">
+                  Total Amount: {getTotal(product.price, product.count)}kr
+                </button>
+                <p
+                  className="button-3"
+                  id="checkout"
+                  onClick={() => emptyCart()}
+                >
+                  EMPTY CART
+                </p>
               </div>
-              
-              
-                </table>
-            </div>
-          
-        )
-      } )}
-
-            
-        </div>
-    
+            </table>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
