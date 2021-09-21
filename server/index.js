@@ -10,7 +10,7 @@ const app = express();
 
 const sqlite3 = require("sqlite3").verbose();
 
-app.use(express.static(path.join(__dirname, "../build")));
+// app.use(express.static(path.join(__dirname, "../build")));
 
 // open the database
 let db = new sqlite3.Database("./webshop.db", (err) => {
@@ -247,4 +247,6 @@ app.post("/api/addUser", (req, res) => {
   });
 });
 // start the web server
+
 app.listen(4000, () => console.log("Listening on port 3000"));
+
