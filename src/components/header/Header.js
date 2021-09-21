@@ -22,14 +22,15 @@ function Header() {
 
     <>
       <div className="upper-nav">
-        <h4>Hello Wines</h4>
+        <h1>Hello Wines</h1>
       </div>
 
+      <div className="navbar-font">
       <Container fluid style={{ backgroundColor: "#bf8596", height:"225px", paddingTop:"25px", textAlign:"center"}}>
 
         <Row md="auto" className="justify-content-md-center xs-2">
         <Col>
-          <Nav.Link href="/App" style={{ color: "#F3DAC6" }}>
+          <Nav.Link href="/" style={{ color: "#F3DAC6" }}>
             <p>wines</p>
             <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
             </Nav.Link>
@@ -66,6 +67,7 @@ function Header() {
         </Row> 
         
       </Container>
+      </div>
     </>
 
   );
