@@ -9,9 +9,7 @@ import { Container, Row, Col, Nav, Navbar, NavDropdown, form, input } from "reac
 
 import Countindicator from "./CountIndicator";
 import { useHistory } from "react-router-dom";
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 import './header.css';
@@ -72,6 +70,7 @@ function Header() {
 
   );
 }
+
 
 export default Header;
 
