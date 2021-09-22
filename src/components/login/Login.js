@@ -5,7 +5,7 @@ import { Nav, Col, Row, Container } from "react-bootstrap";
 
 export default function LoginPage() {
 
-  const [loginInfo, setLoginInfo] = useState({username: null, password: null})
+  const [loginInfo, setLoginInfo] = useState({ username: null, password: null });
 
   useEffect(() => {
     (async ()=> {
