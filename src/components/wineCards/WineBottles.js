@@ -42,10 +42,9 @@ function WineBottles() {
     <div className="container">
 
       <div id="navbar">
-        <Col >
+        <Col xs= {4} md= {8}>
           <Row className="justify-content-md-center">
             <Nav variant="tabs" defaultActiveKey="/App" id="navbar" >
-              {/* <h2>MENU</h2> */}
               <Nav.Item>
                 <Nav.Link href="/App" id="navLink">
                   Red Wine

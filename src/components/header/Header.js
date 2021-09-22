@@ -12,28 +12,28 @@ function Header() {
       <Row md="auto" className="justify-content-md-center xs-2">
       <Col>
         <Nav.Link href="/App" style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
+    
+           <h6>Hem </h6>
           </Nav.Link>
         </Col>
         <Col>
-        <Nav.Link style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
+        <Nav.Link  href="/Cart" style={{ color: "#F3DAC6" }}>
+          
+          <h6>Kassa </h6>
           <Countindicator />
           </Nav.Link>
         </Col>
-        <Col>
-        <Nav.Link href="/Register" style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faPenFancy} className="userIcons xs-2" />
-          </Nav.Link>
-        </Col>
+        
         <Col>
         <Nav.Link href="/Login" style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
+       
+          <h6>Login </h6>
           </Nav.Link>
         </Col>
         <Col>
         <Nav.Link href="/About" style={{ color: "#F3DAC6" }}>
-          <FontAwesomeIcon icon={faInfo} className="userIcons" />
+     
+          <h6>About us</h6>
           </Nav.Link>
         </Col>
       </Row>
