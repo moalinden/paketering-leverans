@@ -31,7 +31,7 @@ function Header() {
         <Row md="auto" className="justify-content-md-center xs-2">
         <Col>
           <Nav.Link href="/" style={{ color: "#F3DAC6" }}>
-            <p>wines</p>
+            <p>Wines</p>
             <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
             </Nav.Link>
           </Col>
