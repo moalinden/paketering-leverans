@@ -1,10 +1,12 @@
 import React from "react";
 import { Container, Row, Card } from 'react-bootstrap';
 
+import './about.css'
+
 function AboutPage() {
   return (
     <Container fluid style={{ minHeight: '100vh', padding:'60px' }}>
-      <div className="d-flex justify-content-around">
+      <div className="d-flex justify-content-around" id="about">
         <Card style={{ width: '35rem', backgroundColor: '#F3E7DA', padding:'10px' }}>
           <Card.Body>
             <Card.Title>The Wine Drinkers</Card.Title>
