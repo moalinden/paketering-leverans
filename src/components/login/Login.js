@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import "./Login.css";
 import submitHelper from '../../helper/submitHelper'
 
+import { Nav, Col, Row, Container } from "react-bootstrap";
+
 export default function LoginPage() {
 
   const [loginInfo, setLoginInfo] = useState({ username: null, password: null });
@@ -56,6 +58,14 @@ export default function LoginPage() {
             <input type="submit" class="form_button" value="Sign In" onClick={submitLogin}/>
           </form>
         </div>
+        <Container className="justify-content-md-center">
+        <div class="reg_button" >
+        <Nav.Link href="/Register" id="navLink">
+                  Sign up
+                </Nav.Link>
+          </div>
+          </Container>
       </div>
     );
+    
 }

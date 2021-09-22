@@ -24,7 +24,7 @@
     color: #bf8596; 
     background-color: #f9f4ee; 
     margin: 2px;
-    border: 1px solid #f3dac6;
+    border: 2.5px solid #f3dac6;
     border-bottom: 0;
 
 }
@@ -34,19 +34,21 @@
     /* margin: auto; */
     position: relative;
     margin-bottom: 100px;
+    
 }
 #wineBox{
     /* align-items: center; */
-    border: 1px solid #f3dac6;
+    border: 3px solid #f3dac6;
     border-radius: 20px;
     width: 350px;
     height: 240px;
     padding: 0px;
-    margin: 30px;
+    margin: auto;
     position: relative;
     box-shadow: 1px 5px #d2cfcf;
     display: flex;
     flex-direction: row;
+    margin-bottom: 30px;
 }
 #h3{
     font-size: 16px;
@@ -93,4 +95,10 @@
     bottom: 7px;
     border-radius: 4px;
     width: 90px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.container{
+    font-family: 'Poppins', sans-serif;
 }
