@@ -1,54 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import "./wineBottles.css";
+import WineList from "./WineList";
 
-import { Nav, Col, Row } from "react-bootstrap";
+import { Nav, Col, Row, Button } from "react-bootstrap";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
+import { useSelector } from "react-redux";
 import Loading from "../loading/Loading";
 
 function WineBottles() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const productsState = useSelector((state) => state.storeSlice);
   const products = productsState.storedProducts;
-  console.log("outside function: ", productsState);
+  const [wineCat, setWineCat] = useState("")
+  // console.log("outside function: ", productsState);
 
-  const addToCart = (product) => {
-    console.log("inside: ", productsState);
-    const productToDispatch = productsState.products.find(
-      (element) => element.id === product.id
-    );
-    console.log(productToDispatch);
-    if (productsState.products.length < 1 || productToDispatch === undefined) {
-      dispatch(addToStore(product));
-    } else {
-      dispatch(addToStore(productToDispatch));
-    }
-  };
 
-  const decrementCart = (product) => {
-    const productToDispatch = productsState.products.find(
-      (element) => element.id === product.id
-    );
-    if (productsState.products.length < 1 || productToDispatch === undefined) {
-      return;
-    } else {
-      dispatch(decrementItem(productToDispatch));
-    }
-  };
+  // const saveToWishList = () => {
+  //   const wishList = productsState.products;
+  //   const keyGen = Math.random() * 1000;
+  //   localStorage.setItem(keyGen, wishList);
+  //   dispatch(storeWishList(keyGen));
+  // };
+  // const removeWishList = (key) => {
+  //   dispatch(removeWishList(key));
+  //   const keyToRemove = productsState.keyToRemove;
+  //   localStorage.removeItem(keyToRemove);
+  // };
 
-  const saveToWishList = () => {
-    const wishList = productsState.products;
-    const keyGen = Math.random() * 1000;
-    localStorage.setItem(keyGen, wishList);
-    dispatch(storeWishList(keyGen));
-  };
-  const removeWishList = (key) => {
-    dispatch(removeWishList(key));
-    const keyToRemove = productsState.keyToRemove;
-    localStorage.removeItem(keyToRemove);
-  };
+  const chooseWine = (cat) => {
+    setWineCat(cat)
+    console.log(cat)
+    
+  }
 
+  
   if (!products) {
     return <Loading />;
   } else {
@@ -57,62 +42,26 @@ function WineBottles() {
         <div id="navbar">
           <Col>
             <Row className="justify-content-md-center">
-              <Nav variant="tabs" defaultActiveKey="/App" id="navbar">
-                {/* <h2>MENU</h2> */}
-                <Nav.Item>
-                  <Nav.Link href="/App" id="navLink">
-                    Red Wine
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link href="/App" id="navLink">
-                    White Wine
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link href="/App" id="navLink">
-                    Sparkling Wine
-                  </Nav.Link>
-                </Nav.Item>
+              <Nav variant="tabs" id="navbar">
+                <Button id="navLink" onClick={() => chooseWine("")} style={{marginRight:'19px'}}>
+                  All Wine
+                </Button>
+                <Button id="navLink" onClick={() => chooseWine("red")}>
+                  Red Wine
+                </Button>
+                <Button id="navLink" onClick={() => chooseWine("white")}>
+                  White Wine
+                </Button>
+                <Button id="navLink" onClick={() => chooseWine("sparkling")}>
+                  Sparkling Wine
+                </Button>
               </Nav>
             </Row>
           </Col>
         </div>
         <div id="systembolaget">
           <div className="row">
-            {products.map((wine, index) => (
-              <div className="col-1" id="wineBox" key={index}>
-                <div id="bild">
-                  {/* {console.log(wine)} */}
-                  <img
-                    src={wine.imageUrl}
-                    alt="wine and dinee"
-                    id="winePic"
-                  ></img>
-                </div>
-                <div id="wineFacts">
-                  <h3>{wine.name}</h3>
-                  <p>{wine.description}</p>
-                  <p>{wine.price} kr</p>
-                  <button id="wishknapp" onClick={() => saveToWishList()}>
-                    ♡
-                  </button>
-                  {/* <button id="wishknapp" onClick={() => removeWishList()}>remove</button> */}
-                  <div id="cartButtons">
-                    <button
-                      placeholder="add to cart"
-                      onClick={() => addToCart(wine)}
-                      id="cartKnapp"
-                    >
-                      Add to Cart
-                    </button>
-                    <button onClick={() => decrementCart(wine)} id="cartKnapp">
-                      decrement
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <WineList data={wineCat}/>
           </div>
         </div>
       </div>
