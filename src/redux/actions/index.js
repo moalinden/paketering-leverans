@@ -1,3 +1,10 @@
+export const initialStore = (payload) => {
+  return {
+    type: "INIT_STORE",
+    payload: payload,
+  };
+};
+
 export const addToStore = (payload) => {
   return {
     type: "ADD_TO_STORE",
@@ -7,45 +14,41 @@ export const addToStore = (payload) => {
 };
 
 export const decrementItem = (payload) => {
-    return {
-        type: "DECREMENT_ITEM",
-        payload: payload,
-    };
+  return {
+    type: "DECREMENT_ITEM",
+    payload: payload,
+  };
 };
 
 export const storeWishList = (payload) => {
-    return {
-        type: "FETCH-WISHLIST",
-        payload: payload,
-    };
+  return {
+    type: "FETCH-WISHLIST",
+    payload: payload,
+  };
 };
 
 export const removeWishList = (payload) => {
-    return {
-        type: "REMOVE_WISHLIST",
-        payload: payload,
-    };
+  return {
+    type: "REMOVE_WISHLIST",
+    payload: payload,
+  };
 };
 
-export const deleteProduct = (cartItemID) => {
-    return {
-        type: "DELETE_PRODUCT",
-        payload: {
-            cartItemID: cartItemID,
-        },
-    };
+export const deleteProduct = (payload) => {
+  return {
+    type: "DELETE_FROM_CART",
+    payload: payload,
+  };
 };
 
-export const editQuantity = (cartItemID, value) => {
-    return {
-        type: "EDIT_QUANTITY",
-        id: cartItemID,
-        count: value,
-    };
+export const clearCart = () => {
+  return {
+    type: "EMPTY_CART",
+    //payload: payload,
+  };
 };
-export const showItem = (cartItem) => {
-    return {
-        type: "SHOW_ITEM",
-        payload: cartItem,
-    };
+export const calculateTotal = () => {
+  return {
+    type: "CALCULATE_TOTAL_PRICE",
+  };
 };

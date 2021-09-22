@@ -1,19 +1,25 @@
 const initialState = {
-  storedProducts: JSON.parse(localStorage.getItem("/api/products")),
+  storedProducts: [],
   productCount: 0,
   products: [],
   wishList: [],
+  total: 0,
 };
 const storeSlice = (state = initialState, action) => {
   switch (action.type) {
+    case "INIT_STORE":
+      return {
+        ...state,
+        storedProducts: action.payload,
+      };
+
     case "ADD_TO_STORE":
       let trueOrFalse = false;
       state.products.forEach((element) => {
         if (element.id === action.payload.id) {
           trueOrFalse = true;
-        }
-        if (element.id !== action.payload.id) {
-          return false;
+        } else {
+          trueOrFalse = false;
         }
       });
 
@@ -27,6 +33,7 @@ const storeSlice = (state = initialState, action) => {
               return {
                 ...object,
                 count: count + 1,
+                total: state.total + action.payload.price,
               };
             } else {
               return {
@@ -39,28 +46,39 @@ const storeSlice = (state = initialState, action) => {
         return {
           ...state,
           productCount: state.productCount + 1,
-          products: action.payload,
+          products: [...state.products, action.payload],
         };
       }
-    case "DELETE_PRODUCT":
-      return {
-        ...state,
-        products: state.products.filter(
-          (cartItem) => cartItem.id !== action.payload.id
-        ),
-      };
 
     case "DECREMENT_ITEM":
       let count = action.payload.count;
-      if (count > 0 && state.productCount > 0) {
+      if (
+        (count > 0 && state.productCount > 0) ||
+        (count < 0 && state.productCount < 0)
+      ) {
+        const list = state.products.map((object) => {
+          if (object.id === action.payload.id) {
+            return {
+              ...object,
+              count: count - 1,
+            };
+          }
+        });
         return {
           ...state,
           productCount: state.productCount - 1,
-          products: state.products.map((object) => {
-            if (object.id === action.payload.id) {
-              return { ...object, count: count - 1 };
-            }
-          }),
+          products: state.products
+            .map((object) => {
+              if (object.id === action.payload.id) {
+                return {
+                  ...object,
+                  count: count - 1,
+                };
+              } else {
+                return object;
+              }
+            })
+            .filter((cartItem) => cartItem.count !== 0),
         };
       } else {
         return state;
@@ -85,11 +103,20 @@ const storeSlice = (state = initialState, action) => {
         ...state,
         keyToRemove: wishListToRemove,
       };
-    case "EMPTY_WHOLE_CART":
-      return {};
-    case "CALCULATE_TOTAL_PRICE":
+
+    case "EMPTY_CART":
       return {
         ...state,
+        products: [],
+      };
+
+    case "DELETE_FROM_CART":
+      return {
+        ...state,
+        products: [
+          state.products.filter((cartItem) => cartItem !== action.payload),
+        ],
+        productCount: state.productCount - action.payload.count,
       };
 
     case "RESET":
