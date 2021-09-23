@@ -18,6 +18,9 @@
     padding: 0;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
+
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -26,7 +29,7 @@ h1 {
 
 .div-form {
     display: flex;
-    padding: 4rem 2rem;
+    /* padding: 4rem 2rem; */
     justify-content: center;
     align-items: center;
     /* height: 100vh; */
@@ -34,7 +37,7 @@ h1 {
 
 .form{
     width: 360px;
-    padding: 4rem 2rem;
+    padding: 1px 3px;
     border-radius: 1rem;
     box-shadow: 0 10px 25px rgba(92,99,105, .2);
 }
@@ -117,15 +120,15 @@ h1 {
 }
 .reg_button{
     display: block;
-    
-    padding: 1rem;
+    padding: 2px;
     outline: none;
-    border: none;
+    border: 1px solid (--border-color);
+    width: fit-content;
     background-color: var(--first-color);
-    color: white;
+    right: 0;
     font-size: var(--normal-font-size);
     border-radius: .5rem;
     cursor: pointer;
     transition: .3s;
-    text-align:center;
+    text-align: center;
 }
