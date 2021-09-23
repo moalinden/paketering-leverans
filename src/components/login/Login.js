@@ -40,9 +40,7 @@ export default function LoginPage() {
     }
     //Wrong info
     if(status.auth == false){
-
     }
-
   }
 
     return (
@@ -59,11 +57,10 @@ export default function LoginPage() {
               <input type="password" class="form_input" data-input="password" placeholder="" onChange={onChangeUpdateStateText}/>
               <label class="form_label">Password</label>
             </div>
-
             <input type="submit" class="form_button" value="Sign In" onClick={submitLogin}/>
           </form>
         </div>
-        <Container className="justify-content-md-center">
+        <Container >
         <div class="reg_button" >
         <Nav.Link href="/Register" id="navLink">
                   Sign up

@@ -50,7 +50,6 @@ function App() {
           <Route exact path="/Register" component={Register} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/logout" component={LogOut} />
-
         </Switch>
         <Footer />
       </div>
