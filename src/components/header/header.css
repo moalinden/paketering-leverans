@@ -5,8 +5,6 @@
     color: #F3DAC6;
 }
 
-
-
 @import url('https://fonts.googleapis.com/css2?family=Carattere&display=swap');
 
 .upper-nav{
@@ -20,7 +18,7 @@
 }
 
 @media screen and (max-width: 600px) {
-    p {
+    .HeadP {
       display: none;
     }
   }

@@ -42,6 +42,9 @@ function WineBottles() {
                 <Button id="navLink" onClick={() => chooseWine("sparkling")}>
                   Sparkling Wine
                 </Button>
+                <Button id="navLink" onClick={() => chooseWine("")} style={{marginRight:'19px'}}>
+                  All Wine
+                </Button>
               </Nav>
             </Row>
           </Col>
