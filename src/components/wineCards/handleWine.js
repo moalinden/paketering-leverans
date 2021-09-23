@@ -8,10 +8,13 @@ export default async function handleWine(type, data) {
   let decoded = jwt_decode(token)
   let user_id = decoded.userId;
 
-  const dataVal = {
-    productId: data.id,
+  let dataVal = {
+
     userId: user_id,
     orderedAmount: 1
+  }
+  if(type != 'get'){
+    dataVal.productId = data.id;
   }
 
   const settings = {
@@ -24,7 +27,6 @@ export default async function handleWine(type, data) {
     case 'add':
     {
       let status = await fetchHelper('/api/cart/add', settings);
-      console.log(status);
       return status;
     }
     case 'decrease':
@@ -35,6 +37,12 @@ export default async function handleWine(type, data) {
     case 'remove':
     {
       let status = await fetchHelper('/api/cart/remove', settings);
+      return status;
+    }
+    case 'get':
+    {
+      let status = await fetchHelper('/api/cart/get', settings);
+      console.log(status);
       return status;
     }
   }
