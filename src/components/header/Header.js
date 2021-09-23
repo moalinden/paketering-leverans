@@ -46,12 +46,6 @@ function Header() {
               </Nav.Link>
             </Col>
 
-            <Col>
-              <Nav.Link href="/" style={{ color: "#F3DAC6" }}>
-                <p className='HeadP'>Wines</p>
-                <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
-              </Nav.Link>
-            </Col>
 
             <Col>
               <Nav.Link href="/cart" style={{ color: "#F3DAC6" }}>
@@ -87,7 +81,6 @@ function Header() {
               </Nav.Link>
             </Col>
           </Row>
-
         </Container>
       </div>
     </>
