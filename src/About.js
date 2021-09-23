@@ -7,7 +7,7 @@ function AboutPage() {
   return (
     <Container fluid style={{ minHeight: '100vh', padding:'60px' }}>
       <div className="d-flex justify-content-around" id="about">
-        <Card style={{ width: '35rem', backgroundColor: '#F3E7DA', padding:'10px' }}>
+        <Card style={{ width: '35rem', backgroundColor: '#F3E7DA', padding:'10px', margin:'10px' }}>
           <Card.Body>
             <Card.Title>The Wine Drinkers</Card.Title>
             <Card.Text>
@@ -21,7 +21,7 @@ function AboutPage() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <Card style={{ width: '35rem', backgroundColor: '#F3E7DA' }}>
+        <Card style={{ width: '35rem', backgroundColor: '#F3E7DA', margin:'10px' }}>
           <Card.Body>
             <Card.Title>  But... How Did It Start?</Card.Title>
             <Card.Text>
