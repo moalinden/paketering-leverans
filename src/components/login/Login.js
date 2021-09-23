@@ -31,7 +31,9 @@ export default function LoginPage() {
 
     //Logged in
     if(status.auth == true){
-
+      localStorage.setItem("user_session", status.token);
+      localStorage.setItem("logged_in", true);
+      window.location.href = '/'; //Return user to home page
     }
     //Wrong info
     if(status.auth == false){
