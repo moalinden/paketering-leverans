@@ -19,6 +19,7 @@ let db = new sqlite3.Database("./webshop.db", (err) => {
   }
   console.log("Connected to the chinook database.");
 });
+
 //Check from validation
 app.post("/api/getUser/:info", (req, res) => {
   let sql;
@@ -161,9 +162,236 @@ app.post("/api/loginUser", (req, res) => {
   );
 });
 
+app.post("/api/cart/:action", (req, res) => {
+  let data = req.body;
+
+  switch(req.params.action){
+    case 'add':
+    {
+      addProductAmount(data);
+      break;
+    }
+    case 'decrease':
+    {
+      decreaseProductAmount(data);
+      break;
+    }
+    case 'remove':
+    {
+      removeProduct(data);
+      break;
+    }
+    case 'get':
+    {
+      getCart(data);
+      break
+    }
+  }
+
+  function addProductAmount(data){
+
+    db.all(
+      `SELECT cart_id, product_amount FROM cart WHERE user_id = ? AND product_id = ?`,
+      [
+        data.userId,
+        data.productId
+      ],
+      (err, rows) => {
+        if(err){
+          res.status(400).json({message: 'Error', auth:false});
+          console.log(err);
+          return;
+        }
+        //if no error
+        else{
+          //if exist
+          if(rows.length > 0){
+            let newAmount = rows[0].product_amount + data.orderedAmount;
+            let cartId = rows[0].cart_id;
+
+            db.all(
+              'UPDATE cart SET product_amount = ? WHERE cart_id = ?',
+              [
+                newAmount,
+                cartId
+              ],
+              (err, rows) => {
+                if(err){
+                  res.status(400).json({message: 'Error', auth:false});
+                  console.log(err);
+                  return;
+                }
+                //if no error
+                else{
+                  console.log('Updated')
+                }
+              }
+            )
+          }
+          //create new row if not exist
+          if(rows.length == 0){
+            db.run(
+              `INSERT INTO cart(user_id, product_id, product_amount) VALUES(?,?,?)`,
+              [
+                data.userId,
+                data.productId,
+                data.orderedAmount
+              ],
+              (err, rows) => {
+                if(err){
+                  res.status(400).json({message: 'Error', auth:false});
+                  console.log(err);
+                  return;
+                }
+                else{
+                  res.json({message: "Added"});
+                }
+              }
+            )
+          }
+        }
+      }
+    )
+  }
+
+  function decreaseProductAmount(data){
+    db.all(
+      `SELECT cart_id, product_amount FROM cart WHERE user_id = ? AND product_id = ?`,
+      [
+        data.userId,
+        data.productId
+      ],
+      (err, rows) => {
+        if(err){
+          res.status(400).json({message: 'Error', auth:false});
+          console.log(err);
+          return;
+        }
+        //if no error
+        else{
+          let newAmount = rows[0].product_amount - 1;
+          let cartId = rows[0].cart_id;
+
+          if(newAmount <= 0){
+            db.all(
+              'DELETE FROM cart WHERE cart_id = ?',
+              [
+                cartId
+              ],
+              (err, rows) => {
+                if(err){
+                  res.status(400).json({message: 'Error', auth:false});
+                  console.log(err);
+                  return;
+                }
+                //if no error
+                else{
+                  console.log('removed')
+                  return;
+                }
+              }
+            )
+          }
+
+          db.all(
+            'UPDATE cart SET product_amount = ? WHERE cart_id = ?',
+            [
+              newAmount,
+              cartId
+            ],
+            (err, rows) => {
+              if(err){
+                res.status(400).json({message: 'Error', auth:false});
+                console.log(err);
+                return;
+              }
+              //if no error
+              else{
+                console.log('Updated')
+              }
+            }
+          )
+        }
+      }
+    )
+  }
+
+  function removeProduct(data){
+    db.all(
+      `SELECT cart_id FROM cart WHERE user_id = ? AND product_id = ?`,
+      [
+        data.userId,
+        data.productId
+      ],
+      (err, rows) => {
+        if(err){
+          res.status(400).json({message: 'Error', auth:false});
+          console.log(err);
+          return;
+        }
+        //if no error
+        else{
+          let cartId = rows[0].cart_id;
+
+          db.all(
+            'DELETE FROM cart WHERE cart_id = ?',
+            [
+              cartId
+            ],
+            (err, rows) => {
+              if(err){
+                res.status(400).json({message: 'Error', auth:false});
+                console.log(err);
+                return;
+              }
+              //if no error
+              else{
+                console.log('removed')
+                return;
+              }
+            }
+          )
+        }
+      }
+    )
+  }
+
+  function getCart(data){
+    db.all(
+      `SELECT * FROM cart WHERE user_id = ?`,
+      [
+        data.userId
+      ],
+      (err, rows) => {
+        if(err){
+          res.status(400).json({message: 'Error', auth:false});
+          console.log(err);
+          return;
+        }
+        else{
+          res.json({rows});
+        }
+      }
+    )
+  }
+
+})
+
+
 //Dev purpose only REMOVE BEFORE ACTIVATE
 app.get('/api/clearTable', (req, res) => {
   db.all("DELETE FROM user", [], (err, rows, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+
+    return res.json(true);
+  });
+})
+
+app.get('/api/clearTableCart', (req, res) => {
+  db.all("DELETE FROM cart", [], (err, rows, result) => {
     if (err) {
       res.status(400).json({ error: err.message });
       return;
@@ -197,7 +425,17 @@ app.get('/api/addAuthCol', (req, res) => {
   });
 })
 
+app.get('/api/createTableCart', (req, res) => {
+  db.all("CREATE TABLE cart (cart_id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, product_id INTEGER NOT NULL, product_amount INTEGER NOT NULL)", [], (err, rows, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    console.log("HAGASFAS", rows);
 
+    return res.json(true);
+  });
+})
 
 // start the web server
 app.listen(4000, () => console.log("Listening on port 4000"));
