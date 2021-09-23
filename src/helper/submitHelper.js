@@ -32,7 +32,7 @@ function ValidateAllInput(obj, value) {
 async function submitRegister(data){
   //Check in regInfo state object if find Ok that == false
   if(ValidateAllInput(data, false) == true){
-    return;
+    return {auth: false, message: 'Need to fill form correctly!'}
   }
   const dataVal = {
     username: data.username.val,
