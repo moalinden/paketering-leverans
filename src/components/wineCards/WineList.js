@@ -1,31 +1,36 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch } from "react-redux"
 import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
-
-
+import handleWine from './handleWine';
+import {isLoggedIn} from '../login/LoggedInCheck';
 
 
 function WineList(data) {
-    const userChoice = data.data
-    const productsState = useSelector((state) => state.storeSlice);
-    const products = productsState.storedProducts;
-    const dispatch = useDispatch();
-    const filteredProducts = products.filter((element)=> element.category === userChoice)
-    console.log(products)
-    console.log(filteredProducts)
+  const userChoice = data.data
+  const productsState = useSelector((state) => state.storeSlice);
+  const products = productsState.storedProducts;
+  const dispatch = useDispatch();
+  const filteredProducts = products.filter((element)=> element.category === userChoice)
+  console.log(products)
+  console.log(filteredProducts)
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
-    const addToCart = (product) => {
-        console.log("inside: ", productsState);
-        const productToDispatch = productsState.products.find(
-          (element) => element.id === product.id
-        );
-        console.log(productToDispatch);
-        if (productsState.products.length < 1 || productToDispatch === undefined) {
-          dispatch(addToStore(product));
-        } else {
-          dispatch(addToStore(productToDispatch));
-        }
-      };
+
+  const addToCart = (product) => {
+
+    const productToDispatch = productsState.products.find(
+      (element) => element.id === product.id
+    );
+    console.log(productToDispatch);
+    if (productsState.products.length < 1 || productToDispatch === undefined) {
+      dispatch(addToStore(product));
+    } else {
+      dispatch(addToStore(productToDispatch));
+    }
+    if(loggedIn){
+      handleWine('add', product)
+    }
+    };
     
       const decrementCart = (product) => {
         const productToDispatch = productsState.products.find(
@@ -36,6 +41,7 @@ function WineList(data) {
         } else {
           dispatch(decrementItem(productToDispatch));
         }
+        handleWine('decrease', product)
       };
     
       const saveToWishList = () => {
