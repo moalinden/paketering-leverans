@@ -358,7 +358,7 @@ app.post("/api/cart/:action", (req, res) => {
 
   function getCart(data){
     db.all(
-      `SELECT * FROM cart WHERE user_id = ?`,
+      `SELECT cart.product_id, cart.product_amount, products.* FROM cart INNER JOIN products ON cart.product_id = products.id WHERE user_id = ?`,
       [
         data.userId
       ],
@@ -369,7 +369,7 @@ app.post("/api/cart/:action", (req, res) => {
           return;
         }
         else{
-          res.json({rows});
+          res.json(rows);
         }
       }
     )
