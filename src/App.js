@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import Header from "./components/header/Header";
-
-import Footer from "./components/footer/Footer";
-
-import Loading from "./components/loading/Loading";
-import { useSelector, useDispatch } from "react-redux";
-
-import AboutPage from "./About";
-// import NavbarPage from "./components/navbar/Navbar";
-
-import WineBottles from "./components/wineCards/WineBottles";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import LogOut from "./components/login/Logout";
+import AboutPage from "./About";
+import WineBottles from "./components/wineCards/WineBottles";
+import Cart from "./components/cart/Cart";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
+import { useDispatch } from "react-redux";
+import { isLoggedIn } from "./components/login/LoggedInCheck";
 import { initialStore } from "./redux/actions";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Cart from "./components/cart/Cart";
 
 function App() {
-  const currentProductState = useSelector((state) => state.storeSlice.products);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +27,7 @@ function App() {
       dispatch(initialStore(data.products));
     };
     newFetch();
+    isLoggedIn();
   }, []);
 
   return (
@@ -45,7 +39,8 @@ function App() {
           <Route path="/About" component={AboutPage} />
           <Route exact path="/" component={WineBottles} />
           <Route exact path="/Register" component={Register} />
-          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/Cart" component={Cart} />
+          <Route exact path="/logout" component={LogOut} />
         </Switch>
         <Footer />
       </div>
