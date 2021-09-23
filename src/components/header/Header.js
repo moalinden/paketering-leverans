@@ -45,6 +45,7 @@ function Header() {
                 <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
               </Nav.Link>
             </Col>
+            </Row>
 
         <Row md="auto" className="justify-content-md-center xs-2">
         <Col>
