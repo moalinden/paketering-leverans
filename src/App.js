@@ -7,6 +7,7 @@ import LogOut from './components/login/Logout';
 
 import Loading from "./components/loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
+import {isLoggedIn} from './components/login/LoggedInCheck';
 
 import AboutPage from "./About";
 // import NavbarPage from "./components/navbar/Navbar";
@@ -35,6 +36,7 @@ function App() {
       dispatch(initialStore(data.products));
     };
     newFetch();
+    isLoggedIn();
   }, []);
 
   return (
