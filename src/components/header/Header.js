@@ -22,11 +22,11 @@ function Header() {
 
     <>
       <div className="upper-nav">
-        <h1>Hello Wines</h1>
+        <h1 style={{ fontSize: "82px" }}>Hello Wines</h1>
       </div>
 
       <div className="navbar-font">
-      <Container fluid style={{ backgroundColor: "#bf8596", height:"225px", paddingTop:"25px", textAlign:"center"}}>
+      <Container fluid style={{ backgroundColor: "#bf8596", height:"225px", textAlign:"center"}}>
 
         <Row md="auto" className="justify-content-md-center xs-2">
         <Col>
