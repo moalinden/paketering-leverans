@@ -27,7 +27,7 @@ function Header() {
 
     {console.log(loggedIn)}
       <div className="navbar-font">
-      <Container fluid style={{ backgroundColor: "#bf8596", textAlign:"center"}}>
+      <Container fluid style={{ backgroundColor: "#bf8596", textAlign:"center", height:'110px'}}>
 
         <Row md="auto" className="justify-content-md-center xs-2">
         <Col>
@@ -38,7 +38,7 @@ function Header() {
           </Col>
 
           <Col>
-          <Nav.Link style={{ color: "#F3DAC6" }}>
+          <Nav.Link href="/Cart" style={{ color: "#F3DAC6" }}>
           <p>Cart</p>
             <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
             <Countindicator />
