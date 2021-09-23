@@ -1,17 +1,20 @@
 import React, {useState, useEffect} from "react";
 import "./Login.css";
 import submitHelper from '../../helper/submitHelper'
+import {isLoggedIn} from './LoggedInCheck';
 
 import { Nav, Col, Row, Container } from "react-bootstrap";
 
 export default function LoginPage() {
 
   const [loginInfo, setLoginInfo] = useState({ username: null, password: null });
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   useEffect(() => {
-    (async ()=> {
-      console.log("Eyy");
-    })();
+    //If user is logged in return to home page
+    if(loggedIn){
+      window.location.href = '/';
+    }
   }, []);
 
   //Change text in state onChange
