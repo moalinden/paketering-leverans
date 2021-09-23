@@ -20,5 +20,5 @@
 
 @media screen and (max-width: 600px) {
 
-    p { display: none; }
+    .HeadP { display: none; }
   }
