@@ -17,9 +17,7 @@ import handleWine from '../wineCards/handleWine';
 function Cart() {
   const store = useSelector((state) => state.storeSlice);
   const storeItems = store.products;
-  const totalCount = store.myTotalCount;
   const dispatch = useDispatch();
-  console.log("state received in cart: ", storeItems);
 
   const [cart, setCart] = useState();
 
@@ -73,7 +71,6 @@ function Cart() {
               <tbody>
                 <tr>
                   <td className="imgCards">
-                    {/*{product.imageUrl}*/}
                     <img
                       src="../media/red/Contrabandistes.jpg"
                       alt="whinebottle"

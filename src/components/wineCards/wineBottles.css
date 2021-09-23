@@ -58,7 +58,7 @@
 #winePic{
     border-radius: 20px;
     height: 238px;
-    width: 95px;
+    width: auto;
     border: 1px solid #f3dac6;
     float: left;
     padding-left: -20px;
@@ -71,6 +71,7 @@
     display: flex;
     flex-direction: column;
 }
+
 #cartButtons{
     position: absolute;
     bottom: 14px;
