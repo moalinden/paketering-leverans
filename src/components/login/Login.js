@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from "react";
 import "./Login.css";
+import submitHelper from '../../helper/submitHelper'
+import {isLoggedIn} from './LoggedInCheck';
 
 import { Nav, Col, Row, Container } from "react-bootstrap";
 
 export default function LoginPage() {
 
   const [loginInfo, setLoginInfo] = useState({ username: null, password: null });
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 
   useEffect(() => {
-    (async ()=> {
-      console.log("Eyy");
-    })();
+    //If user is logged in return to home page
+    if(loggedIn){
+      window.location.href = '/';
+    }
   }, []);
 
   //Change text in state onChange
@@ -26,19 +30,18 @@ export default function LoginPage() {
   const submitLogin = async(e) => {
     e.preventDefault();
 
-    const dataVal = {
-      username: loginInfo.username,
-      password: loginInfo.password
-    }
-    const settings = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataVal)
-    }
+    let status = await submitHelper('login', loginInfo)
 
-    //Fetch (loginResult.message is result of fetch)
-    let fetchLogin = await fetch('/api/loginUser', settings);
-    let loginResult = await fetchLogin.json();
+    //Logged in
+    if(status.auth == true){
+      localStorage.setItem("user_session", status.token);
+      localStorage.setItem("logged_in", true);
+      window.location.href = '/'; //Return user to home page
+    }
+    //Wrong info
+    if(status.auth == false){
+
+    }
 
   }
 

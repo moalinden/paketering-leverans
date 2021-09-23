@@ -1,11 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import { faUser, faShoppingCart, faInfo, faWineBottle, faPenFancy } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Nav, Navbar, NavDropdown, form, input } from "react-bootstrap";
-
-
+import {isLoggedIn} from '../login/LoggedInCheck';
 
 import Countindicator from "./CountIndicator";
 import { useHistory } from "react-router-dom";
@@ -16,6 +15,9 @@ import './header.css';
 
 function Header() {
   const history = useHistory();
+
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+
   return (
 
     <>
@@ -23,6 +25,7 @@ function Header() {
         <h1>Hello Wines</h1>
       </div>
 
+    {console.log(loggedIn)}
       <div className="navbar-font">
       <Container fluid style={{ backgroundColor: "#bf8596", height:"225px", paddingTop:"25px", textAlign:"center"}}>
 
@@ -42,19 +45,30 @@ function Header() {
             </Nav.Link>
           </Col>
 
+          { loggedIn == false ?
+            [
           <Col>
           <Nav.Link href="/Register" style={{ color: "#F3DAC6" }}>
           <p>Sign Up</p>
             <FontAwesomeIcon icon={faPenFancy} className="userIcons xs-2" />
             </Nav.Link>
           </Col>
-
+            ,
           <Col>
           <Nav.Link href="/Login" style={{ color: "#F3DAC6" }}>
           <p>Sign In</p>
             <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
             </Nav.Link>
           </Col>
+            ]
+            :
+            <Col>
+              <Nav.Link href="/logout" style={{ color: "#F3DAC6" }}>
+                <p>Log Out</p>
+                <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
+              </Nav.Link>
+            </Col>
+            }
 
           <Col>
           <Nav.Link href="/About" style={{ color: "#F3DAC6" }}>
