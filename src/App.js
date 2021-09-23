@@ -3,9 +3,11 @@ import "./App.css";
 import Header from "./components/header/Header";
 
 import Footer from "./components/footer/Footer";
+import LogOut from './components/login/Logout';
 
 import Loading from "./components/loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
+import {isLoggedIn} from './components/login/LoggedInCheck';
 
 import AboutPage from "./About";
 // import NavbarPage from "./components/navbar/Navbar";
@@ -34,6 +36,7 @@ function App() {
       dispatch(initialStore(data.products));
     };
     newFetch();
+    isLoggedIn();
   }, []);
 
   return (
@@ -46,6 +49,8 @@ function App() {
           <Route exact path="/" component={WineBottles} />
           <Route exact path="/Register" component={Register} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/logout" component={LogOut} />
+
         </Switch>
         <Footer />
       </div>
