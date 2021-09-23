@@ -168,7 +168,6 @@ app.get('/api/clearTable', (req, res) => {
       res.status(400).json({ error: err.message });
       return;
     }
-    console.log("HAGASFAS", rows);
 
     return res.json(true);
   });
