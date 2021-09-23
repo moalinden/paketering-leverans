@@ -115,4 +115,17 @@ h1 {
 .form_input:focus{
     border: 1.5px solid var(--border-color);
 }
-
+.reg_button{
+    display: block;
+    
+    padding: 1rem;
+    outline: none;
+    border: none;
+    background-color: var(--first-color);
+    color: white;
+    font-size: var(--normal-font-size);
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+    text-align:center;
+}

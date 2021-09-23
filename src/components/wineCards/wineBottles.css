@@ -34,6 +34,7 @@
     /* margin: auto; */
     position: relative;
     margin-bottom: 100px;
+    
 }
 #wineBox{
     /* align-items: center; */
@@ -42,11 +43,12 @@
     width: 350px;
     height: 240px;
     padding: 0px;
-    margin: 30px;
+    margin: auto;
     position: relative;
     box-shadow: 1px 5px #d2cfcf;
     display: flex;
     flex-direction: row;
+    margin-bottom: 30px;
 }
 #h3{
     font-size: 16px;
