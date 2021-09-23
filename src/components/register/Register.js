@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
+import { useHistory } from "react-router-dom";
 import "./register.css";
 
 import RegValidation from './regValidation'
 import submitHelper from '../../helper/submitHelper'
 
 export default function RegisterPage() {
+
+  let history = useHistory();
 
   const [regInfo, setRegInfo] = useState({username:{val: null, OK: false}, firstname: {val: null, OK: false}, lastname:{val: null, OK: false}, email:{val: null, OK: false}, password:{val: null, OK: false}, repassword:{val: null, OK: false}})
 
@@ -65,15 +68,20 @@ export default function RegisterPage() {
 
   //Submit user on submit
   const submitRegister = async(event) => {
-    event.preventDefault();
+
+    event.target.disabled = true; //disable to not let user commit multiple times
 
     let status = await submitHelper('register', regInfo)
 
     //Registered
     if(status.auth == true){
-
+      history.push("/"); //Redirect user to home page
     }
-
+    //Something wrong
+    if(status.auth == false){
+      event.preventDefault();
+      event.target.disabled = false;
+    }
   }
 
   return (
