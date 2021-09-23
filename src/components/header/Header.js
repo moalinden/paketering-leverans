@@ -40,42 +40,43 @@ function Header() {
         >
           <Row md="auto" className="justify-content-md-center xs-2">
             <Col>
-              <Nav.Link href="/" style={{ color: "#F3DAC6" }}>
-                <p className="HeadP">Wines</p>
+              <Nav.Link onClick={() => navTo("/")} style={{ color: "#F3DAC6" }}>
+                <p className='HeadP'>Wines</p>
                 <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
               </Nav.Link>
             </Col>
 
+
             <Col>
               <Nav.Link href="/cart" style={{ color: "#F3DAC6" }}>
-                <p className="HeadP">Cart</p>
+                <p className='HeadP'>Cart</p>
                 <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
                 <Countindicator />
               </Nav.Link>
             </Col>
 
-            {loggedIn == false ? (
-              [
+            {loggedIn == false ?
+              [      
                 ,
                 <Col>
                   <Nav.Link href="/Login" style={{ color: "#F3DAC6" }}>
-                    <p className="HeadP">Sign In</p>
+                    <p className='HeadP'>Sign In</p>
                     <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
                   </Nav.Link>
-                </Col>,
+                </Col>
               ]
-            ) : (
+              :
               <Col>
                 <Nav.Link href="/logout" style={{ color: "#F3DAC6" }}>
-                  <p className="HeadP">Log Out</p>
+                  <p className='HeadP'>Log Out</p>
                   <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
                 </Nav.Link>
               </Col>
-            )}
+            }
 
             <Col>
               <Nav.Link href="/About" style={{ color: "#F3DAC6" }}>
-                <p className="HeadP">About</p>
+                <p className='HeadP'>About</p>
                 <FontAwesomeIcon icon={faInfo} className="userIcons" />
               </Nav.Link>
             </Col>
