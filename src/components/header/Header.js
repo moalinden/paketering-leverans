@@ -8,8 +8,9 @@ import {
   faInfo,
   faWineBottle,
 } from "@fortawesome/free-solid-svg-icons";
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { isLoggedIn } from "../login/LoggedInCheck";
+import { Link } from "react-router-dom";
 
 import Countindicator from "./CountIndicator";
 
@@ -38,65 +39,51 @@ function Header() {
             height: "110px",
           }}
         >
+          
           <Row md="auto" className="justify-content-md-center xs-2">
             <Col>
-              <Nav.Link onClick={() => navTo("/")} style={{ color: "#F3DAC6" }}>
-                <p>Wines</p>
+              <Link to="/" style={{ color: "#F3DAC6" }}>
+                <p className='HeadP'>Wines</p>
                 <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
-              </Nav.Link>
+              </Link>
             </Col>
-            </Row>
 
-        <Row md="auto" className="justify-content-md-center xs-2">
-        <Col>
-          <Nav.Link href="/" style={{ color: "#F3DAC6" }}>
-            <p className='HeadP'>Wines</p>
-            <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
-            </Nav.Link>
-          </Col>
-
-          <Col>
-          <Nav.Link href="/cart" style={{ color: "#F3DAC6" }}>
-          <p className='HeadP'>Cart</p>
-            <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
-            <Countindicator />
-            </Nav.Link>
-          </Col>
-
-          { loggedIn == false ?
-            [
-          // <Col>
-          // <Nav.Link href="/Register" style={{ color: "#F3DAC6" }}>
-          // <p>Sign Up</p>
-          //   <FontAwesomeIcon icon={faPenFancy} className="userIcons xs-2" />
-          //   </Nav.Link>
-          // </Col>
-            ,
-          <Col>
-          <Nav.Link href="/Login" style={{ color: "#F3DAC6" }}>
-          <p className='HeadP'>Sign In</p>
-            <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
-            </Nav.Link>
-          </Col>
-            ]
-            :
             <Col>
-              <Nav.Link href="/logout" style={{ color: "#F3DAC6" }}>
-                <p className='HeadP'>Log Out</p>
-                <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
-              </Nav.Link>
+              <Link to="/cart" style={{ color: "#F3DAC6" }}>
+                <p className='HeadP'>Cart</p>
+                <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
+                <Countindicator />
+              </Link>
             </Col>
+
+            {loggedIn == false ?
+              [      
+                ,
+                <Col>
+                  <Link to="/Login" style={{ color: "#F3DAC6" }}>
+                    <p className='HeadP'>Sign In</p>
+                    <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
+                  </Link>
+                </Col>
+              ]
+              :
+              <Col>
+                <Link to="/logout" style={{ color: "#F3DAC6" }}>
+                  <p className='HeadP'>Log Out</p>
+                  <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
+                </Link>
+              </Col>
             }
 
-          <Col>
-          <Nav.Link href="/About" style={{ color: "#F3DAC6" }}>
-          <p className='HeadP'>About</p>
-            <FontAwesomeIcon icon={faInfo} className="userIcons" />
-            </Nav.Link>
-          </Col>
-        </Row> 
-        
-      </Container>
+            <Col>
+              <Link to="/About" style={{ color: "#F3DAC6" }}>
+                <p className='HeadP'>About</p>
+                <FontAwesomeIcon icon={faInfo} className="userIcons" />
+              </Link>
+            </Col>
+            </Row>
+         
+        </Container>
       </div>
     </>
   );

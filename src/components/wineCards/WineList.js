@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToStore, decrementItem, storeWishList, favoriteProduct, removeWishList
 } from "../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import handleWine from "./handleWine";
+import { isLoggedIn } from "../login/LoggedInCheck";
 
 function WineList(data) {
   const userChoice = data.data;
@@ -15,7 +17,7 @@ function WineList(data) {
     (element) => element.category === userChoice
   );
 
-  
+  const [loggedIn] = useState(isLoggedIn());
 
   const addToCart = (product) => {
     const productToDispatch = productsState.products.find(
@@ -25,6 +27,9 @@ function WineList(data) {
       dispatch(addToStore(product));
     } else {
       dispatch(addToStore(productToDispatch));
+    }
+    if (loggedIn) {
+      handleWine("add", product);
     }
   };
 
@@ -89,12 +94,6 @@ function WineList(data) {
           <h3>{wine.name}</h3>
           <p>{wine.description}</p>
           <p>{wine.price} kr</p>
-          <button id="wishknapp" onClick={() => saveToWishList()}>
-            
-            {
-              wine.isfFavorite ? "Fav" : "♡"
-            }
-          </button>
           <div id="cartButtons">
             <button
               placeholder="add to cart"

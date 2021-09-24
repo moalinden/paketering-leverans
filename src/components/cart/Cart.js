@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Cart.style.css";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -10,21 +10,32 @@ import {
 } from "../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import handleWine from '../wineCards/handleWine';
+
+
 
 function Cart() {
   const store = useSelector((state) => state.storeSlice);
   const storeItems = store.products;
   const dispatch = useDispatch();
 
-  const Increment = (product) => {
-    dispatch(addToStore(product));
-  };
-  const Decrement = (product) => {
-    dispatch(decrementItem(product));
-  };
-  const Deletion = (product) => {
-    dispatch(deleteProduct(product));
-  };
+  const [cart, setCart] = useState();
+
+  useEffect(() => {
+    const newFetch = async () => {
+      let wines = await handleWine('get');
+
+      setCart(wines);
+    };
+    newFetch();
+  }, []);
+
+  const handleClick = (action, product) => {
+
+    handleWine(action, product);
+
+  }
+
   const emptyCart = () => {
     dispatch(clearCart());
   };
@@ -42,7 +53,8 @@ function Cart() {
         </div>
       </div>
 
-      {storeItems.map((product, index) => {
+      {cart != undefined ?
+        cart.map((product, index) => {
         return (
           <div key={index} className="col-md-12">
             <table className="table table-bordered text-center">
@@ -70,16 +82,16 @@ function Cart() {
                     <span
                       className="button-3"
                       id="minus-button"
-                      onClick={() => Decrement(product)}
+                      onClick={() => handleClick('decrease', product)}
                     >
                       {" "}
                       -{" "}
                     </span>
-                    {product.count}
+                    {product.product_amount}
                     <span
                       className="button-3"
                       id="add-button"
-                      onClick={() => Increment(product)}
+                      onClick={() => handleClick('add', product)}
                     >
                       {" "}
                       +{" "}
@@ -89,7 +101,7 @@ function Cart() {
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="userIcons"
-                      onClick={() => Deletion(product)}
+                      onClick={() => handleClick('remove', product)}
                     />
                   </td>
                   <td>{getTotal(product.price, product.count)}</td>
@@ -110,7 +122,10 @@ function Cart() {
             </table>
           </div>
         );
-      })}
+      })
+      :
+        null
+      }
     </div>
   );
 }
