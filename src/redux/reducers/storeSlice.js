@@ -50,79 +50,112 @@ const storeSlice = (state = initialState, action) => {
         };
       }
 
-    case "DECREMENT_ITEM":
-      let count = action.payload.count;
-      if (
-        (count > 0 && state.productCount > 0) ||
-        (count < 0 && state.productCount < 0)
-      ) {
-        const list = state.products.map((object) => {
-          if (object.id === action.payload.id) {
+      case "DECREMENT_ITEM":
+        let count = action.payload.count;
+        if (
+          (count > 0 && state.productCount > 0) ||
+          (count < 0 && state.productCount < 0)
+        ) {
+          const list = state.products.map((object) => {
+            if (object.id === action.payload.id) {
+              return {
+                ...object,
+                count: count - 1,
+              };
+            }
+          });
+          return {
+            ...state,
+            productCount: state.productCount - 1,
+            products: state.products
+              .map((object) => {
+                if (object.id === action.payload.id) {
+                  return {
+                    ...object,
+                    count: count - 1,
+                  };
+                } else {
+                  return object;
+                }
+              })
+              .filter((cartItem) => cartItem.count !== 0),
+          };
+        } else {
+          return state;
+        }
+        case "FETCH-WISHLIST":
+          return {
+            ...state,
+            wishList: action.payload,
+          };
+
+        case "REMOVE_WISHLIST": {
+          const wishListToRemove = state.wishList.find(
+            (element) => element === action.payload
+          );
+
+          let {
+            storedProducts,
+            wishList
+          } = state;
+          let product = storedProducts.find((item) => item.id === action.payload.id);
+          if (product) {
+            product['isFavorite'] = false;
+            console.log(storedProducts, product);
+            console.log(wishList, "wishList");
+            for (let i = 0; i < wishList.length; i++) {
+              if (wishList[i].id === action.payload.id) {
+                wishList.splice(i, 1);
+                break;
+              }
+            }
+
             return {
-              ...object,
-              count: count - 1,
+              ...state,
+              storedProducts: storedProducts,
+              wishList: wishList
             };
           }
-        });
-        return {
-          ...state,
-          productCount: state.productCount - 1,
-          products: state.products
-            .map((object) => {
-              if (object.id === action.payload.id) {
-                return {
-                  ...object,
-                  count: count - 1,
-                };
-              } else {
-                return object;
-              }
-            })
-            .filter((cartItem) => cartItem.count !== 0),
-        };
-      } else {
-        return state;
-      }
-    case "FETCH-WISHLIST":
-      return {
-        ...state,
-        wishList: action.payload,
-      };
+          return state;
+        }
 
-    case "REMOVE_WISHLIST":
-      const wishListToRemove = state.wishList.find(
-        (element) => element === action.payload
-      );
-      if (!wishListToRemove) {
-        return {
-          ...state,
-          error: "No matching key was found",
-        };
-      }
-      return {
-        ...state,
-        keyToRemove: wishListToRemove,
-      };
+        case "EMPTY_CART":
+          return {
+            ...state,
+            products: [],
+          };
 
-    case "EMPTY_CART":
-      return {
-        ...state,
-        products: [],
-      };
+        case "DELETE_FROM_CART":
+          return {
+            ...state,
+            products: [
+                state.products.filter((cartItem) => cartItem !== action.payload),
+              ],
+              productCount: state.productCount - action.payload.count,
+          };
 
-    case "DELETE_FROM_CART":
-      return {
-        ...state,
-        products: [
-          state.products.filter((cartItem) => cartItem !== action.payload),
-        ],
-        productCount: state.productCount - action.payload.count,
-      };
+        case "MARK_FAV_IN_CART":
+          let {
+            storedProducts, wishList
+          } = state;
+          let product = storedProducts.find((item) => item.id === action.payload.id);
+          if (product) {
+            product['isFavorite'] = true;
+            console.log(storedProducts, wishList, "wishList");
+            wishList.push(product);
+            return {
+              ...state,
+              storedProducts: storedProducts,
+              wishList: wishList
+            };
+          }
+          return state;
 
-    case "RESET":
-      return (state = 0);
-    default:
-      return state;
+        case "RESET":
+
+          return (state = 0);
+        default:
+          return state;
   }
 };
 

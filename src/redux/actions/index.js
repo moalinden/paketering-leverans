@@ -41,6 +41,19 @@ export const deleteProduct = (payload) => {
   };
 };
 
+export const favoriteProduct = (payload) => {
+  return {
+    type: "MARK_FAV_IN_CART",
+    payload: payload,
+  };
+};
+export const unFavoriteProduct = (payload) => {
+  return {
+    type: "UNMARK_FAV_IN_CART",
+    payload: payload,
+  };
+};
+
 export const clearCart = () => {
   return {
     type: "EMPTY_CART",

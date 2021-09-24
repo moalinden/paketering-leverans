@@ -1,21 +1,36 @@
 import React, { useState } from "react";
 import "./wineBottles.css";
 import WineList from "./WineList";
+import WishList from "../wishList/WishList";
 
 import { Nav, Col, Row, Button } from "react-bootstrap";
+import {
+    favoriteProduct, removeWishList, saveToWishList
+} from "../../redux/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loading from "../loading/Loading";
 
 function WineBottles() {
   const productsState = useSelector((state) => state.storeSlice);
   const products = productsState.storedProducts;
   const [wineCat, setWineCat] = useState("");
+  const dispatch = useDispatch();
 
   const chooseWine = (cat) => {
     setWineCat(cat);
     console.log(cat);
   };
+  const saveToWishList = (wine) => {
+    dispatch(favoriteProduct(wine));
+    return true
+  };
+  const unfavoriteWine = (wine) => {
+    dispatch(removeWishList(wine));
+    return true
+  }
 
   if (!products) {
     return <Loading />;
@@ -45,6 +60,9 @@ function WineBottles() {
                 <Button id="navLink" onClick={() => chooseWine("")} style={{marginRight:'19px'}}>
                   All Wine
                 </Button>
+                {/*<Button id="navLink" onClick={() => saveToWishList()} style={{marginRight:'19px'}}>
+                  Favorites
+                </Button>*/}
               </Nav>
             </Row>
           </Col>

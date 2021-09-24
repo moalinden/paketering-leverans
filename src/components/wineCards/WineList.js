@@ -1,6 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
+import {
+  addToStore, decrementItem, storeWishList, favoriteProduct, removeWishList
+} from "../../redux/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 function WineList(data) {
   const userChoice = data.data;
@@ -10,6 +14,8 @@ function WineList(data) {
   const filteredProducts = products.filter(
     (element) => element.category === userChoice
   );
+
+  
 
   const addToCart = (product) => {
     const productToDispatch = productsState.products.find(
@@ -33,14 +39,19 @@ function WineList(data) {
     }
   };
 
-  const saveToWishList = () => {
-    const wishList = productsState.products;
-    const keyGen = Math.random() * 1000;
-    localStorage.setItem(keyGen, wishList);
-    dispatch(storeWishList(keyGen));
+  const saveToWishList = (wine) => {
+
+    dispatch(favoriteProduct(wine));
+    return true
   };
+  const unfavoriteWine = (wine) => {
+    dispatch(removeWishList(wine));
+    return true
+  }
+  
 
   if (userChoice === "") {
+    console.log("wine", products);
     return products.map((wine, index) => (
       <div className="col-1" id="wineBox" key={index}>
         <div id="bild">
@@ -50,9 +61,9 @@ function WineList(data) {
           <h3>{wine.name}</h3>
           <p>{wine.description}</p>
           <p>{wine.price} kr</p>
-          <button id="wishknapp" onClick={() => saveToWishList()}>
-            ♡
-          </button>
+          {wine.isFavorite ? <FontAwesomeIcon icon= {faHeart} onClick={()=>unfavoriteWine(wine)} className="fav" color="red"/>
+            : < FontAwesomeIcon onClick = {() => saveToWishList(wine)} icon = { faHeart } /> }
+          
           <div id="cartButtons">
             <button
               placeholder="add to cart"
@@ -79,7 +90,10 @@ function WineList(data) {
           <p>{wine.description}</p>
           <p>{wine.price} kr</p>
           <button id="wishknapp" onClick={() => saveToWishList()}>
-            ♡
+            
+            {
+              wine.isfFavorite ? "Fav" : "♡"
+            }
           </button>
           <div id="cartButtons">
             <button
