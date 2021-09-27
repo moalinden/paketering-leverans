@@ -5,8 +5,6 @@
     color: #F3DAC6;
 }
 
-
-
 @import url('https://fonts.googleapis.com/css2?family=Carattere&display=swap');
 
 .upper-nav{
@@ -19,8 +17,8 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
 @media screen and (max-width: 600px) {
-    p {
-      display: none;
-    }
+
+    .HeadP { display: none; }
   }

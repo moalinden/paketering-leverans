@@ -26,13 +26,6 @@ function WineBottles() {
           <Col>
             <Row className="justify-content-md-center">
               <Nav variant="tabs" id="navbar">
-                <Button
-                  id="navLink"
-                  onClick={() => chooseWine("")}
-                  style={{ marginRight: "19px" }}
-                >
-                  All Wine
-                </Button>
                 <Button id="navLink" onClick={() => chooseWine("red")}>
                   Red Wine
                 </Button>
@@ -41,6 +34,13 @@ function WineBottles() {
                 </Button>
                 <Button id="navLink" onClick={() => chooseWine("sparkling")}>
                   Sparkling Wine
+                </Button>
+                <Button
+                  id="navLink"
+                  onClick={() => chooseWine("")}
+                  style={{ marginRight: "19px" }}
+                >
+                  All Wine
                 </Button>
               </Nav>
             </Row>

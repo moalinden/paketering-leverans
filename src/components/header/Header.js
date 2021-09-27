@@ -41,53 +41,59 @@ function Header() {
           <Row md="auto" className="justify-content-md-center xs-2">
             <Col>
               <Nav.Link onClick={() => navTo("/")} style={{ color: "#F3DAC6" }}>
-                <p>Wines</p>
+                <p className="HeadP">Wines</p>
+
                 <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
               </Nav.Link>
             </Col>
 
+
             <Col>
               <Nav.Link
-                onClick={() => navTo("/Cart")}
+                onClick={() => navTo("/cart")}
                 style={{ color: "#F3DAC6" }}
               >
-                <p>Cart</p>
+                <p className="HeadP">Cart</p>
+
                 <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
                 <Countindicator />
               </Nav.Link>
             </Col>
 
-            {loggedIn == false ? (
-              [
+            {loggedIn == false ?
+              [      
                 ,
                 <Col>
                   <Nav.Link
                     onClick={() => navTo("/Login")}
                     style={{ color: "#F3DAC6" }}
                   >
-                    <p>Sign In</p>
+                    <p className="HeadP">Sign In</p>
+
                     <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
                   </Nav.Link>
-                </Col>,
+                </Col>
               ]
-            ) : (
+              :
               <Col>
                 <Nav.Link
                   onClick={() => navTo("/logout")}
                   style={{ color: "#F3DAC6" }}
                 >
-                  <p>Log Out</p>
+                  <p className="HeadP">Log Out</p>
+
                   <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
                 </Nav.Link>
               </Col>
-            )}
+            }
 
             <Col>
               <Nav.Link
                 onClick={() => navTo("/About")}
                 style={{ color: "#F3DAC6" }}
               >
-                <p>About</p>
+                <p className="HeadP">About</p>
+
                 <FontAwesomeIcon icon={faInfo} className="userIcons" />
               </Nav.Link>
             </Col>

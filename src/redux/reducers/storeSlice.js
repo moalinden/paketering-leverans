@@ -56,29 +56,19 @@ const storeSlice = (state = initialState, action) => {
         (count > 0 && state.productCount > 0) ||
         (count < 0 && state.productCount < 0)
       ) {
-        const list = state.products.map((object) => {
-          if (object.id === action.payload.id) {
-            return {
-              ...object,
-              count: count - 1,
-            };
-          }
-        });
         return {
           ...state,
           productCount: state.productCount - 1,
-          products: state.products
-            .map((object) => {
-              if (object.id === action.payload.id) {
-                return {
-                  ...object,
-                  count: count - 1,
-                };
-              } else {
-                return object;
-              }
-            })
-            .filter((cartItem) => cartItem.count !== 0),
+          products: state.products.map((object) => {
+            if (object.id === action.payload.id) {
+              return {
+                ...object,
+                count: count - 1,
+              };
+            } else {
+              return object;
+            }
+          }),
         };
       } else {
         return state;
@@ -113,9 +103,10 @@ const storeSlice = (state = initialState, action) => {
     case "DELETE_FROM_CART":
       return {
         ...state,
-        products: [
-          state.products.filter((cartItem) => cartItem !== action.payload),
-        ],
+        products: state.products.filter(
+          (cartItem) => cartItem !== action.payload
+        ),
+
         productCount: state.productCount - action.payload.count,
       };
 
