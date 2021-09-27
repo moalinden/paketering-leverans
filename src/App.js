@@ -16,7 +16,8 @@ import { isLoggedIn } from "./components/login/LoggedInCheck";
 import { initialStore } from "./redux/actions";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import {isMobile} from 'react-device-detect';
+  
 function App() {
   const dispatch = useDispatch();
 
@@ -29,6 +30,13 @@ function App() {
     newFetch();
     isLoggedIn();
   }, []);
+
+  const isMobile = navigator.userAgentData.mobile;
+  if (isMobile === true) {
+    console.log("hej dator")
+  }else{
+    console.log("hej mobil")
+  }
 
   return (
     <Router>
