@@ -113,9 +113,10 @@ const storeSlice = (state = initialState, action) => {
     case "DELETE_FROM_CART":
       return {
         ...state,
-        products: [
-          state.products.filter((cartItem) => cartItem !== action.payload),
-        ],
+        products: state.products.filter(
+          (cartItem) => cartItem !== action.payload
+        ),
+
         productCount: state.productCount - action.payload.count,
       };
 
