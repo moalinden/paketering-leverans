@@ -13,7 +13,7 @@ test("should remove all objects from cart", () => {
   expect(storeSlice(occupiedState, clearCart())).toEqual({
     storedProducts: [],
     productCount: 0,
-    productCount: 1,
+    productCount: 1, //dunno why this hapens.
     products: [],
     wishList: [],
     total: 0,

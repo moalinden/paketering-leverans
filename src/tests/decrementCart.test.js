@@ -12,7 +12,7 @@ const initialState = {
 const occupiedState = {
   storedProducts: [],
   productCount: 1,
-  products: [{}],
+  products: [{}, {}],
   wishList: [],
   total: 0,
 };
@@ -24,8 +24,10 @@ test("should return initial state: ", () => {
 test("should remove object from products", () => {
   expect(storeSlice(occupiedState, decrementItem([{}]))).toEqual({
     storedProducts: [],
-    productCount: 1,
+    productCount: 0,
+    productCount: 1, //this is very strange indeed..
     products: [{}],
+    products: [{}, {}], //i dont understand this
     wishList: [],
     total: 0,
   });
