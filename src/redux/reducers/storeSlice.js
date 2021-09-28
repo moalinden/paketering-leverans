@@ -54,7 +54,7 @@ const storeSlice = (state = initialState, action) => {
       let count = action.payload.count;
       if (
         (count > 0 && state.productCount > 0) ||
-        (count < 0 && state.productCount < 0)
+        (count < 1 && state.productCount < 1 )
       ) {
         return {
           ...state,
@@ -68,7 +68,7 @@ const storeSlice = (state = initialState, action) => {
             } else {
               return object;
             }
-          }),
+          }).filter((element) => element.id !== action.payload.id),
         };
       } else {
         return state;

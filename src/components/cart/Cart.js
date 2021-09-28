@@ -131,7 +131,9 @@
 // export default Cart;
 
 import React from "react";
+//import { alert } from "react-alert";
 import "./Cart.style.css";
+import { useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -141,9 +143,10 @@ import {
   deleteProduct,
 } from "../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faTimes, faLongArrowAltLeft, faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
 
 function Cart() {
+  const history = useHistory();
   const store = useSelector((state) => state.storeSlice);
   const storeItems = store.products;
   const dispatch = useDispatch();
@@ -159,92 +162,122 @@ function Cart() {
   };
   const emptyCart = () => {
     dispatch(clearCart());
+    history.push("/")
   };
 
-  const getTotal = (price, count) => {
-    const total = price * count;
+  const getTotal = (item) => {
+    const total = Number(item.price) * Number(item.count);
     return total;
   };
+  const totalPrice = storeItems.length > 0 &&
+     storeItems.reduce((previousValue, item) => {
+       const price = getTotal(item);
+       return previousValue + price;
+    }, 0) || 0;
 
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12">
-          <h2 className="item-header"> Products in Cart</h2>
-        </div>
-      </div>
+ return (
+        <section  className="h-100 h-custom" style={{backgroundColor: '#eee'}}>
+          <div  className="container py-5 h-100">
+            <div  className="row d-flex justify-content-center align-items-center h-100">
+              <div  className="col">
+                <div  className="card">
+                  <div  className="card-body p-4">
 
-      {storeItems.map((product, index) => {
-        return (
-          <div key={index} className="col-md-12">
-            <table className="table table-bordered text-center">
-              <thead>
-                <tr>
-                  <td>Product</td>
-                  <td>Name of Product</td>
-                  <td>Price</td>
-                  <td>Quantity</td>
-                  <td>Remove</td>
-                  <td>Total</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="imgCards">
-                    <img
-                      src="../media/red/Contrabandistes.jpg"
-                      alt="whinebottle"
-                    />
-                  </td>
-                  <td> {product.name}</td>
-                  <td> {product.price}kr</td>
-                  <td>
-                    <span
-                      className="button-3"
-                      id="minus-button"
-                      onClick={() => Decrement(product)}
-                    >
-                      {" "}
-                      -{" "}
-                    </span>
-                    {product.count}
-                    <span
-                      className="button-3"
-                      id="add-button"
-                      onClick={() => Increment(product)}
-                    >
-                      {" "}
-                      +{" "}
-                    </span>
-                  </td>
-                  <td>
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="userIcons"
-                      onClick={() => Deletion(product)}
-                    />
-                  </td>
-                  <td>{getTotal(product.price, product.count)}</td>
-                </tr>
-              </tbody>
-              {/* <div className="buttonContainer">
-                <button className="button-3">
-                  Total Amount: {getTotal(product.price, product.count)}kr
-                </button>
-                <p
-                  className="button-3"
-                  id="checkout"
-                  onClick={() => emptyCart()}
-                >
-                  EMPTY CART
-                </p>
-              </div> */}
-            </table>
+                    <div  className="row">
+
+                      <div  className="col-lg-7">
+                   <h5 className="mb-3"><a onClick={() => history.push("/")} className="text-body" style={{textDecoration: 'none'}}>
+                     <FontAwesomeIcon icon={faLongArrowAltLeft} className="me-2"/>
+                     Continue shopping</a></h5>
+                        <hr />
+
+                        <div  className="d-flex justify-content-between align-items-center mb-4">
+                          <div>
+                            <p  className="mb-1">Shopping cart</p>
+                            <p className="mb-0">You have { storeItems.length} items in your cart</p>
+                          </div>
+                        </div>
+                        { storeItems.map((product, index) => {
+                          return (
+                              <div>
+                              <div key={index}  className="card mb-3">
+                                <div  className="card-body">
+                                  <div  className="d-flex justify-content-between">
+                                    <div  className="d-flex flex-row align-items-flex-start">
+                                      <div>
+                                        <img
+                                          src={product.imageUrl}
+                                          alt="whinebottle"
+                                           className="img-fluid rounded-3" style={{width: '65px'}} />
+                                      </div>
+                                      <div  className="ms-3">
+                                        <h5>{product.name}</h5>
+                                        <p className="small mb-0">{product.description}</p>
+                                        <p className="sub-total">Sub-total:<span>{getTotal(product)} </span></p>
+                                      </div>
+                                    </div>
+                                    <div className= "col-md-7 col-lg-3 col-xl-2 d-flex" >
+                                      
+                                        <button className = "btn btn-link px-2 cart-btn"
+                                          onClick={() => Decrement(product)}>{" "}-{" "}
+                                        </button>
+                                        <button className = "btn btn-link px-2 cart-btn2" > {product.count} </button>
+                                        <button className = "btn btn-link px-2 cart-btn2"
+                                          //id="add-button"
+                                          onClick={() => Increment(product)}>{" "}+{" "}
+                                        </button>
+
+                                     
+                                      <div style={{width: '80px'}}>
+                                        <h5 className="price-tag">{product.price}kr</h5>
+                                      </div>
+                                      < div className="trash-btn2" >
+                                      < FontAwesomeIcon icon={faTrash}
+                                        className = "trash-icon"
+                                        onClick={() => Deletion(product)} />
+                                      </div>
+                                      
+
+
+                                      
+                                      {/*<div style={{ width: '80px' }}>*/}
+                                        
+                                        {/*<h5  className="mb-0">Total: {getTotal(product.price, product.count)}</h5>*/}
+                                      {/*</div>*/}
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                                
+                                       
+                              </div>
+                              
+                            </div>
+                            
+                              
+                            )
+                              })
+                          
+                          }
+                            <div className="button-container">
+                              <button type="button" className="btn btn-info btn-block btn-lg" onClick={()=> emptyCart()}>
+                                <div className="d-flex justify-content-between">
+                                  <span className="cart-price"> {totalPrice}kr</span>
+                                  <span className="checkout-btn">Checkout
+                                  <FontAwesomeIcon icon={faLongArrowAltRight} className="me-2" /></span>
+                                </div>
+                              </button>
+                             </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        );
-      })}
-    </div>
-  );
+        </section>
+      );
+
 }
 
 export default Cart;
