@@ -1,6 +1,13 @@
 #App{
     height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 360px) {
+    .App{
+        background-size: 100%;
+    }
+  }

@@ -35,7 +35,6 @@ function App() {
     newFetch();
     isLoggedIn();
   }, []);
-
   // OBS OBS! För claras dator funkar detta :
   // const isMobile = navigator.userAgentData.mobile;
   // if (isMobile !== true) {
