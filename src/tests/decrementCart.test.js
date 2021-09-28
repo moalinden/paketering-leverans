@@ -12,7 +12,7 @@ const initialState = {
 const occupiedState = {
   storedProducts: [],
   productCount: 1,
-  products: [{}, {}],
+  products: [{}],
   wishList: [],
   total: 0,
 };
