@@ -227,7 +227,7 @@ function Cart() {
                   <td>{getTotal(product.price, product.count)}</td>
                 </tr>
               </tbody>
-              <div className="buttonContainer">
+              {/* <div className="buttonContainer">
                 <button className="button-3">
                   Total Amount: {getTotal(product.price, product.count)}kr
                 </button>
@@ -238,7 +238,7 @@ function Cart() {
                 >
                   EMPTY CART
                 </p>
-              </div>
+              </div> */}
             </table>
           </div>
         );
