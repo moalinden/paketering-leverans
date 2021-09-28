@@ -32,8 +32,15 @@ function App() {
     isLoggedIn();
   }, []);
   
-  const isMobile = navigator.userAgentData.mobile;
-  if (isMobile !== true) {
+
+  // OBS OBS! För claras dator funkar detta :
+  // const isMobile = navigator.userAgentData.mobile;
+  // if (isMobile !== true) {
+    
+    // på claras dator säger denna "hej mobil" alltid, kolla era i consolen
+     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+     if (isMobile) {
+    
     console.log("hej mobil")
     return (
       <Router>
@@ -42,7 +49,6 @@ function App() {
           <Switch>
             <Route path="/Login" component={Login}/>
             <Route path="/About" component={AboutPage} />
-            {/* <Route exact path="/" component={WineBottles} /> */}
             <Route exact path="/" component={WineBottles} >
               {loggedIn ? <Redirect to="/" /> : <Redirect to="/Login" />}
             </Route>
@@ -56,7 +62,9 @@ function App() {
         </div>
       </Router>
     );
-  }else {return (
+  }else {
+    console.log("hej dator")
+    return (
     <Router>
       <div id="App">
         <Header />
@@ -72,35 +80,9 @@ function App() {
       </div>
     </Router>
   );
-
   }
-
-  
-    
-
-  // console.log(loggedIn)
-  
-  return (
-    <Router>
-      <div id="App">
-        <Header />
-        <Switch>
-          <Route path="/Login" component={Login}/>
-          <Route path="/About" component={AboutPage} />
-          {/* <Route exact path="/" component={WineBottles} /> */}
-          <Route exact path="/" component={WineBottles} >
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/Login" />}
-          </Route>
-          <Route exact path="/Register" component={Register} />
-          <Route exact path="/Cart" component={Cart} >
-            {loggedIn ? <Redirect to="/Cart" /> : <Redirect to="/Login" />}
-          </Route>
-          <Route exact path="/logout" component={LogOut} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
-  );
 }
+
+    
 
 export default App;
