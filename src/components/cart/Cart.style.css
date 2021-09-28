@@ -84,6 +84,9 @@ img{
 .cart-price {
     padding-right: 50px;
 }
+.button-container {
+    margin-left: 52%;
+}
 .checkout-btn {
     font-size: medium;
 }

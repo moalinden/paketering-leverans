@@ -131,6 +131,7 @@
 // export default Cart;
 
 import React from "react";
+//import { alert } from "react-alert";
 import "./Cart.style.css";
 import { useHistory } from "react-router-dom";
 
@@ -161,12 +162,18 @@ function Cart() {
   };
   const emptyCart = () => {
     dispatch(clearCart());
+    history.push("/")
   };
 
-  const getTotal = (price, count) => {
-    const total = price * count;
+  const getTotal = (item) => {
+    const total = Number(item.price) * Number(item.count);
     return total;
   };
+  const totalPrice = storeItems.length > 0 &&
+     storeItems.reduce((previousValue, item) => {
+       const price = getTotal(item);
+       return previousValue + price;
+    }, 0) || 0;
 
  return (
         <section  className="h-100 h-custom" style={{backgroundColor: '#eee'}}>
@@ -190,7 +197,7 @@ function Cart() {
                             <p className="mb-0">You have { storeItems.length} items in your cart</p>
                           </div>
                         </div>
-                        { storeItems != undefined ? storeItems.map((product, index) => {
+                        { storeItems.map((product, index) => {
                           return (
                               <div>
                               <div key={index}  className="card mb-3">
@@ -206,7 +213,7 @@ function Cart() {
                                       <div  className="ms-3">
                                         <h5>{product.name}</h5>
                                         <p className="small mb-0">{product.description}</p>
-                                        <p className="sub-total">Sub-total:<span>{getTotal(product.price, product.count)} </span></p>
+                                        <p className="sub-total">Sub-total:<span>{getTotal(product)} </span></p>
                                       </div>
                                     </div>
                                     <div className= "col-md-7 col-lg-3 col-xl-2 d-flex" >
@@ -241,24 +248,26 @@ function Cart() {
                                     
                                   </div>
                                 </div>
+                                
                                        
                               </div>
-                              <div>
-                                  <button type="button" class="btn btn-info btn-block btn-lg">
-                                    <div class="d-flex justify-content-between">
-                                      <span className="cart-price">{getTotal(product.price, product.count)}kr</span>
-                                      <span className="checkout-btn">Checkout
-                                      <FontAwesomeIcon icon={faLongArrowAltRight} className="me-2" /></span>
-                                    </div>
-                                  </button>
-                                  </div>
+                              
                             </div>
                             
                               
                             )
                               })
-                          : storeItems
+                          
                           }
+                            <div className="button-container">
+                              <button type="button" className="btn btn-info btn-block btn-lg" onClick={()=> emptyCart()}>
+                                <div className="d-flex justify-content-between">
+                                  <span className="cart-price"> {totalPrice}kr</span>
+                                  <span className="checkout-btn">Checkout
+                                  <FontAwesomeIcon icon={faLongArrowAltRight} className="me-2" /></span>
+                                </div>
+                              </button>
+                             </div>
                       </div>
                     </div>
                   </div>
