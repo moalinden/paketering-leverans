@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,13 +15,17 @@ import { useDispatch } from "react-redux";
 import { isLoggedIn } from "./components/login/LoggedInCheck";
 import { initialStore } from "./redux/actions";
 
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-  
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+
 function App() {
   const dispatch = useDispatch();
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
-  
-  
+
   useEffect(() => {
     const newFetch = async () => {
       const response = await fetch("/api/products");
@@ -31,29 +35,26 @@ function App() {
     newFetch();
     isLoggedIn();
   }, []);
-  
-  // på claras dator säger denna "hej mobil" alltid, kolla era i consolen
-  //  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  //  if (isMobile) {
-
   // OBS OBS! För claras dator funkar detta :
-  const isMobile = navigator.userAgentData.mobile;
-  if (isMobile !== true) {
-    
-    
-    console.log("hej mobil")
+  // const isMobile = navigator.userAgentData.mobile;
+  // if (isMobile !== true) {
+
+  // på claras dator säger denna "hej mobil" alltid, kolla era i consolen
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (isMobile) {
+    console.log("hej mobil");
     return (
       <Router>
         <div id="App">
           <Header />
           <Switch>
-            <Route path="/Login" component={Login}/>
+            <Route path="/Login" component={Login} />
             <Route path="/About" component={AboutPage} />
-            <Route exact path="/" component={WineBottles} >
+            <Route exact path="/" component={WineBottles}>
               {loggedIn ? <Redirect to="/" /> : <Redirect to="/Login" />}
             </Route>
             <Route exact path="/Register" component={Register} />
-            <Route exact path="/Cart" component={Cart} >
+            <Route exact path="/Cart" component={Cart}>
               {loggedIn ? <Redirect to="/Cart" /> : <Redirect to="/Login" />}
             </Route>
             <Route exact path="/logout" component={LogOut} />
@@ -62,27 +63,25 @@ function App() {
         </div>
       </Router>
     );
-  }else {
-    console.log("hej dator")
+  } else {
+    console.log("hej dator");
     return (
-    <Router>
-      <div id="App">
-        <Header />
-        <Switch>
-          <Route path="/Login" component={Login}/>
-          <Route path="/About" component={AboutPage} />
-          <Route exact path="/" component={WineBottles}/>
-          <Route exact path="/Register" component={Register} />
-          <Route exact path="/Cart" component={Cart} />
-          <Route exact path="/logout" component={LogOut} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
-  );
+      <Router>
+        <div id="App">
+          <Header />
+          <Switch>
+            <Route path="/Login" component={Login} />
+            <Route path="/About" component={AboutPage} />
+            <Route exact path="/" component={WineBottles} />
+            <Route exact path="/Register" component={Register} />
+            <Route exact path="/Cart" component={Cart} />
+            <Route exact path="/logout" component={LogOut} />
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    );
   }
 }
-
-    
 
 export default App;
