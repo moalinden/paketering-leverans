@@ -61,7 +61,7 @@ function Header() {
             </Col>
 
             {loggedIn == false ?
-              [      
+              [
                 ,
                 <Col>
                   <Nav.Link
