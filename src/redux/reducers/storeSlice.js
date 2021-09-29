@@ -112,6 +112,12 @@ const storeSlice = (state = initialState, action) => {
         productCount: state.productCount - action.payload.count,
       };
 
+    case "REMOVE_WISHLIST":
+      return {
+        ...state,
+        wishList: [],
+      };
+
     case "RESET":
       return (state = 0);
     default:

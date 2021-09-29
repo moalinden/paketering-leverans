@@ -3,13 +3,14 @@ import "./Wishlist.css";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
-import { useSelector, useDispatch } from "react-redux";
-import { loadWishList } from "../../redux/actions";
 
+import { useSelector, useDispatch } from "react-redux";
+import { loadWishList, emptyWishList } from "../../redux/actions";
+
+import { useHistory } from "react-router-dom";
 function Wishlist() {
   //////////////////////////////////////////////////////////////////////////////
   //////////////ELECTRON
-  const store = useSelector((state) => state.storeSlice);
   const productsState = useSelector((state) => state.storeSlice.products);
   const dispatch = useDispatch();
 
@@ -75,6 +76,11 @@ function Wishlist() {
         return previousValue + price;
       }, 0)) ||
     0;
+
+  const clearWishList = () => {
+    dispatch(emptyWishList());
+    window.location.reload(false);
+  };
   return (
     <div id="mainElectronContainer">
       <div id="productContainer">
@@ -103,6 +109,7 @@ function Wishlist() {
           id="checkoutBtn"
           type="button"
           className="btn btn-info btn-block btn-lg"
+          onClick={() => clearWishList()}
         >
           <div className="d-flex justify-content-between">
             <span className="cart-price"> {totalPrice}kr</span>

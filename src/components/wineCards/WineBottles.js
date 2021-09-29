@@ -53,6 +53,7 @@ function WineBottles() {
         <div id="systembolaget">
           <div className="row">
             <WineList data={wineCat} />
+            {navigator.userAgent.includes("Electron") && <Wishlist />}
           </div>
         </div>
       </div>

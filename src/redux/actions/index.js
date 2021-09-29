@@ -27,10 +27,9 @@ export const storeWishList = (payload) => {
   };
 };
 
-export const removeWishList = (payload) => {
+export const emptyWishList = () => {
   return {
     type: "REMOVE_WISHLIST",
-    payload: payload,
   };
 };
 
@@ -45,11 +44,6 @@ export const clearCart = () => {
   return {
     type: "EMPTY_CART",
     //payload: payload,
-  };
-};
-export const calculateTotal = () => {
-  return {
-    type: "CALCULATE_TOTAL_PRICE",
   };
 };
 
