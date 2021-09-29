@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { isLoggedIn } from "./components/login/LoggedInCheck";
 import { initialStore } from "./redux/actions";
 
+import handleWine from './components/wineCards/handleWine';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,6 +33,9 @@ function App() {
       const response = await fetch("/api/products");
       const data = await response.json();
       dispatch(initialStore(data.products));
+
+      let token = await handleWine('get');
+      localStorage.setItem('products', token.token);
     };
     newFetch();
     isLoggedIn();
