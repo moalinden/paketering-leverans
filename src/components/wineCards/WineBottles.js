@@ -6,9 +6,11 @@ import { Nav, Col, Row, Button } from "react-bootstrap";
 
 import { useSelector } from "react-redux";
 import Loading from "../loading/Loading";
+import Wishlist from "../../electronComp/wishlist/Wishlist";
 
 function WineBottles() {
   const productsState = useSelector((state) => state.storeSlice);
+  const wishList = useSelector((state) => state.storeSlice.wishList);
   const products = productsState.storedProducts;
   const [wineCat, setWineCat] = useState("");
 
@@ -19,6 +21,8 @@ function WineBottles() {
 
   if (!products) {
     return <Loading />;
+  } else if (wishList.length > 0) {
+    return <Wishlist />;
   } else {
     return (
       <div className="container">

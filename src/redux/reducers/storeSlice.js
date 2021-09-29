@@ -54,29 +54,31 @@ const storeSlice = (state = initialState, action) => {
       let count = action.payload.count;
       if (
         (count > 0 && state.productCount > 0) ||
-        (count < 1 && state.productCount < 1 )
+        (count < 1 && state.productCount < 1)
       ) {
         return {
           ...state,
           productCount: state.productCount - 1,
-          products: state.products.map((object) => {
-            if (object.id === action.payload.id) {
-              return {
-                ...object,
-                count: count - 1,
-              };
-            } else {
-              return object;
-            }
-          }).filter((element) => element.id !== action.payload.id),
+          products: state.products
+            .map((object) => {
+              if (object.id === action.payload.id) {
+                return {
+                  ...object,
+                  count: count - 1,
+                };
+              } else {
+                return object;
+              }
+            })
+            .filter((element) => element.id !== action.payload.id),
         };
       } else {
         return state;
       }
-    case "FETCH-WISHLIST":
+    case "LOAD_WISHLIST":
       return {
         ...state,
-        wishList: action.payload,
+        wishList: [...state.wishList, action.payload],
       };
 
     case "REMOVE_WISHLIST":

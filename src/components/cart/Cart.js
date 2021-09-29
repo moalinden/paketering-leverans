@@ -212,7 +212,7 @@ function Cart() {
                       <div>
                         <p className="mb-1">Shopping cart</p>
                         <p className="mb-0">
-                          You have {storeItems.length} items in your cart
+                          You have {store.productCount} items in your cart
                         </p>
                       </div>
                     </div>
