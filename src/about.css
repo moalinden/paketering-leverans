@@ -3,3 +3,10 @@
 #about {
     font-family: 'Poppins', sans-serif;
 }
+
+@media screen and (max-width: 480px) {
+
+    #aboutStyle { display: none; }
+        
+    #drinkerStyle {background-color: lightgreen;}
+  }
