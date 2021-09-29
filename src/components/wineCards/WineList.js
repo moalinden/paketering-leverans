@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToStore, decrementItem, storeWishList } from "../../redux/actions";
+import { addToStore, decrementItem } from "../../redux/actions";
 
 function WineList(data) {
   const userChoice = data.data;
@@ -11,6 +11,8 @@ function WineList(data) {
     (element) => element.category === userChoice
   );
 
+  // const [loggedIn] = useState(isLoggedIn());
+
   const addToCart = (product) => {
     const productToDispatch = productsState.products.find(
       (element) => element.id === product.id
@@ -20,6 +22,9 @@ function WineList(data) {
     } else {
       dispatch(addToStore(productToDispatch));
     }
+    // if (loggedIn) {
+    //   handleWine("add", product);
+    // }
   };
 
   const decrementCart = (product) => {
@@ -31,13 +36,7 @@ function WineList(data) {
     } else {
       dispatch(decrementItem(productToDispatch));
     }
-  };
-
-  const saveToWishList = () => {
-    const wishList = productsState.products;
-    const keyGen = Math.random() * 1000;
-    localStorage.setItem(keyGen, wishList);
-    dispatch(storeWishList(keyGen));
+    // handleWine("decrease", product);
   };
 
   if (userChoice === "") {
@@ -50,9 +49,7 @@ function WineList(data) {
           <h3>{wine.name}</h3>
           <p>{wine.description}</p>
           <p>{wine.price} kr</p>
-          <button id="wishknapp" onClick={() => saveToWishList()}>
-            ♡
-          </button>
+
           <div id="cartButtons">
             <button
               placeholder="add to cart"
@@ -78,9 +75,7 @@ function WineList(data) {
           <h3>{wine.name}</h3>
           <p>{wine.description}</p>
           <p>{wine.price} kr</p>
-          <button id="wishknapp" onClick={() => saveToWishList()}>
-            ♡
-          </button>
+
           <div id="cartButtons">
             <button
               placeholder="add to cart"

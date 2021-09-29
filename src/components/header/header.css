@@ -17,8 +17,9 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
 @media screen and (max-width: 600px) {
-    .HeadP {
-      display: none;
+.HeadP {
+    display: none; 
     }
   }

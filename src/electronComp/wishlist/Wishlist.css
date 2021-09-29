@@ -1,28 +1,12 @@
-
-#App{
+#mainElectronContainer{
     background-color: #f9f4ee;
-    height: fit-content;
-}
-
-#navbar{ 
-    padding: 10px;
-    margin: 5px; 
-}
-#navLink{
-    color: #bf8596; 
-    background-color: #f9f4ee; 
-    margin: 2px;
-    border: 2.5px solid #f3dac6;
-    border-bottom: 0;
 
 }
-#systembolaget{
-    width: 100%;
-    align-items: center;
-    position: relative;
-    margin-bottom: 100px;
-    
+#productContainer{
+    display: flex;
+    flex-direction: column;
 }
+
 #wineBox{
     border: 3px solid #f3dac6;
     border-radius: 20px;
@@ -56,35 +40,21 @@
     display: flex;
     flex-direction: column;
 }
-
-#cartButtons{
-    position: absolute;
-    bottom: 14px;
+.checkout-btn {
+    font-size: medium;
 }
-#cartKnapp{
-    border: 1px solid #f3dac6;
-    padding: 4px 9px;
-    font-size: 10px;
-    bottom: 10px;
-    right: 10px;
-    border-radius: 4px;
-    width: 90px;
-}
-#cartKnapp:active{
-    background-color: gray;
-}
-#wishknapp{
-    position: absolute;
-    padding: 6px 15px;
-    font-size: 20px;
-    right: 0px;
-    bottom: 7px;
-    border-radius: 4px;
-    width: 90px;
-}
+.cart-price {
+    padding-right: 50px;
+}   
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 .container{
     font-family: 'Poppins', sans-serif;
+}
+#checkoutBtn{
+    height: 100px;
+    position: fixed;
+    right: 10px;
+    top: 10px;
 }

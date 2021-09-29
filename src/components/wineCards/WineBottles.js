@@ -6,9 +6,11 @@ import { Nav, Col, Row, Button } from "react-bootstrap";
 
 import { useSelector } from "react-redux";
 import Loading from "../loading/Loading";
+import Wishlist from "../../electronComp/wishlist/Wishlist";
 
 function WineBottles() {
   const productsState = useSelector((state) => state.storeSlice);
+  const wishList = useSelector((state) => state.storeSlice.wishList);
   const products = productsState.storedProducts;
   const [wineCat, setWineCat] = useState("");
 
@@ -19,6 +21,8 @@ function WineBottles() {
 
   if (!products) {
     return <Loading />;
+  } else if (wishList.length > 0) {
+    return <Wishlist />;
   } else {
     return (
       <div className="container">
@@ -26,13 +30,6 @@ function WineBottles() {
           <Col>
             <Row className="justify-content-md-center">
               <Nav variant="tabs" id="navbar">
-                <Button
-                  id="navLink"
-                  onClick={() => chooseWine("")}
-                  style={{ marginRight: "19px" }}
-                >
-                  All Wine
-                </Button>
                 <Button id="navLink" onClick={() => chooseWine("red")}>
                   Red Wine
                 </Button>
@@ -42,7 +39,11 @@ function WineBottles() {
                 <Button id="navLink" onClick={() => chooseWine("sparkling")}>
                   Sparkling Wine
                 </Button>
-                <Button id="navLink" onClick={() => chooseWine("")} style={{marginRight:'19px'}}>
+                <Button
+                  id="navLink"
+                  onClick={() => chooseWine("")}
+                  style={{ marginRight: "19px" }}
+                >
                   All Wine
                 </Button>
               </Nav>
@@ -52,6 +53,7 @@ function WineBottles() {
         <div id="systembolaget">
           <div className="row">
             <WineList data={wineCat} />
+            {navigator.userAgent.includes("Electron") && <Wishlist />}
           </div>
         </div>
       </div>
