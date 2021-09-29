@@ -1,15 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Wishlist.css";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { loadWishList } from "../../redux/actions";
 
 function Wishlist() {
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////ELECTRON
+  const store = useSelector((state) => state.storeSlice);
+  const productsState = useSelector((state) => state.storeSlice.products);
+  const dispatch = useDispatch();
+
+  const [menuChoice, setMenuChoice] = useState("");
+  const { ipcRenderer } = window.require("electron");
+  const remote = window.require("@electron/remote");
+  const fs = window.require("fs");
+
+  const { dialog } = remote;
+
+  ipcRenderer.on("menuChoice", (ipcEvent, menuItemLabel) => {
+    setMenuChoice(menuItemLabel);
+  });
+
+  useEffect(() => {
+    if (menuChoice === "Save File") {
+      let filePath = dialog.showSaveDialogSync({
+        properties: ["createDirectory"],
+      });
+      let fileExtensionToUse = "myext";
+
+      if (filePath) {
+        if (
+          filePath.slice(-fileExtensionToUse.length - 1) !==
+          "." + fileExtensionToUse
+        ) {
+          filePath += "." + fileExtensionToUse;
+        }
+        fs.writeFileSync(
+          filePath,
+          JSON.stringify(productsState, null, "  "),
+          "utf-8"
+        );
+      }
+    }
+    if (menuChoice === "Load File") {
+      let filePaths = dialog.showOpenDialogSync({
+        properties: ["openFile"],
+        options: { filters: { extensions: [".wishlist"] } },
+      });
+      if (filePaths) {
+        let json = fs.readFileSync(filePaths[0], "utf-8");
+        let data = JSON.parse(json);
+        data.forEach((element) => {
+          dispatch(loadWishList(element));
+        });
+      }
+    }
+  }, [menuChoice]);
+  //ELECTRON
+  ////////////////////////////////////////////////////////////////////////
   const wishList = useSelector((state) => state.storeSlice.wishList);
-  const store = useSelector((state) => state.storeSlice.storedProducts);
-  console.log(wishList);
-  console.log(store);
 
   const getTotal = (product) => {
     const total = product.price * product.count;
