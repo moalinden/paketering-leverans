@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToStore, decrementItem } from "../../redux/actions";
-import handleWine from "./handleWine";
-import { isLoggedIn } from "../login/LoggedInCheck";
 
 function WineList(data) {
   const userChoice = data.data;
@@ -13,7 +11,7 @@ function WineList(data) {
     (element) => element.category === userChoice
   );
 
-  const [loggedIn] = useState(isLoggedIn());
+  // const [loggedIn] = useState(isLoggedIn());
 
   const addToCart = (product) => {
     const productToDispatch = productsState.products.find(
@@ -24,9 +22,9 @@ function WineList(data) {
     } else {
       dispatch(addToStore(productToDispatch));
     }
-    if (loggedIn) {
-      handleWine("add", product);
-    }
+    // if (loggedIn) {
+    //   handleWine("add", product);
+    // }
   };
 
   const decrementCart = (product) => {
@@ -38,7 +36,7 @@ function WineList(data) {
     } else {
       dispatch(decrementItem(productToDispatch));
     }
-    handleWine("decrease", product);
+    // handleWine("decrease", product);
   };
 
   if (userChoice === "") {

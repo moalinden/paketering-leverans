@@ -52,41 +52,33 @@ const storeSlice = (state = initialState, action) => {
 
     case "DECREMENT_ITEM":
       let count = action.payload.count;
-      if (
-        (count > 0 && state.productCount > 0) ||
-        (count < 0 && state.productCount < 0)
-      ) {
-        const list = state.products.map((object) => {
-          if (object.id === action.payload.id) {
-            return {
-              ...object,
-              count: count - 1,
-            };
-          }
-        });
+      if (count > 0 && state.productCount > 0) {
         return {
           ...state,
           productCount: state.productCount - 1,
-          products: state.products
-            .map((object) => {
-              if (object.id === action.payload.id) {
-                return {
-                  ...object,
-                  count: count - 1,
-                };
-              } else {
-                return object;
-              }
-            })
-            .filter((cartItem) => cartItem.count !== 0),
+          products: state.products.map((object) => {
+            if (object.id === action.payload.id) {
+              return {
+                ...object,
+                count: count - 1,
+              };
+            } else {
+              return object;
+            }
+          }),
         };
       } else {
-        return state;
+        return {
+          ...state,
+          products: state.products.filter(
+            (element) => element.id !== action.payload.id
+          ),
+        };
       }
-    case "FETCH-WISHLIST":
+    case "LOAD_WISHLIST":
       return {
         ...state,
-        wishList: action.payload,
+        wishList: [...state.wishList, action.payload],
       };
 
     case "REMOVE_WISHLIST":
@@ -113,10 +105,17 @@ const storeSlice = (state = initialState, action) => {
     case "DELETE_FROM_CART":
       return {
         ...state,
-        products: [
-          state.products.filter((cartItem) => cartItem !== action.payload),
-        ],
+        products: state.products.filter(
+          (cartItem) => cartItem !== action.payload
+        ),
+
         productCount: state.productCount - action.payload.count,
+      };
+
+    case "REMOVE_WISHLIST":
+      return {
+        ...state,
+        wishList: [],
       };
 
     case "RESET":
