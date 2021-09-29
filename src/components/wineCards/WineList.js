@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToStore, decrementItem } from "../../redux/actions";
-import handleWine from "./handleWine";
-import { isLoggedIn } from "../login/LoggedInCheck";
 
 function WineList(data) {
   const userChoice = data.data;
