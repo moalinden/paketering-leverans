@@ -52,3 +52,10 @@ export const calculateTotal = () => {
     type: "CALCULATE_TOTAL_PRICE",
   };
 };
+
+export const loadWishList = (payload) => {
+  return {
+    type: "LOAD_WISHLIST",
+    payload: payload,
+  };
+};

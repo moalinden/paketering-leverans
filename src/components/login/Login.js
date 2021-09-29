@@ -3,7 +3,7 @@ import "./Login.css";
 import submitHelper from "../../helper/submitHelper";
 import { isLoggedIn } from "./LoggedInCheck";
 
-import { Nav, Col, Row, Container } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 
 export default function LoginPage() {
   const [loginInfo, setLoginInfo] = useState({

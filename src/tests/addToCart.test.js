@@ -53,16 +53,3 @@ test("should add objets to occupied products-array and count", () => {
     count: 1,
   });
 });
-
-// test("should add objets to occupied products-array and count", () => {
-//   expect(storeSlice(occupiedState, addToStore([{}]))).toEqual({
-//     storedProducts: [],
-//     productCount: 2,
-//     products: [{ 0: {}, 1: 1, count: NaN, total: NaN }],
-//     wishList: [],
-//     total: 4,
-//     total: 3,
-//     count: 2,
-//     count: 1,
-//   });
-// });
