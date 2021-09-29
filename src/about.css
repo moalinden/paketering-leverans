@@ -3,10 +3,24 @@
 #about {
     font-family: 'Poppins', sans-serif;
 }
-
-@media screen and (max-width: 480px) {
-
-    #aboutStyle { display: none; }
+.justify-content-around{
+    flex-direction: row;
+    /* width: 200px; */
+} 
+Container{
+    padding: 60px;
+    /* width: 80%; */
+}
+@media screen and (max-width:700px) {
+    #about {
+        padding: 6px;
+        flex-direction: column;
+        /* width: 80%; */
+        margin: 2px;
         
-    #drinkerStyle {background-color: lightgreen;}
+    }
+    div.card {
+        max-width: 100%;
+        align-self: center;
+    }
   }
