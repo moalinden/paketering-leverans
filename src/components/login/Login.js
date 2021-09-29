@@ -3,6 +3,8 @@ import "./Login.css";
 import submitHelper from "../../helper/submitHelper";
 import { isLoggedIn } from "./LoggedInCheck";
 
+import { useHistory } from "react-router-dom";
+
 import { Nav } from "react-bootstrap";
 
 export default function LoginPage() {
@@ -11,6 +13,11 @@ export default function LoginPage() {
     password: null,
   });
   const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+  const history = useHistory();
+
+  const navTo = (location) => {
+    history.push(location);
+  };
 
   useEffect(() => {
     //If user is logged in return to home page
@@ -80,7 +87,7 @@ export default function LoginPage() {
           {/* </Container> */}
         </form>
         <div id="navLink">
-          <Nav.Link href="/Register" className="reg_button">
+          <Nav.Link onClick={() => navTo("/Register")} className="reg_button">
             Sign up
           </Nav.Link>
         </div>
