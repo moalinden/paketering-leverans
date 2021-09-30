@@ -1,13 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import "./header.css";
+import jwt_decode from "jwt-decode";
+
 
 function CountIndicator() {
-  const store = useSelector((state) => state.storeSlice);
-  if (store.productCount === 0) {
+  let token = localStorage.getItem('products');
+  var cartAmount = 0;
+
+  if(token){
+    let decoded = jwt_decode(token);
+    cartAmount = decoded.productCount;
+  }
+
+  if (cartAmount === 0) {
     return null;
   } else {
-    return <div id="cartCount">{store.productCount}</div>;
+    return <div id="cartCount">{cartAmount}</div>;
   }
 }
 
