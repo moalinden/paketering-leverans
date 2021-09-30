@@ -134,7 +134,7 @@
 Vi blev tvugna att skala av sena förändringar för att spara tid. Så koden ovanför är Timmies som vi beslöt att ersätta med gammal fungerande kod.
 */
 
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./Cart.style.css";
 import { useHistory } from "react-router-dom";
 
@@ -151,6 +151,10 @@ import {
   faLongArrowAltLeft,
   faLongArrowAltRight,
 } from "@fortawesome/free-solid-svg-icons";
+import handleWine from '../wineCards/handleWine';
+import { isLoggedIn } from "../login/LoggedInCheck";
+import jwt_decode from "jwt-decode";
+
 
 function Cart() {
   const history = useHistory();
@@ -158,18 +162,46 @@ function Cart() {
   const storeItems = store.products;
   const dispatch = useDispatch();
 
-  const Increment = (product) => {
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+  const [products, setProducts] = useState();
+
+  useEffect(() => {
+    if(localStorage.getItem('products')){
+      let token = localStorage.getItem('products');
+      setProducts(jwt_decode(token));
+    }
+
+    isLoggedIn();
+  }, [localStorage.getItem('products')]);
+
+  const Increment = async(product) => {
     dispatch(addToStore(product));
+    if(loggedIn){
+      let token = await handleWine('add', product);
+      setProducts(jwt_decode(token.token))
+    }
   };
-  const Decrement = (product) => {
+  const Decrement = async(product) => {
     dispatch(decrementItem(product));
+    if(loggedIn){
+      let token = await handleWine('decrease', product);
+      setProducts(jwt_decode(token.token))
+    }
   };
-  const Deletion = (product) => {
+  const Deletion = async(product) => {
     dispatch(deleteProduct(product));
+    if(loggedIn){
+      let token = await handleWine('remove', product);
+      setProducts(jwt_decode(token.token))
+    }
   };
-  const emptyCart = () => {
+  const emptyCart = async() => {
     dispatch(clearCart());
     history.push("/");
+    if(loggedIn){
+      let token = await handleWine('clear');
+      setProducts(jwt_decode(token.token))
+    }
   };
 
   const getTotal = (item) => {
@@ -212,11 +244,11 @@ function Cart() {
                       <div>
                         <p className="mb-1">Shopping cart</p>
                         <p className="mb-0">
-                          You have {store.productCount} items in your cart
+                          You have {products != null ? products.productCount : 0} items in your cart
                         </p>
                       </div>
                     </div>
-                    {storeItems.map((product, index) => {
+                    {products != null ? products.productDetails.map((product, index) => {
                       return (
                         <div>
                           <div key={index} className="card mb-3">
@@ -280,7 +312,7 @@ function Cart() {
                           </div>
                         </div>
                       );
-                    })}
+                    }) : null}
                     <div className="button-container">
                       <button
                         type="button"

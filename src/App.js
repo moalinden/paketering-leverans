@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { isLoggedIn } from "./components/login/LoggedInCheck";
 import { initialStore } from "./redux/actions";
 
+import handleWine from './components/wineCards/handleWine';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,10 +33,15 @@ function App() {
       const response = await fetch("/api/products");
       const data = await response.json();
       dispatch(initialStore(data.products));
+        if(loggedIn){
+          let token = await handleWine('get');
+          localStorage.setItem('products', token.token);
+        }
     };
     newFetch();
     isLoggedIn();
   }, [loggedIn]);
+
   // OBS OBS! För claras dator funkar detta :
   // const isMobile = navigator.userAgentData.mobile;
   // if (isMobile !== true) {
@@ -42,6 +49,7 @@ function App() {
   // på claras dator säger denna "hej mobil" alltid, kolla era i consolen
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (isMobile) {
+    // console.log("hej mobil")
     return (
       <Router>
         <div id="App">
@@ -63,6 +71,7 @@ function App() {
       </Router>
     );
   } else if (navigator.userAgent.includes("Electron")) {
+    // console.log("hej desktop")
     return (
       <Router>
         <div id="App">
