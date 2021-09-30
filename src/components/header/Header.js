@@ -1,60 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faShoppingCart,
+  faInfo,
+  faWineBottle,
+} from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Nav } from "react-bootstrap";
+import { isLoggedIn } from "../login/LoggedInCheck";
 
 import Countindicator from "./CountIndicator";
 
+import "./header.css";
+
 function Header() {
+  const [loggedIn] = useState(isLoggedIn());
+  const history = useHistory();
+
+  const navTo = (location) => {
+    history.push(location);
+  };
+
   return (
-    <Container fluid style={{ backgroundColor: "#bf8596" }}>
-      <Row md="auto" className="justify-content-md-center">
-        <Col>
-          <FontAwesomeIcon icon={faUser} className="userIcons" />
-        </Col>
+    <>
+      <div className="upper-nav">
+        <h1 style={{ fontSize: "82px" }}>Hello Wines</h1>
+      </div>
 
-        <Col>
-          <Countindicator />
-          <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
-        </Col>
-      </Row>
-      <Nav
-        className="justify-content-md-center"
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
-        <Nav.Item>
-          <Nav.Link href="/App" style={{ color: "#F3DAC6" }}>
-            App
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/Login" style={{ color: "#F3DAC6" }}>
-            Login
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/About" style={{ color: "#F3DAC6" }}>
-            About Us
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <div className="navbar-font">
+        <Container
+          fluid
+          style={{
+            backgroundColor: "#bf8596",
+            textAlign: "center",
+            height: "110px",
+          }}
+        >
+          <Row md="auto" className="justify-content-md-center xs-2">
+            <Col>
+              <Nav.Link onClick={() => navTo("/")} style={{ color: "#F3DAC6" }}>
+                <p className="HeadP">Wines</p>
 
-      <style></style>
+                <FontAwesomeIcon icon={faWineBottle} className="userIcons" />
+              </Nav.Link>
+            </Col>
 
-      <Row
-        md="auto"
-        className="justify-content-md-center"
-        style={{ backgroundColor: "#bf8596", color: "#F3E7DA" }}
-      >
-        <Col>
-          <h1>Hej På Dig Viner</h1>
-        </Col>
-      </Row>
-    </Container>
+
+            <Col>
+              <Nav.Link
+                onClick={() => navTo("/cart")}
+                style={{ color: "#F3DAC6" }}
+              >
+                <p className="HeadP">Cart</p>
+
+                <FontAwesomeIcon icon={faShoppingCart} className="userIcons" />
+                <Countindicator />
+              </Nav.Link>
+            </Col>
+
+            {loggedIn == false ?
+              [
+                ,
+                <Col>
+                  <Nav.Link
+                    onClick={() => navTo("/Login")}
+                    style={{ color: "#F3DAC6" }}
+                  >
+                    <p className="HeadP">Sign In</p>
+
+                    <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
+                  </Nav.Link>
+                </Col>
+              ]
+              :
+              <Col>
+                <Nav.Link
+                  onClick={() => navTo("/logout")}
+                  style={{ color: "#F3DAC6" }}
+                >
+                  <p className="HeadP">Log Out</p>
+
+                  <FontAwesomeIcon icon={faUser} className="userIcons xs-2" />
+                </Nav.Link>
+              </Col>
+            }
+
+            <Col>
+              <Nav.Link
+                onClick={() => navTo("/About")}
+                style={{ color: "#F3DAC6" }}
+              >
+                <p className="HeadP">About</p>
+
+                <FontAwesomeIcon icon={faInfo} className="userIcons" />
+              </Nav.Link>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </>
   );
 }
 
 export default Header;
-
-// color: #F3E7DA;

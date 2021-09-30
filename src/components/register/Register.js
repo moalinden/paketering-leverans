@@ -1,12 +1,21 @@
 import React, {useState, useEffect} from "react";
 import "./register.css";
+import {isLoggedIn} from '../login/LoggedInCheck';
 
-import RegValidation from '../../helper/regValidation'
-import RegSubmitHelper from '../../helper/regSubmitHelper'
+import RegValidation from './regValidation'
+import submitHelper from '../../helper/submitHelper'
 
 export default function RegisterPage() {
 
   const [regInfo, setRegInfo] = useState({username:{val: null, OK: false}, firstname: {val: null, OK: false}, lastname:{val: null, OK: false}, email:{val: null, OK: false}, password:{val: null, OK: false}, repassword:{val: null, OK: false}})
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+
+  useEffect(() => {
+    //If user is logged in return to home page
+    if(loggedIn){
+      window.location.href = '/';
+    }
+  }, []);
 
   //Check data onBlur
   const regDataCheck = async(e) => {
@@ -64,9 +73,21 @@ export default function RegisterPage() {
   }
 
   //Submit user on submit
-  const submitRegister = (event) => {
-    event.preventDefault();
-    RegSubmitHelper(regInfo)
+  const submitRegister = async(event) => {
+
+    event.target.disabled = true; //disable to not let user commit multiple times
+
+    let status = await submitHelper('register', regInfo)
+
+    //Registered
+    if(status.auth == true){
+      window.location.href = '/'; //Redirect user to home page
+    }
+    //Something wrong
+    if(status.auth == false){
+      event.preventDefault();
+      event.target.disabled = false;
+    }
   }
 
   return (
@@ -92,7 +113,7 @@ export default function RegisterPage() {
             <label className="form_label">Email</label>
           </div>
           <div className="form_div">
-            <input type="text" className="form_input" data-input="password" placeholder="" onBlur={regDataCheck} onChange={onChangeUpdateStateText}/>
+            <input type="password" className="form_input" data-input="password" placeholder="" onBlur={regDataCheck} onChange={onChangeUpdateStateText}/>
             <label className="form_label">Password</label>
           </div>
           <div className="form_div">

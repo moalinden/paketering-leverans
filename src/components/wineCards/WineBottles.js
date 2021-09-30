@@ -1,66 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./wineBottles.css";
+import WineList from "./WineList";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToStore } from "../../redux/actions";
+import { Nav, Col, Row, Button } from "react-bootstrap";
 
-//import result from ../../../server/index.js
+import { useSelector } from "react-redux";
+import Loading from "../loading/Loading";
+import Wishlist from "../../electronComp/wishlist/Wishlist";
 
 function WineBottles() {
-  const dispatch = useDispatch();
   const productsState = useSelector((state) => state.storeSlice);
+  const wishList = useSelector((state) => state.storeSlice.wishList);
   const products = productsState.storedProducts;
-  console.log(productsState);
-  console.log(products);
+  const [wineCat, setWineCat] = useState("");
 
-  const addToCart = (product) => {
-    console.log("products: ", productsState.products);
-    const productToDispatch = productsState.products.find(
-      (element) => element.id === product.id
-    );
-    if (productsState.products.length < 1 || productToDispatch === undefined) {
-      dispatch(addToStore(product));
-    } else {
-      dispatch(addToStore(productToDispatch));
-    }
+  const chooseWine = (cat) => {
+    setWineCat(cat);
+    console.log(cat);
   };
 
-  // const [bottles, setBottles] = useState();
-  // useEffect(() => {
-  //   (async () => {
-  //     const wines = await (await fetch("/api/products")).json();
-  //     setBottles(wines.products);
-  //     return wines;
-  //   })();
-  // }, []);
-
-  //Axel korrigerade lite för att det ska funka med redux/localstorage
-
-  return (
-    <div className="container" id="systembolaget">
-      <div className="row">
-        {products.products.map((wine, index) => (
-          <div className="col-1" id="wineBox" key={index}>
-            <div id="bild">
-              {/* {console.log(wine)} */}
-              <img src={wine.imageUrl} alt="wine and dinee" id="winePic"></img>
-            </div>
-            <div id="wineFacts">
-              <h3>{wine.name}</h3>
-              <p>{wine.description}</p>
-              <p>{wine.price}</p>
-              <button
-                placeholder="add to cart"
-                onClick={() => addToCart(wine)}
-              ></button>
-            </div>
+  if (!products) {
+    return <Loading />;
+  } else if (wishList.length > 0) {
+    return <Wishlist />;
+  } else {
+    return (
+      <div className="container">
+        <div id="navbar">
+          <Col>
+            <Row className="justify-content-md-center">
+              <Nav variant="tabs" id="navbar">
+                <Button id="navLink" onClick={() => chooseWine("red")}>
+                  Red Wine
+                </Button>
+                <Button id="navLink" onClick={() => chooseWine("white")}>
+                  White Wine
+                </Button>
+                <Button id="navLink" onClick={() => chooseWine("sparkling")}>
+                  Sparkling Wine
+                </Button>
+                <Button
+                  id="navLink"
+                  onClick={() => chooseWine("")}
+                  style={{ marginRight: "19px" }}
+                >
+                  All Wine
+                </Button>
+              </Nav>
+            </Row>
+          </Col>
+        </div>
+        <div id="systembolaget">
+          <div className="row">
+            <WineList data={wineCat} />
+            {navigator.userAgent.includes("Electron") && <Wishlist />}
           </div>
-        ))}
-        {/* {handleGetJson()} */}
-        {/* {console.log(bottles)} */}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default WineBottles;

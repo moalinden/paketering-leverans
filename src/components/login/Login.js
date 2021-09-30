@@ -1,63 +1,98 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
+import submitHelper from "../../helper/submitHelper";
+import { isLoggedIn } from "./LoggedInCheck";
+
+import { useHistory } from "react-router-dom";
+
+import { Nav } from "react-bootstrap";
 
 export default function LoginPage() {
+  const [loginInfo, setLoginInfo] = useState({
+    username: null,
+    password: null,
+  });
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+  const history = useHistory();
 
-  const [loginInfo, setLoginInfo] = useState({username: null, password: null})
+  const navTo = (location) => {
+    history.push(location);
+  };
 
   useEffect(() => {
-    (async ()=> {
-      console.log("Eyy");
-    })();
+    //If user is logged in return to home page
+    if (loggedIn) {
+      window.location.href = "/";
+    }
   }, []);
 
   //Change text in state onChange
-  const onChangeUpdateStateText = async(e) => {
+  const onChangeUpdateStateText = async (e) => {
     let inpType = e.target.dataset.input;
     let inpVal = e.target.value;
     setLoginInfo((prevState) => ({
       ...prevState,
-       [inpType]: inpVal
+      [inpType]: inpVal,
     }));
-  }
+  };
 
-  const submitLogin = async(e) => {
+  const submitLogin = async (e) => {
     e.preventDefault();
 
-    const dataVal = {
-      username: loginInfo.username,
-      password: loginInfo.password
+    let status = await submitHelper("login", loginInfo);
+
+    //Logged in
+    if (status.auth == true) {
+      localStorage.setItem("user_session", status.token);
+      localStorage.setItem("logged_in", true);
+      window.location.href = "/"; //Return user to home page
     }
-    const settings = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataVal)
+    //Wrong info
+    if (status.auth == false) {
     }
+  };
 
-    //Fetch (loginResult.message is result of fetch)
-    let fetchLogin = await fetch('/api/loginUser', settings);
-    let loginResult = await fetchLogin.json();
-
-  }
-
-    return (
-      <div class="body">
-        <div class="div-form">
-          <form action="" class="form">
-            <h1 class="form_title">Sign In</h1>
-            <br/>
-            <div class="form_div">
-              <input type="text" class="form_input" data-input="username" placeholder="" onChange={onChangeUpdateStateText}/>
-              <label class="form_label">Username</label>
-            </div>
-            <div class="form_div">
-              <input type="password" class="form_input" data-input="password" placeholder="" onChange={onChangeUpdateStateText}/>
-              <label class="form_label">Password</label>
-            </div>
-
-            <input type="submit" class="form_button" value="Sign In" onClick={submitLogin}/>
-          </form>
+  return (
+    <div className="body">
+      <div className="div-form">
+        <form action="" className="form">
+          <h1 className="form_title">Sign In</h1>
+          <br />
+          <div className="form_div">
+            <input
+              type="text"
+              className="form_input"
+              data-input="username"
+              placeholder=""
+              onChange={onChangeUpdateStateText}
+            />
+            <label className="form_label">Username</label>
+          </div>
+          <div className="form_div">
+            <input
+              type="password"
+              className="form_input"
+              data-input="password"
+              placeholder=""
+              onChange={onChangeUpdateStateText}
+            />
+            <label className="form_label">Password</label>
+          </div>
+          <input
+            type="submit"
+            className="form_button"
+            value="Sign In"
+            onClick={submitLogin}
+          />
+          {/* </Container> */}
+        </form>
+        <div id="navLink">
+          <Nav.Link onClick={() => navTo("/Register")} className="reg_button">
+            Sign up
+          </Nav.Link>
         </div>
       </div>
-    );
+      {/* <Container > */}
+    </div>
+  );
 }

@@ -1,11 +1,25 @@
+.upper-nav{
+    background-color: #bf8596;
+    text-align: center;
+    padding-top: 25px;
+    color: #F3DAC6;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Carattere&display=swap');
+
+.upper-nav{
+    font-family: 'Carattere', cursive;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.navbar-font{
+    font-family: 'Poppins', sans-serif;
+}
 
 
-/*headerContainer
-
-rosa: #bf8596
-rosa/vit: #EDBFC0
-beige/vit: #F3DAC6
-vit: #F3E7DA
-grå: #BAABB4 
-
-*/
+@media screen and (max-width: 600px) {
+.HeadP {
+    display: none; 
+    }
+  }

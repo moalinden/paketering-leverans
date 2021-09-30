@@ -18,6 +18,9 @@
     padding: 0;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
+
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -26,7 +29,9 @@ h1 {
 
 .div-form {
     display: flex;
-    padding: 4rem 2rem;
+    flex-direction: column;
+
+    /* margin: 4rem 2rem; */
     justify-content: center;
     align-items: center;
     /* height: 100vh; */
@@ -34,7 +39,7 @@ h1 {
 
 .form{
     width: 360px;
-    padding: 4rem 2rem;
+    padding: 1px 3px;
     border-radius: 1rem;
     box-shadow: 0 10px 25px rgba(92,99,105, .2);
 }
@@ -114,4 +119,20 @@ h1 {
 
 .form_input:focus{
     border: 1.5px solid var(--border-color);
+}
+#navLink{
+    border: 1px solid var(--border-color);
+    width: fit-content;
+    border-radius: .5rem;
+    font-size: var(--normal-font-size);
+    cursor: pointer;
+    transition: .3s;
+    padding: 0.5rem;
+    text-align: center;
+    display: block;
+    margin-top: 5em;
+    transition: .3s; 
+}
+#navLink:hover{
+    background-color:var(--input-color);
 }

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+#about {
+    font-family: 'Poppins', sans-serif;
+}
+.justify-content-around{
+    flex-direction: row;
+    /* width: 200px; */
+} 
+Container{
+    padding: 60px;
+    /* width: 80%; */
+}
+@media screen and (max-width:700px) {
+    #about {
+        padding: 6px;
+        flex-direction: column;
+        /* width: 80%; */
+        margin: 2px;
+        
+    }
+    div.card {
+        max-width: 100%;
+        align-self: center;
+    }
+  }

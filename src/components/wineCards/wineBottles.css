@@ -1,46 +1,90 @@
-/* 990 går från två t ett kort - fortf inte centrerat */
-/* Add medie querys */
 
+#App{
+    background-color: #f9f4ee;
+    height: fit-content;
+}
+
+#navbar{ 
+    padding: 10px;
+    margin: 5px; 
+}
+#navLink{
+    color: #bf8596; 
+    background-color: #f9f4ee; 
+    margin: 2px;
+    border: 2.5px solid #f3dac6;
+    border-bottom: 0;
+
+}
 #systembolaget{
-    width: fit-content
+    width: 100%;
+    align-items: center;
+    position: relative;
+    margin-bottom: 100px;
+    
 }
 #wineBox{
-    align-items: center;
-    border: 1px solid rgb(165, 135, 135);
+    border: 3px solid #f3dac6;
     border-radius: 20px;
     width: 350px;
     height: 240px;
     padding: 0px;
-    margin: 30px;
-    font-size: 12px;
+    margin: auto;
     position: relative;
     box-shadow: 1px 5px #d2cfcf;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
 }
 #h3{
     font-size: 16px;
-    height: 40px;
+    min-height: 50px;
+    padding-top: 15px;
 }
 #winePic{
     border-radius: 20px;
-    height: 240px;
-    width: 95px;
-    padding-left: -20px;
-    border: 1px solid rgb(165, 135, 135);
+    height: 238px;
+    width: auto;
+    border: 1px solid #f3dac6;
     float: left;
+    padding-left: -20px;
 }
 #wineFacts{
-    float: right;
     width: 200px;
-   margin: 12px;
-   white-space: pre-line;
+    margin-left: 12px;
+    white-space: pre-line;
+    display: flex;
+    flex-direction: column;
+}
+
+#cartButtons{
+    position: absolute;
+    bottom: 14px;
 }
 #cartKnapp{
-    border: 1px solid rgb(165, 135, 135);
-    padding: 6px 15px;
+    border: 1px solid #f3dac6;
+    padding: 4px 9px;
     font-size: 10px;
-    position: absolute;
     bottom: 10px;
     right: 10px;
     border-radius: 4px;
+    width: 90px;
+}
+#cartKnapp:active{
+    background-color: gray;
+}
+#wishknapp{
+    position: absolute;
+    padding: 6px 15px;
+    font-size: 20px;
+    right: 0px;
+    bottom: 7px;
+    border-radius: 4px;
+    width: 90px;
+}
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.container{
+    font-family: 'Poppins', sans-serif;
 }
