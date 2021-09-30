@@ -20,6 +20,82 @@ let db = new sqlite3.Database("./webshop.db", (err) => {
   console.log("Connected to the chinook database.");
 });
 
+
+var productJwtPayload = {
+  products: [],
+  productDetails: [],
+  productCount: 0,
+  exp: 60000
+};
+
+function jwtProductHandler(data, newAmount) {
+
+  if(data.action == "add" && !newAmount){
+    let productsObj = {
+      id: data.productId
+    }
+    let productDetailsObj = {
+      id: data.product.id,
+      imageUrl: data.product.imageUrl,
+      name: data.product.name,
+      count: data.orderedAmount,
+      price: data.product.price,
+      product_category: data.product.category,
+      description: data.product.description
+    }
+    productJwtPayload.productCount = ++productJwtPayload.productCount ;
+    productJwtPayload.products.push(productsObj);
+    productJwtPayload.productDetails.push(productDetailsObj);
+  }
+
+  //Start with only update amount since nothing else is needed at first
+  if(data.action  == "add" && newAmount){
+    for(let i = 0; i < productJwtPayload.productDetails.length; i++){
+      if(productJwtPayload.productDetails[i].id == data.productId){
+        productJwtPayload.productDetails[i].count = newAmount;
+
+        productJwtPayload.productCount = ++productJwtPayload.productCount;
+      }
+    }
+  }
+
+  //Start with only update amount since nothing else is needed at first
+  if(data.action  == "decrease" && newAmount > 0){
+    for(let i = 0; i < productJwtPayload.productDetails.length; i++){
+      if(productJwtPayload.productDetails[i].id == data.productId){
+        productJwtPayload.productDetails[i].count = newAmount;
+
+        productJwtPayload.productCount = --productJwtPayload.productCount;
+      }
+    }
+  }
+
+  //Leave for one sec
+  if(data.action  == "remove" || data.action  == "decrease" && newAmount == 0){
+    for(let i = 0; i < productJwtPayload.products.length; i++){
+      if(productJwtPayload.products[i].id == data.productId){
+        productJwtPayload.products.splice(i,1);
+      }
+    }
+    for(let i = 0; i < productJwtPayload.productDetails.length; i++){
+      if(productJwtPayload.productDetails[i].id == data.productId){
+        productJwtPayload.productCount = productJwtPayload.productCount - productJwtPayload.productDetails[i].count;
+        productJwtPayload.productDetails.splice(i,1)
+      }
+    }
+  }
+
+  if(data.action  == "clear"){
+    for(let i = 0; i < productJwtPayload.productDetails.length; i++){
+      productJwtPayload.products.splice(i,1);
+      productJwtPayload.productDetails.splice(i,1);
+      productJwtPayload.productCount = 0;
+    }
+  }
+
+  return jwt.sign(productJwtPayload, process.env.PRODUCT_SECRET_TOKEN);
+}
+
 //Check from validation
 app.post("/api/getUser/:info", (req, res) => {
   let sql;
@@ -192,6 +268,10 @@ app.post("/api/cart/:action", (req, res) => {
       getCart(data);
       break;
     }
+    case "clear": {
+      let token = jwtProductHandler(req.body);
+      res.json({ message: "Updated", token: token});
+    }
   }
 
   function addProductAmount(data) {
@@ -222,7 +302,8 @@ app.post("/api/cart/:action", (req, res) => {
                 }
                 //if no error
                 else {
-                  console.log("Updated");
+                  let token = jwtProductHandler(req.body, newAmount);
+                  res.json({ message: "Updated", token: token});
                 }
               }
             );
@@ -238,7 +319,8 @@ app.post("/api/cart/:action", (req, res) => {
                   console.log(err);
                   return;
                 } else {
-                  res.json({ message: "Added" });
+                  let token = jwtProductHandler(req.body);
+                  res.json({ message: "Added", token:token });
                 }
               }
             );
@@ -271,15 +353,15 @@ app.post("/api/cart/:action", (req, res) => {
                 if (err) {
                   res.status(400).json({ message: "Error", auth: false });
                   console.log(err);
-                  return;
                 }
                 //if no error
                 else {
-                  console.log("removed");
-                  return;
+                  let token = jwtProductHandler(req.body, newAmount);
+                  res.json({ message: "removed", token:token });
                 }
               }
             );
+            return;
           }
 
           db.all(
@@ -293,7 +375,9 @@ app.post("/api/cart/:action", (req, res) => {
               }
               //if no error
               else {
-                console.log("Updated");
+                let token = jwtProductHandler(req.body, newAmount);
+                res.json({ message: "Added", token:token });
+                return;
               }
             }
           );
@@ -327,7 +411,8 @@ app.post("/api/cart/:action", (req, res) => {
               }
               //if no error
               else {
-                console.log("removed");
+                let token = jwtProductHandler(req.body);
+                res.json({ message: "Added", token:token });
                 return;
               }
             }
@@ -347,7 +432,8 @@ app.post("/api/cart/:action", (req, res) => {
           console.log(err);
           return;
         } else {
-          res.json(rows);
+          let token = jwtProductHandler(req.body);
+          res.json({token : token, rows: rows});
         }
       }
     );
