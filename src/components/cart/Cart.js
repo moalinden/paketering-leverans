@@ -270,7 +270,7 @@ function Cart() {
                                     </p>
                                     <p className="sub-total">
                                       Sub-total:
-                                      <span>{getTotal(product)} </span>
+                                      <span>{getTotal(product)} kr</span>
                                     </p>
                                   </div>
                                 </div>
@@ -296,7 +296,7 @@ function Cart() {
 
                                   <div style={{ width: "80px" }}>
                                     <h5 className="price-tag">
-                                      {product.price}kr
+                                      {product.price}:-
                                     </h5>
                                   </div>
                                   <div className="trash-btn2">
@@ -320,7 +320,7 @@ function Cart() {
                         onClick={() => emptyCart()}
                       >
                         <div className="d-flex justify-content-between">
-                          <span className="cart-price"> {totalPrice}kr</span>
+                          <span className="cart-price"> {totalPrice} kr</span>
                           <span className="checkout-btn">
                             Checkout
                             <FontAwesomeIcon

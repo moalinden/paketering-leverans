@@ -112,7 +112,7 @@ function Wishlist() {
           onClick={() => clearWishList()}
         >
           <div className="d-flex justify-content-between">
-            <span className="cart-price"> {totalPrice}kr</span>
+            <span className="cart-price">{totalPrice} + kr</span>
             <span className="checkout-btn">
               Checkout
               <FontAwesomeIcon icon={faLongArrowAltRight} className="me-2" />
